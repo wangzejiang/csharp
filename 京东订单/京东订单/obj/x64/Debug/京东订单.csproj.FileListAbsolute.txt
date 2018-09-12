@@ -1,0 +1,4 @@
+d:\documents\visual studio 2015\Projects\京东订单\京东订单\bin\x64\Debug\京东订单.exe.config
+d:\documents\visual studio 2015\Projects\京东订单\京东订单\obj\x64\Debug\京东订单.Form1.resources
+d:\documents\visual studio 2015\Projects\京东订单\京东订单\obj\x64\Debug\京东订单.Properties.Resources.resources
+d:\documents\visual studio 2015\Projects\京东订单\京东订单\obj\x64\Debug\京东订单.csproj.GenerateResource.Cache
