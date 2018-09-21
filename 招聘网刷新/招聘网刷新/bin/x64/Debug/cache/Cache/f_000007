@@ -1,0 +1,1986 @@
+﻿
+$(function () {
+    seletor.Init();
+});
+
+
+
+seletor = {};
+st = {};
+
+seletor.successcall_index_city = function (d) {
+    var sel_default = "";
+    var sel_cn = "";
+    if (d && typeof (d) != "undefined") {
+
+        for (var i = 0; i < d.length; i++) {
+            var item = d[i];
+            sel_default += item.code + ",";
+            sel_cn += item.name + ",";
+        }
+    }
+    if (sel_default.length > 0) {
+        sel_default = sel_default.substring(0, sel_default.length - 1);
+    }
+    if (sel_cn.length > 0) {
+        sel_cn = sel_cn.substring(0, sel_cn.length - 1);
+    }
+    if (sel_default.length > 0) {
+        st.note.attr("sel_default", sel_default);
+        st.note.html(sel_cn).attr("title", sel_cn);
+    } else {
+        st.note.attr("sel_default", "");
+        st.note.html("选择城市").attr("title", "");
+    }
+}
+seletor.successcall_index_jobnav = function (d) {
+    var sel_default = "";
+    var sel_cn = "";
+    if (d && typeof (d) != "undefined") {
+
+        for (var i = 0; i < d.length; i++) {
+            var item = d[i];
+            sel_default += item.code + ",";
+            sel_cn += item.name + ",";
+        }
+    }
+    if (sel_default.length > 0) {
+        sel_default = sel_default.substring(0, sel_default.length - 1);
+    }
+    if (sel_cn.length > 0) {
+        sel_cn = sel_cn.substring(0, sel_cn.length - 1);
+    }
+    if (sel_default.length > 0) {
+        st.note.attr("sel_default", sel_default);
+        st.note.html(sel_cn).attr("title", sel_cn);
+    } else {
+        st.note.attr("sel_default", "");
+        st.note.html("工作岗位").attr("title", "");
+    }
+}
+
+seletor.Init = function () {
+    var sel_note = $("[sel_model='1']");
+    sel_note.click(function () {
+        var note = $(this);
+        st.note = note;
+        st.sel_type = note.attr("sel_type") || "";
+        var _sel_type_lx = note.attr("sel_type_lx") || "0";
+        st.sel_type_lx = Number(_sel_type_lx);
+        st.sel_default = note.attr("sel_default") || "";
+        var _sel_selnum = note.attr("sel_selnum") || "1";
+        st.sel_selnum = Number(_sel_selnum);
+        st.sel_success = note.attr("sel_success") || "";
+        st.sel_code_type = note.attr("sel_code_type") || "";
+        st.sel_limit_count = note.attr("sel_limit_count") || 0;
+        var _sel_limit_1level = note.attr("sel_limit_1level") || "0";
+        st.sel_limit_1level = Number(_sel_limit_1level);
+        //缓存参数:var sel_datakey = note.attr("sel_datakey") || "";
+
+        var sel_title = "标题";
+        if (st.sel_type == 'city') {
+            sel_title = "选择城市";
+            st.width = 600;
+            st.height = 500;
+            st.content_height = 350;
+            st.limitlevel = 3;
+        } else if (st.sel_type == 'jobcate') {
+            sel_title = "选择职位";
+            st.width = 600;
+            st.height = 500;
+            st.content_height = 350;
+            st.limitlevel = 3;
+        } else if (st.sel_type == 'jobnav') {
+            sel_title = "选择职位";
+            st.width = 600;
+            st.height = 520;
+            st.content_height = 350;
+            st.limitlevel = 2;
+        }
+        else if (st.sel_type == 'site') {
+            sel_title = "选择站点";
+            st.width = 600;
+            st.height = 520;
+            st.content_height = 350;
+            st.limitlevel = 2;
+        }
+        else if (st.sel_type == 'industry') {
+            sel_title = "选择行业";
+            st.width = 600;
+            st.height = 520;
+            st.content_height = 350;
+            st.limitlevel = 2;
+        }
+
+        //初始化控件
+        if (!seletor.HaveControl()) {
+            seletor.InitControl();
+        }
+        seletor.RenderingControl();
+        $(".sel-bg").show().click(function () {
+            seletor.Close();
+        });
+        var warp_html = [];
+        warp_html.push("<div class='sel-layer-title'>" + sel_title + "</div>");
+        warp_html.push("<div  class='sel-layer-content'></div><div class='sel-alert-warp'><div class='sel-alert-content'></div></div>");
+        warp_html.push("<div class='searchwarp'>快速搜索：<input class='search' placeholder='名称或拼音' id='SeletorKey' onchange='seletor.SearchKey()' onkeyup='seletor.SearchKey()' autocomplete='off'/></div>");
+        warp_html.push("<span class='sel-layer-setwin'>" +
+            "<a class='sel-layer-ico sel-layer-close sel-layer-close1' href='javascript:seletor.Close()'></a>" +
+            "</span>");
+        $(".sel-warp").html(warp_html.join('')).show();
+        var sel_html = [];
+        if (st.sel_type == "city") {
+            sel_html.push(seletor.City_RenderingControl());
+        } else if (st.sel_type == 'jobcate') {
+            sel_html.push(seletor.JobCate_RenderingControl());
+        } else if (st.sel_type == 'jobnav') {
+            sel_html.push(seletor.JobNav_RenderingControl());
+        } else if (st.sel_type == 'site') {
+            sel_html.push(seletor.Site_RenderingControl());
+        } else if (st.sel_type == 'industry') {
+            sel_html.push(seletor.Industry_RenderingControl());
+        }
+
+        var content_html_1 = [];
+        var content_html_2 = [];
+
+
+        content_html_1.push("<div class='sl-b-selected' style='display:block'>" +
+            "<span class='sl-b-key'>最多选择" + st.sel_selnum + "项：</span>" +
+            "<ul class='sl-v-list brand-selected result-selected'>");
+        var is_default = 2;
+        if (st.sel_default != "") {
+            var citydatas = seletor.GetData();
+            var default_ls = st.sel_default.split(',');
+            var first_default = 0;
+            for (var i = 0; i < default_ls.length; i++) {
+                if (st.sel_code_type == "string") {
+                    var default_value = default_ls[i];
+                    if (default_value && default_value.length > 0) {
+                        first_default = default_value;
+                        for (var j = 0; j < citydatas.length; j++) {
+                            var item = citydatas[j];
+                            if (item.c == default_value) {
+                                content_html_1.push("<li code='" + item.c + "' class='selected'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                                is_default = 1;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    var default_value = Number(default_ls[i]);
+                    if (default_value > 0) {
+                        first_default = default_value;
+                        for (var j = 0; j < citydatas.length; j++) {
+                            var item = citydatas[j];
+                            if (item.c == default_value) {
+                                content_html_1.push("<li code='" + item.c + "' level='" + item.l + "' class='selected'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                                is_default = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        content_html_1.push("</ul></div>");
+
+
+        content_html_2.push("<div class='sl-btns' style='display:block'>" +
+            "<a class='btn btn-primary' href='javascript:seletor.Confirm();'>确定</a>" +
+            "<a class='btn btn-default' href='javascript:seletor.Close();' style='margin-left:14px;'>取消</a>" +
+            "</div>");
+
+        $(".sel-layer-content").html(content_html_1.join('') + sel_html.join('') + content_html_2.join(''));
+
+        $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+
+        if (st.sel_type == "city") {
+            seletor.City_Load(1);
+            if (first_default > 0) {
+                var first_level = 0;
+                if ((Math.round(first_default / 10000) * 10000) == first_default) {
+                    first_level = 1;
+                } else if ((Math.round(first_default / 100) * 100) == first_default) {
+                    first_level = 2;
+                } else {
+                    first_level = 3;
+                }
+                if (first_level == 2) {
+                    seletor.JumpTab(2, Math.round(first_default / 10000) * 10000);
+                    seletor.JumpTab(3, first_default);
+                } else if (first_level == 3) {
+                    seletor.JumpTab(2, Math.round(first_default / 10000) * 10000);
+                    seletor.JumpTab(3, Math.round(first_default / 100) * 100);
+                }
+            }
+        } else if (st.sel_type == "jobcate") {
+            if (st.sel_type_lx == 2) {
+                seletor.JobCate_JumpTab(3, seletor.JobCate_PartTimeJobType, 1);
+            } else {
+                seletor.JobCate_Load(1);
+            }
+            if (first_default > 0) {
+                var first_level = 0;
+                if ((Math.round(first_default / 1000000) * 1000000) == first_default) {
+                    first_level = 1;
+                } else if ((Math.round(first_default / 1000) * 1000) == first_default) {
+                    first_level = 2;
+                } else {
+                    first_level = 3;
+                }
+                if (first_level == 2) {
+                    seletor.JumpTab(2, Math.round(first_default / 1000000) * 1000000);
+                    seletor.JumpTab(3, first_default);
+                } else if (first_level == 3) {
+                    seletor.JumpTab(2, Math.round(first_default / 1000000) * 1000000);
+                    seletor.JumpTab(3, Math.round(first_default / 1000) * 1000);
+                }
+            }
+
+        } else if (st.sel_type == "jobnav") {
+            seletor.JobNav_Load(1);
+            if (first_default > 0) {
+                var first_level = 0;
+                if ((Math.round(first_default / 1000) * 1000) == first_default) {
+                    first_level = 1;
+                } else {
+                    first_level = 2;
+                }
+                if (first_level == 2) {
+                    seletor.JumpTab(2, first_default);
+                }
+            }
+        }
+        if (is_default == 1) {
+            seletor.InitSel();
+        }
+    });
+}
+seletor.Confirm = function () {
+
+    var sel_note = $(".result-selected .selected");
+    if (st.sel_limit_count > 0) {
+        if (sel_note.length == 0) {
+            seletor.alert("请选择" + st.sel_limit_count + "个选项");
+            return;
+        }
+        if (st.sel_selnum == 1 && sel_note.length != st.sel_limit_count) {
+            seletor.alert("请选择" + st.sel_limit_count + "个选项");
+            return;
+        }
+    }
+    if (st.sel_type == 'site') {
+        seletor.Site_Confirm();
+        return;
+    } else if (st.sel_type == 'industry') {
+        seletor.Industry_Confirm();
+        return;
+    }
+    var r = [];
+
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = Number(item.attr("code"));
+            var itemname = item.find("a").text();
+            r.push({ code: itemcode, name: itemname, note: st.note });
+        }
+    }
+    if (st.sel_success && st.sel_success != "") {
+        eval(st.sel_success + "(r)");
+    }
+    $(".sel-bg").hide();
+    $(".sel-warp").hide();
+}
+seletor.Close = function () {
+    var sel_note = $(".result-selected .selected");
+    if (st.sel_limit_count > 0) {
+        if (sel_note.length == 0) {
+            seletor.alert("请选择" + st.sel_limit_count + "个选项");
+            return;
+        }
+        if (st.sel_selnum == 1 && sel_note.length != st.sel_limit_count) {
+            seletor.alert("请选择" + st.sel_limit_count + "个选项");
+            return;
+        }
+    }
+
+    $(".sel-bg").hide();
+    $(".sel-warp").hide();
+}
+seletor.HaveControl = function () {
+    var havenote = $(".sel-bg");
+    if (havenote && havenote.length > 0) {
+        return true;
+    }
+    return false;
+}
+seletor.InitControl = function () {
+    var selwarp_html = "<div class='sel-warp'></div>";
+    var selbg_html = "<div class='sel-bg'></div>";
+    $("body").append(selwarp_html + selbg_html);
+}
+seletor.RenderingControl = function () {
+    var str = "width:" + st.width + "px;height:" + st.height + "px;" +
+        "margin-left:-" + (st.width / 2) + "px;margin-top:-" + (st.height / 2) + "px;display:block;";
+    $(".sel-warp").attr("style", str);
+}
+seletor.Click = function (e) {
+    if (st.sel_type == 'site') {
+        seletor.Site_Click(e);
+        return;
+    } else if (st.sel_type == 'industry') {
+        seletor.Industry_Click(e);
+        return;
+    }
+    var _sub = $(e).attr("sub") || 0;
+    var sub = Number(_sub);
+
+    var _jump = $(e).attr("jump") || 0;
+    var jump = Number(_jump);
+    var note = $(e).parent();
+    var sel = 2;
+    if (note.hasClass("selected")) {
+        sel = 2;
+    } else {
+        sel = 1;
+    }
+    var code = Number(note.attr("code"));
+    var level = Number(note.attr("level"));
+    //
+    if (sel == 1) {
+
+        if (st.sel_selnum == 1) {
+            $("ul.result-selected").find("li").remove();
+            if (jump == 0) {
+                if (level < st.limitlevel) {
+                    //跳转面板
+                    seletor.JumpTab(level + 1, code);
+                }
+            }
+            $("li.selected").removeClass("selected");
+            $(".city-select-tab-content li[code='" + code + "']").addClass("selected");
+            $("ul.result-selected").append(note.prop('outerHTML'));
+            seletor.InitSel();
+        } else {
+            if (sub > 0) {
+                if (jump == 0) {
+                    if (level < st.limitlevel) {
+                        //跳转面板
+                        seletor.JumpTab(level + 1, code);
+                    }
+                }
+                seletor.InitSel();
+            } else {
+                seletor.InitItem(level, code);
+                var canSel = $("ul.result-selected").find("li").length < st.sel_selnum;
+                if (canSel == 1) {
+                    if (jump == 0) {
+                        if (level < st.limitlevel) {
+                            //跳转面板
+                            seletor.JumpTab(level + 1, code);
+                        }
+                    }
+                    $(".city-select-tab-content li[code='" + code + "']").addClass("selected");
+                    $("ul.result-selected").append(note.prop('outerHTML'));
+                    seletor.InitSel();
+                }
+                else {
+                    seletor.alert("选择不能多于3项");
+                }
+            }
+        }
+    } else {
+        $("ul.result-selected").find("li[code='" + code + "']").remove();
+        $("li.selected[code='" + code + "']").removeClass("selected");
+        seletor.InitSel();
+    }
+}
+
+seletor.AlertMessLock = 2;
+seletor.AlertMess = function (mess) {
+    if (seletor.AlertMessLock == 1) return;
+    seletor.AlertMessLock = 1;
+    $(".result-selected").append("<li class='AlertMess'><span>" + mess + "</span></li>");
+    if (typeof (window.event_alertmess) != "undefined") {
+        window.clearTimeout(window.event_alertmess);
+    }
+    window.event_alertmess = window.setTimeout(function () {
+        $(".result-selected .AlertMess").remove();
+        seletor.AlertMessLock = 2;
+    }, 1500);
+}
+seletor.SearchKey = function () {
+    var key = $("#SeletorKey").val();
+    if (key && key.length > 0) {
+        if (typeof (window.event_searchkey) != "undefined") {
+            window.clearTimeout(window.event_searchkey);
+        }
+        window.event_searchkey = window.setTimeout(function () {
+            seletor.SearchKey_Run($("#SeletorKey").val());
+        }, 200);
+    }
+    return false;
+}
+seletor.SearchKey_LastValue = "";
+seletor.SearchKey_Run = function (key) {
+    if (typeof (key) == "undefined") return;
+    if (seletor.SearchKey_LastValue == key)
+        return;
+
+    seletor.SearchKey_LastValue = key;
+    key = key.replace(/[^\d|a-z|A-Z|\u4e00-\u9fa5]/g, '');
+    if (key == "") return;
+
+    $(".city-select-tab a.select-tab").removeClass("active");
+    $(".city-select-tab a.SearchTab").addClass("active").attr("key", key).show();
+
+    var havenote = $(".sel-warp .city-select-tab-content .city-select[key='" + key + "']");
+    if (havenote.length > 0) {
+        havenote.show();
+    } else {
+        var shtml = [];
+        var citys = seletor.GetData();
+        var counti = 40;
+        var res_zh = [];
+
+        var level_1 = 1000000;
+        var level_2 = 1000;
+        if (st.sel_type == "city") {
+            level_1 = 10000;
+            level_2 = 100;
+        }
+        for (var i = 0; i < citys.length; i++) {
+            var item = citys[i];
+            if (item.n.indexOf(key) >= 0
+                || item.t.indexOf(key) >= 0) {
+                if (st.sel_type == "jobcate" || st.sel_type == "city") {
+                    //整合搜索结果
+                    if (item.l == 1) {
+                        res_zh.push(item);
+                    }
+                    else if (item.l == 2) {
+                        //一级
+                        lever1_code = Math.round(item.c / level_1) * level_1;
+                        for (var z = 0; z < citys.length; z++) {
+                            if (citys[z].c == lever1_code) {
+                                res_zh.push(citys[z]);
+                                break;
+                            }
+                        }
+                        res_zh.push(item);
+                    }
+                    else if (item.l == 3) {
+                        //一级
+                        lever1_code = Math.round(item.c / level_1) * level_1;
+                        for (var z = 0; z < citys.length; z++) {
+                            if (citys[z].c == lever1_code) {
+                                res_zh.push(citys[z]);
+                                break;
+                            }
+                        }
+                        //二级
+                        lever2_code = Math.round(item.c / level_2) * level_2;
+                        for (var z = 0; z < citys.length; z++) {
+                            if (citys[z].c == lever2_code) {
+                                res_zh.push(citys[z]);
+                                break;
+                            }
+                        }
+                        res_zh.push(item);
+                    }
+                } else {
+                    shtml.push("<li code='" + item.c + "' level='" + item.l + "'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                }
+                counti--;
+                if (counti < 0) break;
+            }
+        }
+
+        var res_zh_distinct = [];
+        for (var j = 0; j < res_zh.length; j++) {
+            var isrepeat = 0;
+            for (var k = 0; k < res_zh_distinct.length; k++) {
+                if (res_zh_distinct[k].c == res_zh[j].c) {
+                    isrepeat = 1;
+                    break;
+                }
+            }
+            if (isrepeat == 0) {
+                res_zh_distinct.push(res_zh[j])
+            }
+        }
+        res_zh = res_zh_distinct;
+        if (res_zh.length > 0) {
+            for (var k_i = 0; k_i < res_zh.length; k_i++) {
+                var item_level1 = res_zh[k_i];
+                if (item_level1.l == 1) {
+                    shtml.push("<div class='zh_level1_warp'>" +
+                        "<div class='zh_level1'>" + "<li code='" + item_level1.c + "' level='" + item_level1.l + "'><a onclick='seletor.Click(this)' jump='2' title='" + item_level1.n + "'>" + item_level1.n + "<i>&nbsp;</i></a></li>" + "</div>");
+
+                    shtml.push("<div class='zh_level2_warp_all'><div class='zh_level2_warp_all_bg'></div>");
+                    for (var k_j = 0; k_j < res_zh.length; k_j++) {
+                        var item_level2 = res_zh[k_j];
+                        if (item_level2.l == 2 && Math.round(item_level2.c / level_1) * level_1 == item_level1.c) {
+                            shtml.push("<div class='zh_level2_warp'>" +
+                                "<div class='zh_level2'>" + "<li code='" + item_level2.c + "' level='" + item_level2.l + "'><a onclick='seletor.Click(this)' jump='2' title='" + item_level2.n + "'>" + item_level2.n + "<i>&nbsp;</i></a></li>" + "</div>");
+
+                            var item_level3_html = [];
+                            for (var k_z = 0; k_z < res_zh.length; k_z++) {
+                                var item_level3 = res_zh[k_z];
+                                if (item_level3.l == 3 && Math.round(item_level3.c / level_2) * level_2 == item_level2.c) {
+                                    item_level3_html.push("<li code='" + item_level3.c + "' level='" + item_level3.l + "'><a onclick='seletor.Click(this)' jump='2' title='" + item_level3.n + "'>" + item_level3.n + "<i>&nbsp;</i></a></li>");
+                                }
+                            }
+                            if (item_level3_html.length > 0) {
+                                shtml.push("<div class='zh_level3_warp'>" +
+                                    "<div class='zh_level3'>" + item_level3_html.join('') + "</div></div>");
+                            }
+                            shtml.push("<div class='clearfix'></div></div>");
+                        }
+                    }
+                    shtml.push("</div>");
+                    shtml.push("<div class='clearfix'></div></div>");
+                }
+            }
+        }
+        var html = [];
+        html.push("<div class='city-select district' data-count='district' style='display: block;' key='{key}'>".replace("{key}", key));
+        html.push("<dl class='clearfix'>");
+        html.push("<dd>");
+        if (shtml.length > 0) {
+            html.push("<ul class='sl-v-list brand-selected'>");
+            html.push(shtml.join(''));
+            html.push("</ul>");
+        } else {
+            html.push("<p class='nosearchresult'>暂无搜索结果，请试试其他关键词吧</p>")
+        }
+        html.push("</dd> </dl>");
+        html.push("</div>");
+        $(".sel-warp .city-select-tab-content").append(html.join(''));
+        $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+    }
+    $(".sel-warp .city-select-tab-content .city-select[key!='" + key + "']").hide();
+}
+seletor.SearchKey_TabJump = function (e) {
+    var note = $(e);
+    var key = note.attr("key");
+    var havenote = $(".sel-warp .city-select-tab-content .city-select[key='" + key + "']");
+    if (havenote.length > 0) {
+        havenote.show();
+        $(".sel-warp .city-select-tab-content .city-select[key!='" + key + "']").hide();
+        $(".city-select-tab a.select-tab").removeClass("active");
+        $(".city-select-tab a.SearchTab").addClass("active");
+    }
+}
+
+seletor.InitSel = function () {
+    if (st.sel_type == 'city') {
+        seletor.City_InitSel();
+    } else if (st.sel_type == 'jobcate') {
+        seletor.JobCate_InitSel();
+    }
+    else if (st.sel_type == 'jobnav') {
+        seletor.JobNav_InitSel();
+    }
+    else if (st.sel_type == 'site') {
+        seletor.Site_InitSel();
+    }
+    else if (st.sel_type == 'industry') {
+        seletor.Industry_InitSel();
+    }
+}
+seletor.InitItem = function (level, code) {
+    if (st.sel_type == 'city') {
+        seletor.City_InitItem(level, code);
+    } else if (st.sel_type == 'jobcate') {
+        seletor.JobCate_InitItem(level, code);
+    }
+    else if (st.sel_type == 'jobnav') {
+        seletor.JobNav_InitItem(level, code);
+    }
+}
+
+seletor.GetData = function () {
+    if (st.sel_type == 'city') {
+        return seletor.City_Data();
+    } else if (st.sel_type == 'jobcate') {
+        return seletor.JobCate_Data();
+    }
+    else if (st.sel_type == 'jobnav') {
+        return seletor.JobNav_Data();
+    }
+    else if (st.sel_type == 'site') {
+        return seletor.Site_Data();
+    }
+    else if (st.sel_type == 'industry') {
+        return seletor.Industry_Data();
+    }
+}
+seletor.JumpTab = function (level, code) {
+    if (st.sel_type == 'city') {
+        seletor.City_JumpTab(level, code);
+    } else if (st.sel_type == 'jobcate') {
+        seletor.JobCate_JumpTab(level, code);
+    }
+    else if (st.sel_type == 'jobnav') {
+        seletor.JobNav_JumpTab(level, code);
+    }
+}
+
+seletor.alert = function (str) {
+    $(".sel-alert-content").text(str);
+    $(".sel-alert-warp").show();
+    window.setTimeout(function () {
+        $(".sel-alert-warp").hide();
+    }, 1500);
+}
+
+Array.prototype.contains = function (element) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == element) {
+            return true;
+        }
+
+    }
+    return false;
+}
+
+
+
+
+seletor.City_Load = function () {
+    seletor.City_JumpTab(1);
+}
+seletor.City_TabJump = function (e) {
+    var note = $(e);
+    var code = Number(note.attr("code"));
+    var level = Number(note.attr("level"));
+    if (level == 1) {
+        seletor.City_JumpTab(1);
+    } else {
+        if (code > 0) {
+            seletor.City_JumpTab(level, code);
+        }
+    }
+}
+seletor.City_InitItem = function (level, code) {
+    if (level == 1) {
+
+        //删除下属
+        var parcode = Math.round(code / 10000);
+        $("ul.result-selected").find("li[code^='" + parcode + "'][code!='" + code + "']").remove();
+        $("li.selected[code^='" + parcode + "'][code!='" + code + "']").removeClass("selected");
+    } else if (level == 2) {
+        var parcode1 = Math.round(code / 100);
+        $("ul.result-selected").find("li[code^='" + parcode1 + "'][code!='" + code + "']").remove();
+        $("li.selected[code^='" + parcode1 + "'][code!='" + code + "']").removeClass("selected");
+        var parcode2 = Math.round(code / 10000) * 10000;
+        $("ul.result-selected").find("li[code='" + parcode2 + "']").remove();
+        $("li.selected[code='" + parcode2 + "']").removeClass("selected");
+    }
+    else if (level == 3) {
+        var parcode1 = Math.round(code / 100) * 100;
+        $("ul.result-selected").find("li[code='" + parcode1 + "']").remove();
+        $("li.selected[code='" + parcode1 + "']").removeClass("selected");
+        var parcode2 = Math.round(code / 10000) * 10000;
+        $("ul.result-selected").find("li[code='" + parcode2 + "']").remove();
+        $("li.selected[code='" + parcode2 + "']").removeClass("selected");
+    }
+};
+seletor.City_JumpTab = function (level, code) {
+    if (level == 1) {
+        $(".city-select-tab a[data-count='province']").addClass("active");
+        $(".city-select-tab a[data-count!='province']").removeClass("active");
+        $(".sel-warp .city-select-tab-content .city-select[data-count='province']").show();
+        $(".sel-warp .city-select-tab-content .city-select[data-count!='province']").hide();
+    }
+    else if (level == 2) {
+        var html = seletor.City_RenderingControl_Level(2, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='city']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='city']").removeClass("active");
+            //
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(html);
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+    else if (level == 3) {
+        var html = seletor.City_RenderingControl_Level(3, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='district']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='district']").removeClass("active");
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(seletor.City_RenderingControl_Level(3, code));
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+}
+window.City_Data_Warp = null;
+seletor.City_Data = function () {
+    var jsdata;
+    if (window.City_Data_Warp && window.City_Data_Warp.length > 0) {
+        jsdata = window.City_Data_Warp;
+        return jsdata;
+    } else {
+        $.ajax({
+            type: "get",
+            url: "/selector/selector_ajax.ashx",
+            data: { ac: "city" },
+            async: false,
+            success: function (d) {
+                if (d.length > 0) {
+                    var ls = d.split('|');
+                    var ds = [];
+                    for (var i = 0; i < ls.length; i++) {
+                        var item = ls[i];
+                        var item_ls = item.split('@');
+                        if (item_ls.length == 5) {
+                            ds.push({ n: item_ls[0], c: Number(item_ls[1]), t: item_ls[2], l: item_ls[3], s: item_ls[4] });
+                        }
+                    }
+                    window.City_Data_Warp = ds;
+                    jsdata = ds;
+                }
+            }
+        });
+        return jsdata;
+    }
+}
+seletor.City_Prov_Html = ["<div class='city-select province' data-count='province' style='display: block;'>"
+        , "<div class='city-select city' data-count='city' style='display: block;' code='{code}'>"
+        , "<div class='city-select district' data-count='district' style='display: block;' code='{code}'>"];
+seletor.City_S1 = ["A-G", "H-K", "L-S", "T-Z"];
+seletor.City_S2 = [['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['h', 'i', 'j', 'k'], ['l', 'm', 'n', 'o', 'p', 'q', 'r', 's'], ['t', 'u', 'v', 'w', 'x', 'y', 'z']];
+seletor.City_RenderingControl = function () {
+
+    var html = [];
+    html.push("<div class='city-picker-dropdown'>");
+    html.push("<div class='city-select-wrap'>");
+    html.push("<div class='city-select-tab'>");
+    html.push("<a class='active select-tab' data-count='province' level='1' onclick='seletor.City_TabJump(this)'>省份<i>&nbsp;</i></a>" +
+        "<a data-count='city' level='2' onclick='seletor.City_TabJump(this)' class='select-tab' style='display:none;'>城市<i>&nbsp;</i></a>" +
+        "<a data-count='district' level='3' onclick='seletor.City_TabJump(this)' class='select-tab' style='display:none;'>区县<i>&nbsp;</i></a>" +
+        "<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+        "</div>");
+    html.push("<div class='city-select-content city-select-tab-content' style='height:" + st.content_height + "px'>");
+
+    html.push(seletor.City_RenderingControl_Level(1));
+
+    html.push("</div>");
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.City_RenderingControl_Level = function (level, code) {
+    //遍历数据
+    var shtml = new Array();
+    for (var i = 0; i < 4; i++) {
+        shtml[i] = [];
+    }
+
+    var citys = seletor.City_Data();
+    for (var i = 0; i < citys.length; i++) {
+        var item = citys[i];
+        var item_level = 0;
+
+        if (level == 1) {
+            if (item.c / 10000 - Math.floor(item.c / 10000) == 0) {
+                //item_level = 1;
+            } else if (item.c / 100 - Math.floor(item.c / 100) == 0) {
+                //item_level = 2;
+                continue;
+            } else {
+                //item_level = 3;
+                continue;
+            }
+        } else if (level == 2) {
+            if (item.c / 10000 - Math.floor(item.c / 10000) == 0) {
+                //item_level = 1;
+                continue;
+            } else if (item.c / 100 - Math.floor(item.c / 100) == 0) {
+                //item_level = 2;
+                if (Math.floor(item.c / 10000) == Math.floor(code / 10000)) {
+
+                } else {
+                    continue;
+                }
+            } else {
+                //item_level = 3;
+                continue;
+            }
+        } else {
+            if (item.c / 10000 - Math.floor(item.c / 10000) == 0) {
+                //item_level = 1;
+                continue;
+            } else if (item.c / 100 - Math.floor(item.c / 100) == 0) {
+                continue;
+            } else {
+                //item_level = 3;
+                if (Math.floor(item.c / 100) == Math.floor(code / 100)) {
+
+                } else {
+                    continue;
+                }
+            }
+        }
+        var mychar = item.t.substr(0, 1)
+        var temp = 0;
+        if (seletor.City_S2[1].contains(mychar)) {
+            temp = 1;
+        } else if (seletor.City_S2[2].contains(mychar)) {
+            temp = 2;
+        } else if (seletor.City_S2[3].contains(mychar)) {
+            temp = 3;
+        }
+        shtml[temp].push("<li code='" + item.c + "' level='" + level + "' ><a onclick='seletor.Click(this)' title='" + item.n + "'  sub='" + item.s + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+    }
+    var html = [];
+    if (level == 1) {
+        html.push(seletor.City_Prov_Html[0]);
+    } else if (level == 2) {
+        html.push(seletor.City_Prov_Html[1].replace("{code}", code));
+    } else if (level == 3) {
+        html.push(seletor.City_Prov_Html[2].replace("{code}", code));
+    }
+
+    var isEmpty = 1;
+    var temphtml = [];
+    var parhtml = [];
+    //加入父选择
+    if (level == 2 || level == 3) {
+        var get_code = 0;
+        if (level == 2) {
+            get_code = Math.floor(code / 10000) * 10000;
+        } else {
+            get_code = Math.floor(code / 100) * 100;
+        }
+        parhtml.push("<dl class='clearfix'>");
+
+        parhtml.push("<dd class='fa-dd'><ul class='sl-v-list brand-selected'>");
+        for (var i = 0; i < citys.length; i++) {
+            var item = citys[i];
+            if (item.c == get_code) {
+                parhtml.push("<li code='" + item.c + "' level='" + item.l + "'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                break;
+            }
+        }
+        parhtml.push("</ul> </dd> </dl>");
+    }
+    for (var j = 0; j < 4; j++) {
+        var _shtml = shtml[j].join('');
+
+        if (_shtml.length > 0) {
+            isEmpty = 2;
+            if (level == 3) {
+                temphtml.push(_shtml);
+            } else {
+                temphtml.push("<dl class='clearfix'>");
+                temphtml.push("<dt>" + seletor.City_S1[j] + "</dt>");
+                temphtml.push("<dd><ul class='sl-v-list brand-selected'>");
+                temphtml.push(_shtml);
+                temphtml.push("</ul> </dd> </dl>");
+            }
+        }
+    }
+    if (isEmpty == 1) {
+        //没有数据
+        return "";
+    }
+    if (level == 3) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push("<dl class='clearfix'>");
+        html.push("<dd>");
+        html.push("<ul class='sl-v-list brand-selected'>");
+        html.push(temphtml.join(''));
+        html.push("</ul> ");
+        html.push("</dd> </dl>");
+    } else if (level == 2) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push(temphtml.join(''));
+    }
+    else if (level == 1) {
+        html.push(temphtml.join(''));
+    }
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.City_InitSel = function () {
+    $(".fa_selected").removeClass("fa_selected");
+    var sel_note = $(".result-selected .selected");
+    var level1 = [];
+    var level2 = [];
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = Number(item.attr("code"));
+            if (itemcode - Math.floor(itemcode / 100) * 100 != 0) //3ji
+            {
+                level1.push(Math.floor(itemcode / 10000) * 10000);
+                level2.push(Math.floor(itemcode / 100) * 100);
+            }
+            else if (itemcode - Math.floor(itemcode / 10000) * 10000 != 0) //2ji
+            {
+                level1.push(Math.floor(itemcode / 10000) * 10000);
+            }
+            //选择列表项
+            $(".city-select-tab-content li[code='" + itemcode + "']").addClass("selected");
+        }
+        var level1_res = [];
+        for (var i = 0; i < level1.length; i++) {
+            var i_code = level1[i];
+            var is_add = 1;
+            for (var j = 0; j < level1_res.length; j++) {
+                if (level1_res[j].code == i_code) {
+                    level1_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level1_res.push({ code: i_code, num: 1 });
+            }
+        }
+        var level2_res = [];
+        for (var i = 0; i < level2.length; i++) {
+            var i_code = level2[i];
+            var is_add = 1;
+            for (var j = 0; j < level2_res.length; j++) {
+                if (level2_res[j].code == i_code) {
+                    level2_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level2_res.push({ code: i_code, num: 1 });
+            }
+        }
+        if (level1_res.length > 0) {
+            for (var i = 0; i < level1_res.length; i++) {
+                var item = level1_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+        if (level2_res.length > 0) {
+            for (var i = 0; i < level2_res.length; i++) {
+                var item = level2_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+    }
+}
+
+window.Industry_Data_Warp = null;
+seletor.Industry_Data = function () {
+    var jsdata;
+    if (window.Industry_Data_Warp && window.Industry_Data_Warp.length > 0) {
+        jsdata = window.Industry_Data_Warp;
+        return jsdata;
+    } else {
+        $.ajax({
+            type: "get",
+            url: "/selector/selector_ajax.ashx",
+            data: { ac: "industry" },
+            async: false,
+            success: function (d) {
+                if (d.length > 0) {
+                    var ls = d.split('|');
+                    var ds = [];
+                    for (var i = 0; i < ls.length; i++) {
+                        var item = ls[i];
+                        var item_ls = item.split('@');
+                        if (item_ls.length == 3) {
+                            ds.push({ n: item_ls[0], c: item_ls[1], t: item_ls[2] });
+                        }
+                    }
+                    window.Industry_Data_Warp = ds;
+                    jsdata = ds;
+                }
+            }
+        });
+        return jsdata;
+    }
+}
+seletor.Industry_S1 = ["A-G", "H-K", "L-S", "T-Z"];
+seletor.Industry_S2 = [['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['h', 'i', 'j', 'k'], ['l', 'm', 'n', 'o', 'p', 'q', 'r', 's'], ['t', 'u', 'v', 'w', 'x', 'y', 'z']];
+seletor.Industry_RenderingControl = function () {
+
+    var html = [];
+    html.push("<div class='city-picker-dropdown'>");
+    html.push("<div class='city-select-wrap'>");
+    html.push("<div class='city-select-tab'>");
+    html.push("<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+        "</div>");
+    html.push("<div class='city-select-content city-select-tab-content' style='height:" + st.content_height + "px'>");
+
+    html.push(seletor.Industry_RenderingControl_Level(1));
+
+    html.push("</div>");
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.Industry_Click = function (e) {
+    var _sub = $(e).attr("sub") || 0;
+    var sub = Number(_sub);
+    var note = $(e).parent();
+    var sel = 2;
+    if (note.hasClass("selected")) {
+        sel = 2;
+    } else {
+        sel = 1;
+    }
+    var code = note.attr("code");
+    //
+    if (sel == 1) {
+
+        if (st.sel_selnum == 1) {
+            $("ul.result-selected").find("li").remove();
+            $("li.selected").removeClass("selected");
+            $(".city-select-tab-content li[code='" + code + "']").addClass("selected");
+            $("ul.result-selected").append(note.prop('outerHTML'));
+            seletor.InitSel();
+        }
+    } else {
+        $("ul.result-selected").find("li[code='" + code + "']").remove();
+        $("li.selected[code='" + code + "']").removeClass("selected");
+        seletor.InitSel();
+    }
+}
+seletor.Industry_RenderingControl_Level = function (level, code) {
+    //遍历数据
+    var shtml = new Array();
+    for (var i = 0; i < 4; i++) {
+        shtml[i] = [];
+    }
+
+    var citys = seletor.Industry_Data();
+    for (var i = 0; i < citys.length; i++) {
+        var item = citys[i];
+
+        var mychar = item.t.substr(0, 1)
+        var temp = 0;
+        if (seletor.Industry_S2[1].contains(mychar)) {
+            temp = 1;
+        } else if (seletor.Industry_S2[2].contains(mychar)) {
+            temp = 2;
+        } else if (seletor.Industry_S2[3].contains(mychar)) {
+            temp = 3;
+        }
+        shtml[temp].push("<li code='" + item.c + "' ><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+    }
+    var html = [];
+
+    html.push("<div class='city-select city' data-count='city' style='display: block;'>");
+
+    var temphtml = [];
+
+    for (var j = 0; j < 4; j++) {
+        var _shtml = shtml[j].join('');
+
+        if (_shtml.length > 0) {
+            temphtml.push("<dl class='clearfix'>");
+            temphtml.push("<dt>" + seletor.Industry_S1[j] + "</dt>");
+            temphtml.push("<dd><ul class='sl-v-list brand-selected'>");
+            temphtml.push(_shtml);
+            temphtml.push("</ul> </dd> </dl>");
+        }
+    }
+    html.push(temphtml.join(''));
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.Industry_Confirm = function (e) {
+    var r = [];
+
+    var sel_note = $(".result-selected .selected");
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = item.attr("code");
+            var itemname = item.find("a").text();
+            r.push({ code: itemcode, name: itemname });
+        }
+    }
+    if (st.sel_success && st.sel_success != "") {
+        eval(st.sel_success + "(r)");
+    }
+    $(".sel-bg").hide();
+    $(".sel-warp").hide();
+}
+
+
+seletor.Industry_InitSel = function () {
+    $(".fa_selected").removeClass("fa_selected");
+    var sel_note = $(".result-selected .selected");
+
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = item.attr("code");
+
+            //选择列表项
+            $(".city-select-tab-content li[code='" + itemcode + "']").addClass("selected");
+        }
+    }
+}
+
+
+
+seletor.JobCate_PartTimeJobType = 112100000;
+//seletor.JobCate_PartTimeJobType = 112100000;
+seletor.JobCate_Load = function () {
+    seletor.JobCate_JumpTab(1);
+}
+seletor.JobCate_TabJump = function (e) {
+    var note = $(e);
+    var code = Number(note.attr("code"));
+    var level = Number(note.attr("level"));
+    if (level == 1) {
+        seletor.JobCate_JumpTab(1);
+    } else {
+        if (code > 0) {
+            seletor.JobCate_JumpTab(level, code);
+        }
+    }
+}
+seletor.JobCate_InitItem = function (level, code) {
+    if (level == 1) {
+
+        //删除下属
+        var parcode = Math.round(code / 1000000);
+        $("ul.result-selected").find("li[code^='" + parcode + "'][code!='" + code + "']").remove();
+        $("li.selected[code^='" + parcode + "'][code!='" + code + "']").removeClass("selected");
+    } else if (level == 2) {
+        var parcode1 = Math.round(code / 1000);
+        $("ul.result-selected").find("li[code^='" + parcode1 + "'][code!='" + code + "']").remove();
+        $("li.selected[code^='" + parcode1 + "'][code!='" + code + "']").removeClass("selected");
+        var parcode2 = Math.round(code / 1000000) * 1000000;
+        $("ul.result-selected").find("li[code='" + parcode2 + "']").remove();
+        $("li.selected[code='" + parcode2 + "']").removeClass("selected");
+    }
+    else if (level == 3) {
+        var parcode1 = Math.round(code / 1000) * 1000;
+        $("ul.result-selected").find("li[code='" + parcode1 + "']").remove();
+        $("li.selected[code='" + parcode1 + "']").removeClass("selected");
+        var parcode2 = Math.round(code / 1000000) * 1000000;
+        $("ul.result-selected").find("li[code='" + parcode2 + "']").remove();
+        $("li.selected[code='" + parcode2 + "']").removeClass("selected");
+    }
+};
+seletor.JobCate_JumpTab = function (level, code) {
+    if (level == 1) {
+        $(".city-select-tab a[data-count='province']").addClass("active");
+        $(".city-select-tab a[data-count!='province']").removeClass("active");
+        $(".sel-warp .city-select-tab-content .city-select[data-count='province']").show();
+        $(".sel-warp .city-select-tab-content .city-select[data-count!='province']").hide();
+    }
+    else if (level == 2) {
+        var html = seletor.JobCate_RenderingControl_Level(2, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='city']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='city']").removeClass("active");
+            //
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(html);
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+    else if (level == 3) {
+        var html = seletor.JobCate_RenderingControl_Level(3, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='district']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='district']").removeClass("active");
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(seletor.JobCate_RenderingControl_Level(3, code));
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+}
+window.JobCate_Data_Warp_0 = null;
+window.JobCate_Data_Warp_1 = null;
+window.JobCate_Data_Warp_2 = null;
+seletor.JobCate_Data = function () {
+    var jsdata;
+    if (st.sel_type_lx == 0) {
+        if (window.JobCate_Data_Warp_0 && window.JobCate_Data_Warp_0.length > 0) {
+            jsdata = window.JobCate_Data_Warp_0;
+            return jsdata;
+        }
+    }
+    else if (st.sel_type_lx == 1) {
+        if (window.JobCate_Data_Warp_1 && window.JobCate_Data_Warp_1.length > 0) {
+            jsdata = window.JobCate_Data_Warp_1;
+            return jsdata;
+        }
+    }
+    else if (st.sel_type_lx == 2) {
+        if (window.JobCate_Data_Warp_2 && window.JobCate_Data_Warp_2.length > 0) {
+            jsdata = window.JobCate_Data_Warp_2;
+            return jsdata;
+        }
+    }
+    $.ajax({
+        type: "get",
+        url: "/selector/selector_ajax.ashx",
+        data: { ac: "jobcate", sel_type_lx: st.sel_type_lx },
+        async: false,
+        success: function (d) {
+            if (d.length > 0) {
+                var ls = d.split('|');
+                var ds = [];
+                for (var i = 0; i < ls.length; i++) {
+                    var item = ls[i];
+                    var item_ls = item.split('@');
+                    if (item_ls.length == 5) {
+                        ds.push({ n: item_ls[0], c: Number(item_ls[1]), t: item_ls[2], l: item_ls[3], s: item_ls[4] });
+                    }
+                }
+                if (st.sel_type_lx == 0) {
+                    window.JobCate_Data_Warp_0 = ds;
+                } else if (st.sel_type_lx == 1) {
+                    window.JobCate_Data_Warp_1 = ds;
+                } else if (st.sel_type_lx == 2) {
+                    window.JobCate_Data_Warp_2 = ds;
+                }
+                jsdata = ds;
+            }
+        }
+    });
+    return jsdata;
+}
+seletor.JobCate_Prov_Html = ["<div class='city-select province' data-count='province' style='display: block;'>"
+        , "<div class='city-select city' data-count='city' style='display: block;' code='{code}'>"
+        , "<div class='city-select district' data-count='district' style='display: block;' code='{code}'>"];
+seletor.JobCate_S1 = ["A-G", "H-K", "L-S", "T-Z"];
+seletor.JobCate_S2 = [['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['h', 'i', 'j', 'k'], ['l', 'm', 'n', 'o', 'p', 'q', 'r', 's'], ['t', 'u', 'v', 'w', 'x', 'y', 'z']];
+
+seletor.JobCate_RenderingControl = function () {
+
+    var html = [];
+    html.push("<div class='city-picker-dropdown'>");
+    html.push("<div class='city-select-wrap'>");
+    html.push("<div class='city-select-tab'>");
+    if (st.sel_type_lx == 2) {
+        html.push("<a data-count='district' level='3' onclick='seletor.JobCate_TabJump(this)' class='select-tab active'  code='100100000'>兼职<i>&nbsp;</i></a>" +
+            "<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+            "</div>");
+    } else {
+        html.push("<a class='active select-tab' data-count='province' level='1' onclick='seletor.JobCate_TabJump(this)'>一级<i>&nbsp;</i></a>" +
+            "<a data-count='city' level='2' onclick='seletor.JobCate_TabJump(this)' class='select-tab' style='display:none;'>二级<i>&nbsp;</i></a>" +
+            "<a data-count='district' level='3' onclick='seletor.JobCate_TabJump(this)' class='select-tab' style='display:none;'>三级<i>&nbsp;</i></a>" +
+            "<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+            "</div>");
+    }
+    html.push("<div class='city-select-content city-select-tab-content' style='height:" + st.content_height + "px'>");
+    if (st.sel_type_lx == 2) {
+        html.push(seletor.JobCate_RenderingControl_Level(3, seletor.JobCate_PartTimeJobType, 1));
+    } else {
+        html.push(seletor.JobCate_RenderingControl_Level(1));
+    }
+    html.push("</div>");
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.JobCate_RenderingControl_Level = function (level, code, notParHtml) {
+    var notParHtml = notParHtml || 0;
+    //遍历数据
+    var shtml = new Array();
+    for (var i = 0; i < 4; i++) {
+        shtml[i] = [];
+    }
+
+    var citys = seletor.JobCate_Data();
+    for (var i = 0; i < citys.length; i++) {
+        var item = citys[i];
+        if (item.l != level)
+            continue;
+        if (level == 1) {
+            if (item.c / 1000000 - Math.floor(item.c / 1000000) == 0) {
+                //item_level = 1;
+            } else if (item.c / 1000 - Math.floor(item.c / 1000) == 0) {
+                //item_level = 2;
+                continue;
+            } else {
+                //item_level = 3;
+                continue;
+            }
+        } else if (level == 2) {
+            if (item.c / 1000000 - Math.floor(item.c / 1000000) == 0) {
+                //item_level = 1;
+                continue;
+            } else if (item.c / 1000 - Math.floor(item.c / 1000) == 0) {
+                //item_level = 2;
+                if (Math.floor(item.c / 1000000) == Math.floor(code / 1000000)) {
+
+                } else {
+                    continue;
+                }
+            } else {
+                //item_level = 3;
+                continue;
+            }
+        } else {
+            if (item.c / 1000000 - Math.floor(item.c / 1000000) == 0) {
+                //item_level = 1;
+                continue;
+            } else if (item.c / 1000 - Math.floor(item.c / 1000) == 0) {
+                continue;
+            } else {
+                //item_level = 3;
+                if (Math.floor(item.c / 1000) == Math.floor(code / 1000)) {
+
+                } else {
+                    continue;
+                }
+            }
+        }
+        var mychar = item.t.substr(0, 1);
+        var temp = 0;
+        if (level != 3) {
+            if (seletor.JobCate_S2[1].contains(mychar)) {
+                temp = 1;
+            } else if (seletor.JobCate_S2[2].contains(mychar)) {
+                temp = 2;
+            } else if (seletor.JobCate_S2[3].contains(mychar)) {
+                temp = 3;
+            }
+        }
+
+        shtml[temp].push("<li code='" + item.c + "' level='" + level + "' ><a onclick='seletor.Click(this)' title='" + item.n + "'  sub='" + item.s + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+    }
+    var html = [];
+    if (level == 1) {
+        html.push(seletor.JobCate_Prov_Html[0]);
+    } else if (level == 2) {
+        html.push(seletor.JobCate_Prov_Html[1].replace("{code}", code));
+    } else if (level == 3) {
+        html.push(seletor.JobCate_Prov_Html[2].replace("{code}", code));
+    }
+
+    var isEmpty = 1;
+    var temphtml = [];
+    var parhtml = [];
+    //加入父选择
+    if (notParHtml != 1) {
+        if ((level == 2 && st.sel_limit_1level == 0) || level == 3) {
+            var get_code = 0;
+            if (level == 2) {
+                get_code = Math.floor(code / 1000000) * 1000000;
+            } else {
+                get_code = Math.floor(code / 1000) * 1000;
+            }
+            parhtml.push("<dl class='clearfix'>");
+
+            parhtml.push("<dd class='fa-dd'><ul class='sl-v-list brand-selected'>");
+            for (var i = 0; i < citys.length; i++) {
+                var item = citys[i];
+                if (item.c == get_code) {
+                    parhtml.push("<li code='" + item.c + "' level='" + item.l + "'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                    break;
+                }
+            }
+            parhtml.push("</ul> </dd> </dl>");
+        }
+    }
+    for (var j = 0; j < 4; j++) {
+        var _shtml = shtml[j].join('');
+
+        if (_shtml.length > 0) {
+            isEmpty = 2;
+            if (level == 3) {
+                temphtml.push(_shtml);
+            } else {
+                temphtml.push("<dl class='clearfix'>");
+                temphtml.push("<dt>" + seletor.JobCate_S1[j] + "</dt>");
+                temphtml.push("<dd><ul class='sl-v-list brand-selected'>");
+                temphtml.push(_shtml);
+                temphtml.push("</ul> </dd> </dl>");
+            }
+        }
+    }
+    if (isEmpty == 1) {
+        //没有数据
+        return "";
+    }
+    if (level == 3) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push("<dl class='clearfix'>");
+        html.push("<dd>");
+        html.push("<ul class='sl-v-list brand-selected'>");
+        html.push(temphtml.join(''));
+        html.push("</ul> ");
+        html.push("</dd> </dl>");
+    } else if (level == 2) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push(temphtml.join(''));
+    }
+    else if (level == 1) {
+        html.push(temphtml.join(''));
+    }
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.JobCate_InitSel = function () {
+    $(".fa_selected").removeClass("fa_selected");
+    var sel_note = $(".result-selected .selected");
+    var level1 = [];
+    var level2 = [];
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = Number(item.attr("code"));
+            if (itemcode - Math.floor(itemcode / 1000) * 1000 != 0) //3ji
+            {
+                level1.push(Math.floor(itemcode / 1000000) * 1000000);
+                level2.push(Math.floor(itemcode / 1000) * 1000);
+            }
+            else if (itemcode - Math.floor(itemcode / 1000000) * 1000000 != 0) //2ji
+            {
+                level1.push(Math.floor(itemcode / 1000000) * 1000000);
+            }
+            //选择列表项
+            $(".city-select-tab-content li[code='" + itemcode + "']").addClass("selected");
+        }
+        var level1_res = [];
+        for (var i = 0; i < level1.length; i++) {
+            var i_code = level1[i];
+            var is_add = 1;
+            for (var j = 0; j < level1_res.length; j++) {
+                if (level1_res[j].code == i_code) {
+                    level1_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level1_res.push({ code: i_code, num: 1 });
+            }
+        }
+        var level2_res = [];
+        for (var i = 0; i < level2.length; i++) {
+            var i_code = level2[i];
+            var is_add = 1;
+            for (var j = 0; j < level2_res.length; j++) {
+                if (level2_res[j].code == i_code) {
+                    level2_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level2_res.push({ code: i_code, num: 1 });
+            }
+        }
+        if (level1_res.length > 0) {
+            for (var i = 0; i < level1_res.length; i++) {
+                var item = level1_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+        if (level2_res.length > 0) {
+            for (var i = 0; i < level2_res.length; i++) {
+                var item = level2_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+    }
+}
+
+
+seletor.JobNav_Load = function () {
+    seletor.JobNav_JumpTab(1);
+}
+seletor.JobNav_TabJump = function (e) {
+    var note = $(e);
+    var code = Number(note.attr("code"));
+    var level = Number(note.attr("level"));
+    if (level == 1) {
+        seletor.JobNav_JumpTab(1);
+    } else {
+        if (code > 0) {
+            seletor.JobNav_JumpTab(level, code);
+        }
+    }
+}
+seletor.JobNav_InitItem = function (level, code) {
+    if (level == 1) {
+
+        //删除下属
+        var parcode = Math.round(code / 1000);
+        $("ul.result-selected").find("li[code^='" + parcode + "'][code!='" + code + "']").remove();
+        $("li.selected[code^='" + parcode + "'][code!='" + code + "']").removeClass("selected");
+    } else if (level == 2) {
+        var parcode2 = Math.round(code / 1000) * 1000;
+        $("ul.result-selected").find("li[code='" + parcode2 + "']").remove();
+        $("li.selected[code='" + parcode2 + "']").removeClass("selected");
+    }
+};
+seletor.JobNav_JumpTab = function (level, code) {
+    if (level == 1) {
+        $(".city-select-tab a[data-count='province']").addClass("active");
+        $(".city-select-tab a[data-count!='province']").removeClass("active");
+        $(".sel-warp .city-select-tab-content .city-select[data-count='province']").show();
+        $(".sel-warp .city-select-tab-content .city-select[data-count!='province']").hide();
+    }
+    else if (level == 2) {
+        var html = seletor.JobNav_RenderingControl_Level(2, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='city']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='city']").removeClass("active");
+            //
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(html);
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+    else if (level == 3) {
+        var html = seletor.JobNav_RenderingControl_Level(3, code);
+        if (html != "") {
+            $(".city-select-tab a[data-count='district']").addClass("active").attr("code", code).show();
+            $(".city-select-tab a[data-count!='district']").removeClass("active");
+            var note = $(".city-select-tab-content .city-select[code='" + code + "']");
+            if (note.length > 0) {
+                note.show();
+            } else {
+                $(".sel-warp .city-select-tab-content").append(seletor.JobNav_RenderingControl_Level(3, code));
+            }
+            $(".sel-warp .city-select-tab-content .city-select[code!='" + code + "']").hide();
+            $(".city-select-content").perfectScrollbar && $(".city-select-content").perfectScrollbar();
+        }
+    }
+}
+window.JobNav_Data_Warp = null;
+seletor.JobNav_Data = function () {
+    var jsdata;
+    if (window.JobNav_Data_Warp && window.JobNav_Data_Warp.length > 0) {
+        jsdata = window.JobNav_Data_Warp;
+        return jsdata;
+    } else {
+        $.ajax({
+            type: "get",
+            url: "/selector/selector_ajax.ashx",
+            data: { ac: "jobnav" },
+            async: false,
+            success: function (d) {
+                if (d.length > 0) {
+                    var ls = d.split('|');
+                    var ds = [];
+                    for (var i = 0; i < ls.length; i++) {
+                        var item = ls[i];
+                        var item_ls = item.split('@');
+                        if (item_ls.length == 5) {
+                            ds.push({ n: item_ls[0], c: Number(item_ls[1]), t: item_ls[2], l: item_ls[3], s: item_ls[4] });
+                        }
+                    }
+                    window.JobNav_Data_Warp = ds;
+                    jsdata = ds;
+                }
+            }
+        });
+        return jsdata;
+    }
+}
+seletor.JobNav_Prov_Html = ["<div class='city-select province' data-count='province' style='display: block;'>"
+        , "<div class='city-select city' data-count='city' style='display: block;' code='{code}'>"
+        , "<div class='city-select district' data-count='district' style='display: block;' code='{code}'>"];
+seletor.JobNav_S1 = ["A-G", "H-K", "L-S", "T-Z"];
+seletor.JobNav_S2 = [['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['h', 'i', 'j', 'k'], ['l', 'm', 'n', 'o', 'p', 'q', 'r', 's'], ['t', 'u', 'v', 'w', 'x', 'y', 'z']];
+seletor.JobNav_RenderingControl = function () {
+
+    var html = [];
+    html.push("<div class='city-picker-dropdown'>");
+    html.push("<div class='city-select-wrap'>");
+    html.push("<div class='city-select-tab'>");
+    html.push("<a class='active select-tab' data-count='province' level='1' onclick='seletor.JobNav_TabJump(this)'>大类<i>&nbsp;</i></a>" +
+        "<a data-count='city' level='2' onclick='seletor.JobNav_TabJump(this)' class='select-tab' style='display:none;'>小类<i>&nbsp;</i></a>" +
+        "<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+        "</div>");
+    html.push("<div class='city-select-content city-select-tab-content' style='height:" + st.content_height + "px'>");
+
+    html.push(seletor.JobNav_RenderingControl_Level(1));
+
+    html.push("</div>");
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.JobNav_RenderingControl_Level = function (level, code) {
+    //遍历数据
+    var shtml = new Array();
+    for (var i = 0; i < 4; i++) {
+        shtml[i] = [];
+    }
+
+    var citys = seletor.JobNav_Data();
+    for (var i = 0; i < citys.length; i++) {
+        var item = citys[i];
+        var item_level = 0;
+
+        if (level == 1) {
+            if (item.l == 1) {
+                //item_level = 1;
+            }
+            else {
+                //item_level = 3;
+                continue;
+            }
+        } else if (level == 2) {
+            if (item.l == 2) {
+                //item_level = 2;
+                if (Math.floor(item.c / 1000) == Math.floor(code / 1000)) {
+
+                } else {
+                    continue;
+                }
+            } else {
+                //item_level = 3;
+                continue;
+            }
+        }
+        var mychar = item.t.substr(0, 1)
+        var temp = 0;
+        if (seletor.JobNav_S2[1].contains(mychar)) {
+            temp = 1;
+        } else if (seletor.JobNav_S2[2].contains(mychar)) {
+            temp = 2;
+        } else if (seletor.JobNav_S2[3].contains(mychar)) {
+            temp = 3;
+        }
+        shtml[temp].push("<li code='" + item.c + "' level='" + level + "' ><a onclick='seletor.Click(this)' title='" + item.n + "'  sub='" + item.s + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+    }
+    var html = [];
+    if (level == 1) {
+        html.push(seletor.JobNav_Prov_Html[0]);
+    } else if (level == 2) {
+        html.push(seletor.JobNav_Prov_Html[1].replace("{code}", code));
+    }
+
+    var isEmpty = 1;
+    var temphtml = [];
+    var parhtml = [];
+    //加入父选择
+    if (level == 2) {
+        var get_code = 0;
+        if (level == 2) {
+            get_code = Math.floor(code / 1000) * 1000;
+        }
+        parhtml.push("<dl class='clearfix'>");
+
+        parhtml.push("<dd class='fa-dd'><ul class='sl-v-list brand-selected'>");
+        for (var i = 0; i < citys.length; i++) {
+            var item = citys[i];
+            if (item.c == get_code) {
+                parhtml.push("<li code='" + item.c + "' level='" + item.l + "'><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+                break;
+            }
+        }
+        parhtml.push("</ul> </dd> </dl>");
+    }
+    for (var j = 0; j < 4; j++) {
+        var _shtml = shtml[j].join('');
+
+        if (_shtml.length > 0) {
+            isEmpty = 2;
+            if (level == 3) {
+                temphtml.push(_shtml);
+            } else {
+                temphtml.push("<dl class='clearfix'>");
+                temphtml.push("<dt>" + seletor.JobNav_S1[j] + "</dt>");
+                temphtml.push("<dd><ul class='sl-v-list brand-selected'>");
+                temphtml.push(_shtml);
+                temphtml.push("</ul> </dd> </dl>");
+            }
+        }
+    }
+    if (isEmpty == 1) {
+        //没有数据
+        return "";
+    }
+    if (level == 3) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push("<dl class='clearfix'>");
+        html.push("<dd>");
+        html.push("<ul class='sl-v-list brand-selected'>");
+        html.push(temphtml.join(''));
+        html.push("</ul> ");
+        html.push("</dd> </dl>");
+    } else if (level == 2) {
+        if (parhtml.length > 0) {
+            html.push(parhtml.join(''));
+        }
+        html.push(temphtml.join(''));
+    }
+    else if (level == 1) {
+        html.push(temphtml.join(''));
+    }
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.JobNav_InitSel = function () {
+    $(".fa_selected").removeClass("fa_selected");
+    var sel_note = $(".result-selected .selected");
+    var level1 = [];
+    var level2 = [];
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = Number(item.attr("code"));
+            if (itemcode - Math.floor(itemcode / 1000) * 1000 != 0) //2ji
+            {
+                level1.push(Math.floor(itemcode / 1000) * 1000);
+            }
+            //选择列表项
+            $(".city-select-tab-content li[code='" + itemcode + "']").addClass("selected");
+        }
+        var level1_res = [];
+        for (var i = 0; i < level1.length; i++) {
+            var i_code = level1[i];
+            var is_add = 1;
+            for (var j = 0; j < level1_res.length; j++) {
+                if (level1_res[j].code == i_code) {
+                    level1_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level1_res.push({ code: i_code, num: 1 });
+            }
+        }
+        var level2_res = [];
+        for (var i = 0; i < level2.length; i++) {
+            var i_code = level2[i];
+            var is_add = 1;
+            for (var j = 0; j < level2_res.length; j++) {
+                if (level2_res[j].code == i_code) {
+                    level2_res[j].num++;
+                    is_add = 2;
+                    break;
+                }
+            }
+            if (is_add == 1) {
+                level2_res.push({ code: i_code, num: 1 });
+            }
+        }
+        if (level1_res.length > 0) {
+            for (var i = 0; i < level1_res.length; i++) {
+                var item = level1_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+        if (level2_res.length > 0) {
+            for (var i = 0; i < level2_res.length; i++) {
+                var item = level2_res[i];
+                var note = $(".city-select-wrap li[code='" + item.code + "']");
+                note.addClass("fa_selected");
+            }
+        }
+    }
+}
+
+
+window.Site_Data_Warp = null;
+seletor.Site_Data = function () {
+    var jsdata;
+    if (window.Site_Data_Warp && window.Site_Data_Warp.length > 0) {
+        jsdata = window.Site_Data_Warp;
+        return jsdata;
+    } else {
+        $.ajax({
+            type: "get",
+            url: "/selector/selector_ajax.ashx",
+            data: { ac: "site" },
+            async: false,
+            success: function (d) {
+                if (d.length > 0) {
+                    var ls = d.split('|');
+                    var ds = [];
+                    for (var i = 0; i < ls.length; i++) {
+                        var item = ls[i];
+                        var item_ls = item.split('@');
+                        if (item_ls.length == 3) {
+                            ds.push({ n: item_ls[0], c: item_ls[1], t: item_ls[2] });
+                        }
+                    }
+                    window.Site_Data_Warp = ds;
+                    jsdata = ds;
+                }
+            }
+        });
+        return jsdata;
+    }
+}
+seletor.Site_S1 = ["A-G", "H-K", "L-S", "T-Z"];
+seletor.Site_S2 = [['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['h', 'i', 'j', 'k'], ['l', 'm', 'n', 'o', 'p', 'q', 'r', 's'], ['t', 'u', 'v', 'w', 'x', 'y', 'z']];
+seletor.Site_RenderingControl = function () {
+
+    var html = [];
+    html.push("<div class='city-picker-dropdown'>");
+    html.push("<div class='city-select-wrap'>");
+    html.push("<div class='city-select-tab'>");
+    html.push("<a onclick='seletor.SearchKey_TabJump(this)' style='display:none' class='SearchTab'>搜索结果<i>&nbsp;</i></a>" +
+        "</div>");
+    html.push("<div class='city-select-content city-select-tab-content' style='height:" + st.content_height + "px'>");
+
+    html.push(seletor.Site_RenderingControl_Level(1));
+
+    html.push("</div>");
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.Site_Click = function (e) {
+    var _sub = $(e).attr("sub") || 0;
+    var sub = Number(_sub);
+    var note = $(e).parent();
+    var sel = 2;
+    if (note.hasClass("selected")) {
+        sel = 2;
+    } else {
+        sel = 1;
+    }
+    var code = note.attr("code");
+    //
+    if (sel == 1) {
+
+        if (st.sel_selnum == 1) {
+            $("ul.result-selected").find("li").remove();
+            $("li.selected").removeClass("selected");
+            $(".city-select-tab-content li[code='" + code + "']").addClass("selected");
+            $("ul.result-selected").append(note.prop('outerHTML'));
+            seletor.InitSel();
+        }
+    } else {
+        $("ul.result-selected").find("li[code='" + code + "']").remove();
+        $("li.selected[code='" + code + "']").removeClass("selected");
+        seletor.InitSel();
+    }
+}
+seletor.Site_RenderingControl_Level = function (level, code) {
+    //遍历数据
+    var shtml = new Array();
+    for (var i = 0; i < 4; i++) {
+        shtml[i] = [];
+    }
+
+    var citys = seletor.Site_Data();
+    for (var i = 0; i < citys.length; i++) {
+        var item = citys[i];
+
+        var mychar = item.t.substr(0, 1)
+        var temp = 0;
+        if (seletor.Site_S2[1].contains(mychar)) {
+            temp = 1;
+        } else if (seletor.Site_S2[2].contains(mychar)) {
+            temp = 2;
+        } else if (seletor.Site_S2[3].contains(mychar)) {
+            temp = 3;
+        }
+        shtml[temp].push("<li code='" + item.c + "' ><a onclick='seletor.Click(this)' title='" + item.n + "'>" + item.n + "<i>&nbsp;</i></a></li>");
+    }
+    var html = [];
+
+    html.push("<div class='city-select city' data-count='city' style='display: block;'>");
+
+    var temphtml = [];
+
+    for (var j = 0; j < 4; j++) {
+        var _shtml = shtml[j].join('');
+
+        if (_shtml.length > 0) {
+            temphtml.push("<dl class='clearfix'>");
+            temphtml.push("<dt>" + seletor.Site_S1[j] + "</dt>");
+            temphtml.push("<dd><ul class='sl-v-list brand-selected'>");
+            temphtml.push(_shtml);
+            temphtml.push("</ul> </dd> </dl>");
+        }
+    }
+    html.push(temphtml.join(''));
+    html.push("</div>");
+
+    return html.join('');
+}
+seletor.Site_Confirm = function (e) {
+    var r = [];
+
+    var sel_note = $(".result-selected .selected");
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = item.attr("code");
+            var itemname = item.find("a").text();
+            r.push({ code: itemcode, name: itemname });
+        }
+    }
+    if (st.sel_success && st.sel_success != "") {
+        eval(st.sel_success + "(r)");
+    }
+    $(".sel-bg").hide();
+    $(".sel-warp").hide();
+}
+
+
+seletor.Site_InitSel = function () {
+    $(".fa_selected").removeClass("fa_selected");
+    var sel_note = $(".result-selected .selected");
+
+    if (sel_note.length > 0) {
+        for (var i = 0; i < sel_note.length; i++) {
+            var item = $(sel_note[i]);
+            var itemcode = item.attr("code");
+
+            //选择列表项
+            $(".city-select-tab-content li[code='" + itemcode + "']").addClass("selected");
+        }
+    }
+}

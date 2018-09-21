@@ -1,0 +1,1582 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>企业管理中心 - 汕头招聘网</title>
+    <meta name="description" content="汕头招聘网（STZP.CN），汕头人才网站知名品牌，汕头人才求职、汕头招聘网站第一选择！人气火爆的汕头人才市场，汕头领先的人力资源机构，汕头招聘网人才求职简历库超500万份！致力于打造最成功的汕头人才市场网络品牌。" />
+    <meta name="keywords" content="汕头招聘网,汕头人才网,汕头招聘,汕头人才招聘网,汕头人才,汕头求职,汕头人才市场,汕头兼职,汕头网络招聘,汕头招聘信息,汕头人才信息,汕头招聘会,汕头中高级人才" />
+    <script src="http://bczpweb.oss-cn-shenzhen.aliyuncs.com/js/jquery.js" type="text/javascript"></script>
+    <script src="http://bczpweb.oss-cn-shenzhen.aliyuncs.com/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="/js/v3/global.js?v=1519311851" type="text/javascript"></script>
+    <script src="/js/CommonLibs.js?v=20180320" type="text/javascript"></script>
+    <script src=" /js/flash.js" type="text/javascript"></script>
+    <link href="http://bczpweb.oss-cn-shenzhen.aliyuncs.com/style/v3/global.css?v=1519311851" rel="stylesheet" />
+    <link href="/css/selector.css" rel="stylesheet" />
+    <link href="/style/v3/message.css" rel="stylesheet" type="text/css" />
+    <link href="/style/stzp.style.css" rel="stylesheet" type="text/css" />
+    <link href="/style/v3/entmanage.css?v=20180321" rel="stylesheet" type="text/css" />
+    <script src="/js/ajaxloading.js" type="text/javascript"></script>
+    <script src="/js/entmanage.js" type="text/javascript"></script>
+    <script src="/js/jquery.plugins.js" type="text/javascript"></script>
+    <script src="/js/tip.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://bczpweb.oss-cn-shenzhen.aliyuncs.com/js/jquery.qrcode.min.js"></script>
+    <script src="/js/DeviceAuth.js"></script>
+    
+    <link href="/style/v3/message.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery.banner.js"></script>
+    <script type="text/javascript" src="/js/tip/tip_sys.js"></script>
+    <script type="text/javascript">
+        //刷新招聘信息
+        function RefreshRanking() {
+            __open("refreshranking", { caption: "查询目前排名", w: 360, h: 180, scrolling: "no", url: "/ent/ranking.aspx" });
+        }
+        $(function () {
+            $("#idcRefreshOffer,#cfcard,#s12intro,#emailyz,#mobileyz,#zzyz,#dituyz,#logox").jtip({ offsetx: 0, offsety: 8, useanimate: false });
+            //$("#idcRefreshOffer").mouseover();
+        });
+    </script>
+    <style type="text/css">
+        .alerttip1 .at-head {
+            background: #1f84d4;
+        }
+
+        .alerttip1 .at-text {
+            border: solid #1f84d4;
+            border-width: 0 2px 2px 2px;
+        }
+
+        .alerttip1 a {
+            color: #1f84d4;
+        }
+
+        .dengpao2 {
+            margin: 6px 5px 0;
+        }
+
+        .csphone {
+            color: green;
+            font-weight: bold;
+        }
+
+        .caidanicon .caidan2 {
+            margin: auto 46px 10px;
+            _margin: auto 23px 10px;
+        }
+
+        .AutoRefTips {
+            position: absolute;
+            right: 150px;
+            top: 100px;
+            background: #fffbe5;
+            border: 1px solid #eee;
+            width: 150px;
+            padding: 5px 10px;
+            line-height: 20px;
+        }
+
+            .AutoRefTips a {
+                color: #f00;
+                margin: 0 5px;
+            }
+
+            .AutoRefTips span {
+                color: #f90;
+            }
+
+            .AutoRefTips i {
+                position: absolute;
+                top: 11px;
+                right: -15px;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 15px solid #fffbe5;
+                width: 0;
+                height: 0;
+                z-index: 1;
+            }
+
+            .AutoRefTips u {
+                position: absolute;
+                top: 11px;
+                right: -16px;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 15px solid #eee;
+                width: 0;
+                height: 0;
+            }
+
+            .AutoRefTips img {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                cursor: pointer;
+            }
+
+        .hidden {
+            display: none;
+        }
+
+        .note_false {
+            display: inline-block;
+            height: 18px;
+            width: 28px;
+            line-height: 25px;
+            font-weight: normal;
+            background: url(/images/jw/err.gif) 2px -4px no-repeat;
+            background-size: 80%;
+            margin-bottom: -4px;
+        }
+    </style>
+
+    <link rel="shortcut icon" href="/logo.ico" />
+    <link rel="alternate" type="application/rss+xml" href="rss.aspx" title="汕头招聘网_汕头人才网_汕头人才招聘首选_【汕头招聘网马头商标】_人气旺、访问高的汕头人才网站！" />
+
+    <script>
+        $(function () {
+            if (1580624 == 0)
+                return;
+
+            
+
+        });
+
+        
+    </script>
+
+    <link href="/selector/selector.v1.css" rel="stylesheet" />
+    <link href="/js/ScrollBar/perfect-scrollbar-0.4.10.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="./manage.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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Ii9lbnQvcmVnaXN0ZXIxLmFzcHgiIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iaXRlbSBsIj7kvIHkuJrms6jlhow8L2E+PGEgaHJlZj0iL3NlYXJjaC9yZXN1bWVfc2VhcmNoZXIuYXNweCIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJpdGVtIGwiPuaQnOe0ouS6uuaJjTwvYT48YSBocmVmPSJodHRwOi8vd3d3LnN0enAuY24vdmlwLyIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJpdGVtIGwiPuS4quaAp+WMlumhtemdojwvYT48YSBocmVmPSIvc2VhcmNoL3Jlc3VtZV9wdWdvbmcuYXNweCIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJpdGVtIGwiPuaZruW3peS4k+WMujwvYT5kAgMPFgIfBgWuAjxhIGhyZWY9Ii9pbmZvcy96aGFvcGluaHVpIiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9Iml0ZW0gbCI+5oub6IGY5Lya5L+h5oGvPC9hPjxhIGhyZWY9Imh0dHA6Ly93d3cuc3R6cC5jbi9nZGZ0LyIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJpdGVtIGwiPumrmOerr+iuv+iwiDwvYT48YSBocmVmPSIvaW5mb3MvcWl1emhpIiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9Iml0ZW0gbCI+5rGC6IGM5pS755WlPC9hPjxhIGhyZWY9Ii9pbmZvcy96aGl5YW4iIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iaXRlbSBsIj7ogYzoqIDkuI3orrM8L2E+ZAIEDxYCHwYFsAI8YSBocmVmPSIvbmV3cGFnZXMvcHJvZHVjdDEuYXNweCIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJpdGVtIGwiPuaUtui0ueagh+WHhjwvYT48YSBocmVmPSIvYm9vay9pbmRleC5hc3B4IiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9Iml0ZW0gbCI+5paw5omL5oyH5byVPC9hPjxhIGhyZWY9Ii9oZWxwL2luZGV4LmFzcHgiIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iaXRlbSBsIj7luLjop4Hpl67popg8L2E+PGEgaHJlZj0iL2ZsaW5rL2luZGV4LmFzcHgiIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iaXRlbSBsIj7lj4vmg4Xpk77mjqU8L2E+ZAIFDxYCHwYFDTA3NTQtODgxMzg4ODhkAgYPFgIfBgUNMDc1NC04NjczMDAwMGQCBw8WAh8GBQ0wNzU0LTg2NzM2NjcyZAIIDxYCHwYFETI4ODA2MjgxMzRAcXEuY29tZAIKDxYCHwYFkQM8ZGl2IGNsYXNzPSJEaXZSaWdodEJ1dHRvbiI+PGRpdiBjbGFzcz0iR29Ub1RvcCIgdGl0bGU9IuWbnuWIsOmhtumDqCI+PC9kaXY+PGRpdiBjbGFzcz0iRmVlZEJhY2siIHRpdGxlPSLlj43ppogiIG9uY2xpY2s9J2phdmFzY3JpcHQ6JCgiLkZlZWRCYWNrQmcsLkZlZWRCYWNrQm94Iikuc2hvdygpOyc+PC9kaXY+PGRpdiBjbGFzcz0iTXlOZXdzIGNoYXRfY2xpZW50X3JlZHBvaW50IiB0aXRsZT0i5oiR55qE5raI5oGvIiBvbmNsaWNrPSJjaGF0X2NsaWVudF9yZWRwb2ludF9jbGljayh0aGlzKSIgY29tcGtleT0iNzZhYzY2Yzc1MGRkMmZkNmQ5ODMzODdjNGY5NGQ4NGYiIHVzZXJpZD0iZW50MTU4MDYyNCIga2V5MT0iNjU0NWUzOGMiIGtleTI9IjMwYjRjNjYzIiBkZXZpY2U9IjEiPjwvZGl2PjwvZGl2PmQCDQ8WAh8EZxYCAgEPDxYCHw4FL2h0dHA6Ly9waWMuc3R6cC5jbi91cGxvYWRmaWxlcy93ZWl4aW4vanBsbHcuZ2lmZGQCDg8PFgIfBGdkFgYCAQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQROYW1lHg5EYXRhVmFsdWVGaWVsZAUEQ29kZR4LXyFEYXRhQm91bmRnZBAVAgblu7rorq4G5oqV6K+JFQIDMTAxAzEwMhQrAwJnZ2RkAgMPFgIfBwICFgRmD2QWBGYPFQEDMTAxZAIBDxYCHwcCAxYGZg9kFgJmDxUCBTEwMTAxDOWKn+iDveW7uuiurmQCAQ9kFgJmDxUCBTEwMTAyD+aLm+iBmOS8muW7uuiurmQCAg9kFgJmDxUCBTEwMTAzDOWFtuS7luW7uuiurmQCAQ9kFgRmDxUBAzEwMmQCAQ8WAh8HAgQWCGYPZBYCZg8VAgUxMDIwMQzmiJHopoHkuL7miqVkAgEPZBYCZg8VAgUxMDIwMgzomZrlgYfkv6Hmga9kAgIPZBYCZg8VAgUxMDIwMwzpnZ7ms5XooYzkuLpkAgMPZBYCZg8VAgUxMDIwNAznp5/miL/popHpgZNkAgUPDxYCHwRoZGQCEA8PFgIfBGdkZGQJYEjFHM5RNCf9XQIto/kRhXTYW7or1qkKb9HwiK/OlA==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=vxlpQ9OKdN3siD0Dz6grhFijq4q2myF6RWFpGZGpxXE---u0ugc-U6o4bw9FhPwRSEqOa0EoCtkmxxUMeQjY528b7zoTZbSg4TJhQNIq8q81&amp;t=636161132560000000" type="text/javascript"></script>
+
+
+<script src="/js/common/jquery.public.js" type="text/javascript"></script>
+<script src="/js/jquery.ajaxtips.js?v=1" type="text/javascript"></script>
+<script src="/js/tip.js" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=0-nbq89tPziQkaskSYwyvyQuaUDsedPDIyXfDhRVSgQs1wMV0sbFWyhAKfPOZ6Wm7wT6prIlaLDo8KFynwID_c4KTzXTdf5s4jVfBOO-wtRaaOuiYX91bB5QBc-CwF3ODUrgMeqelpiczFgtLlcKh-cHFJ8brn78uhISBi5qD-A1&amp;t=2a48f442" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=vMGxUngaBUmwbHVFLsKQ4S4ZBICqwR5rNvqSuLNnzGb3zXNBJtZCmgF3lsHsBoe9t9xZb9S87-DMF6q-dUkBRDlQM2Lt56NkecFj0TnZoqtse16PjyfVuaFXLoidmFZhKljTtW2Vj_PHQLhkYmdev8EmDExwjBdp2f0ZxfM1kWQxA9g81yTMpj9ilMRMYUee0&amp;t=2a48f442" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="F78E85FE" />
+</div>
+        
+<div class="header">
+    <div class="headermenu">
+        <div class="headericon icon l" id="daohang">
+            <ul class="daohangbox">
+                <li>
+                    <em class="headericon l dot"></em>
+                    <em class="l line"></em>
+                    <div class="l content">
+                        <span class="content1">
+                            <a href="/jw/register1.aspx" target="_blank" style="color: #0378D8;">注册简历</a><a href="/search/offer_searcher.aspx" target="_blank" >查询职位</a><a href="http://www.stzp.cn/longtou/" target="_blank" >名企招聘</a><a href="/good/" target="_blank" >点亮绿标</a><br/><a href="/jw/reghelp.aspx" target="_blank" >求职助手</a><a href="/search/offer_searchmap_result.aspx" target="_blank" >地图搜索</a><a href="/Activity/AppDownload/Index.aspx" target="_blank" >百城求职宝</a><a href="/jw/buyvip.aspx" target="_blank" >求职VIP</a><br/><a href="/restemp/index.aspx" target="_blank" style="color: #0378D8;">个性化简历模板</a>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <em class="headericon l dot dot2"></em>
+                    <em class="l line"></em>
+                    <div class="l content">
+                        <span class="content1">
+                            <a href="/ent/register1.aspx" target="_blank" style="color: #0378D8;">企业注册</a><a href="/search/resume_searcher.aspx" target="_blank" >搜索人才</a><a href="http://www.stzp.cn/vip/" target="_blank" >个性化页面</a><a href="/search/resume_pugong.aspx" target="_blank" >普工专区</a><br/><a href="/adv/compete/" target="_blank" >职位竞价</a><a href="/ent/TemplateInfo.aspx" target="_blank" >个性化模板</a><a href="/newpages/EmailSubscribe.aspx" target="_blank" >订阅HR专刊</a><a href="/newpages/product2.aspx" target="_blank" >图片招聘</a><br/><a href="/Activity/AppDownload/Index.aspx" target="_blank" >百城招聘宝</a>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <em class="headericon l dot dot3"></em>
+                    <em class="l line"></em>
+                    <div class="l content">
+                        <span class="content1">
+                            <a href="/Activity/AppDownload/Index.aspx" target="_blank" >手机客户端</a><a href="/newpages/hrtools.aspx" target="_blank" >人事工具</a><a href="/book/index.aspx" target="_blank" style="color: #0378D8;">新手指引</a><a href="/vane/index.aspx" target="_blank" >职场指数</a><br/><a href="http://zufang.stzp.cn" target="_blank" style="color: #0378D8;">租房信息</a>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <em class="headericon l dot dot4"></em>
+                    <em class="l line"></em>
+                    <div class="l content">
+                        <span class="content1">
+                            <a href="http://vip.stzp.cn/sl/" target="_blank" >百城HR沙龙</a><a href="http://www.stzp.cn/jobfair/index.aspx" target="_blank" >现场招聘会</a><a href="/zpzk/" target="_blank" >招聘专刊</a><a href="/gdft/" target="_blank" >高端访谈</a><br/><a href="http://www.stguohui.com" target="_blank" >国慧学校</a><a href="/score/" target="_blank" style="color: #0378D8;">才币商城</a><a href="/ent/bao12intro.aspx" target="_blank" >优质雇主</a><a href="/shop/" target="_blank" >商家急聘</a><br/><a href="/book/hrbook/" target="_blank" style="color: #0378D8;">HR读本</a><a href="http://www.csitzk.cn" target="_blank" >潮汕IT智库</a><a href="/adv/wjf/paihang.aspx" target="_blank" style="color: #0378D8;">微积分排行榜</a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="headermenul l">
+            <ul>
+                <li><a style="border: none;" href="http://www.stzp.cn">首页</a></li>
+                <li><a href="/index/offers_more.aspx" title="近聘" target="_blank">近聘</a></li><li><a href="/search/offer_searcher.aspx" title="找工作" target="_blank">找工作</a></li><li><a href="/search/resume_searcher.aspx" title="找人才" target="_blank">找人才</a></li><li><a href="/jobfair/index.aspx" title="招聘会" target="_blank">招聘会</a></li><li><a href="/parttimejob/index.aspx?jcity1Hidden=101700" title="兼职" target="_blank">兼职</a></li><li><a href="/school/" title="校园" target="_blank">校园</a></li><li><a href="/infos/" title="资讯" target="_blank">资讯</a></li><li><a href="/vane/index.aspx" title="指数" target="_blank">指数</a></li><li><a href="/ipo/index.aspx" title="上市公司" target="_blank">上市公司</a></li>
+            </ul>
+        </div>
+        <div class="headermenur r">
+            
+            <div id="ctl00_header1_entislogin">
+	
+                <div class="entlogin">
+                    <div class="entloginimages entloginkuan">
+                        <div style="height: 40px; cursor: pointer" id="entlogin"></div>
+                        <a href="/ent/publishjob.aspx">发布招聘</a>
+                        <a href="/ent/recresume.aspx">收到简历</a>
+                        <a href="javascript:RefreshOffer()">刷新招聘</a>
+                        <a href="/ent/recommend.aspx">推荐简历</a>
+                        <a href="/ent/mgjoblist.aspx">招聘管理</a>
+                        <a href="/ent/history.aspx">谁看过我</a>
+                        <a href="/ent/logout.aspx" class="exit">安全退出</a>
+                    </div>
+                    <div class="entloginimages entloginicon"></div>
+                </div>
+            
+</div>
+            
+        </div>
+        <div id="ctl00_header1_MenuMobile" onclick="javascript:window.open(&#39;/Activity/AppDownload/Index.aspx&#39;);" class="MenuMobile r" style="display:block;">
+            <u class="headericon"></u>
+            手机
+            <div class="Qr">
+                <a id="MobileQr"></a>
+                “扫一扫”立即使用
+            </div>
+        </div>
+        <div id="ctl00_header1_MenuWx" onclick="javascript:window.open(&#39;/3g/weixin.aspx&#39;);" class="MenuWx r" style="display:block;">
+            <u class="headericon"></u>
+            微信
+            <div class="Qr">
+                <img src="http://pic.stzp.cn/uploadfiles/weixin/jpllw.gif" alt="">
+                打开微信“扫一扫”
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+        <div class="logowrapper">
+            <div class="logomenu">
+                <a href="http://www.stzp.cn/"  class='l'><img id="Logo_Img" title="汕头招聘网" alt="汕头招聘网" src="http://pic.stzp.cn/uploadfiles/pic/jpllw/head_upfiles/logo.gif" height="66" width="190" border="0"/></a>
+                <div class="l line"></div>
+                <div class="l" style="width: 170px;">
+                    <div>
+                        <div class="l" style="margin-top: 3px;">汕头招聘网</div>
+                        <div id="ctl00_mycity" class="citybox l">
+                            <div class="l cityboxselect orange">
+                                <strong>汕头站</strong>
+                                <div class="selectcity">
+                                    <div class="em"></div>
+                                    <div>
+                                        <div class="l headericon icon"></div>
+                                        <a href="http://www.bczp.cn" target="_blank" class="l blue" style="text-decoration: none;">百城旗下站点</a>
+                                        <div class="r orange">全国连锁，一站注册，多站发布！</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="line1"></div>
+                                    <div class="lianmeng">
+                                        <a href="http://ch.stzp.cn" target="_blank" rel="nofollow">澄海</a><a href="http://cn.stzp.cn" target="_blank" rel="nofollow">潮南</a><a href="http://cy.stzp.cn" target="_blank" rel="nofollow">潮阳</a><a href="http://www.job0663.com/" target="_blank" rel="nofollow">揭阳</a><a href="http://www.job0768.com/" target="_blank" rel="nofollow">潮州</a><a href="http://pn.job0663.com" target="_blank" rel="nofollow">普宁</a><a href="http://ca.job0768.com" target="_blank" rel="nofollow">潮安</a><a href="http://rp.job0768.com" target="_blank" rel="nofollow">饶平</a><a href="http://www.hr0755.com/" target="_blank" rel="nofollow">深圳</a><a href="http://www.hr020.cn/" target="_blank" rel="nofollow">广州</a><a href="http://www.0757rc.com/" target="_blank" rel="nofollow">佛山</a><a href="http://www.zhjob.cn/" target="_blank" rel="nofollow">珠海</a><a href="http://www.0769rc.com" target="_blank" rel="nofollow">东莞</a><a href="http://www.hr0752.com/" target="_blank" rel="nofollow">惠州</a><a href="http://www.hr0759.com/" target="_blank" rel="nofollow">湛江</a><a href="http://www.0750rc.com/" target="_blank" rel="nofollow">江门</a><a href="http://www.0760rc.com" target="_blank" rel="nofollow">中山</a><a href="http://www.hr0753.com/" target="_blank" rel="nofollow">梅州</a><a href="http://www.hr0660.com" target="_blank" rel="nofollow">汕尾</a><a href="http://www.hr762.com" target="_blank" rel="nofollow">河源</a><a href="http://www.hr0668.cn" target="_blank" rel="nofollow">茂名</a><a href="http://www.hr0751.com" target="_blank" rel="nofollow">韶关</a><a href="http://www.hr763.com" target="_blank" rel="nofollow">清远</a><a href="http://www.zqzp.cn" target="_blank" rel="nofollow">肇庆</a><a href="http://www.hr0596.cn" target="_blank" rel="nofollow">漳州</a><a href="http://www.fzzpw.net" target="_blank" rel="nofollow">抚州</a><a href="http://www.nnzp.com" target="_blank" rel="nofollow">南宁</a><a href="http://www.hr0898.com" target="_blank" rel="nofollow">海南</a><a href="http://www.hr0571.com" target="_blank" rel="nofollow">杭州</a><a href="http://www.lyzp100.com" target="_blank" rel="nofollow">临沂</a><a href="http://www.jjtl.com.cn" target="_blank" rel="nofollow">九江</a><a href="http://www.hr0351.cn/" target="_blank" rel="nofollow">太原</a><a href="http://www.0631rc.com" target="_blank" rel="nofollow">威海</a><a href="http://www.srrlzy.com/" target="_blank" rel="nofollow">上饶</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <a class="Jm" target="_blank" href="http://www.bczp.cn/book/businessJoin.aspx">加盟热线：400-777-3001 <span>详情了解>></span></a>
+                                </div>
+                            </div>
+                            <span class="headericon cityboxicon l"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div style="color: #9b9b9b;">
+                        人气火爆的汕头人才网站
+                    </div>
+                    <div>
+                        咨询热线：<span style="color: #FF6600; font-size: 11px;">0754-88138888</span>
+                    </div>
+                </div>
+                <div class="r searchclass">
+                    <div class="search">
+                        <div class="headericon icon l icon1" id="search-t">
+                            <span id="sp1" class="sp2">招人才</span>
+                            <i class="i_cornor"></i>
+                            <div class="headericon selected">
+                                <span id="sp2" class="sp1">找工作</span>
+                            </div>
+                        </div>
+                        <div class="searchbox l">
+                            <a id="searchLink" target="_blank" style="display: none;"></a>
+                            <i class="i_search"></i>
+                            <input name="ctl00$keyword" type="text" id="ctl00_keyword" class="l searchinput" placeholder="请输入关键字" autocomplete="off" suggestion="{inputid:&#39;ctl00_keyword&#39;,containerid:&#39;suggest&#39;,url:&#39;/search.aspx&#39;,para:&#39;keyword&#39;,paracallback:function(){return { searchtype: $(&#39;#search-t&#39;).hasClass(&#39;icon1&#39;)?2:1,jtype1Hidden:escape($(&#39;#jobdropdown&#39;).attr(&#39;sel_default&#39;)),jcity1Hidden:escape($(&#39;#citydropdown&#39;).attr(&#39;sel_default&#39;))}},entercallback:function(){$(&#39;searchbtn&#39;).click();},IsShowFcKeyword:1}" x-webkit-speech="" lang="zh-CN" />
+                            <div class="SearchParm">
+                                
+                                <span class="l headericon select relative" id="jobdropdown" sel_model="1" sel_type="jobcate" sel_selnum="3" sel_default="" sel_success="seletor.successcall_index_jobnav">工作岗位<i class="i_down"></i></span>
+                                
+                                <span class="l headericon select relative" id="citydropdown" sel_model="1" sel_type="city" sel_selnum="1" sel_default="101700" sel_success="seletor.successcall_index_city">汕头市<b></b><i class="i_down i_city"></i></span>
+                                
+                            </div>
+                        </div>
+                        <a href="javascript:Search();" class="headericon l searchbtn">
+                            <span>搜&nbsp;&nbsp;索</span>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div style="margin-top: 4px;">
+                        <div class="l gray hotkey">&nbsp;热门搜索：<a href="/search/resume_search_result.aspx?keyword=平面设计&jcity1Hidden=101700" target="_blank" title="平面设计">平面设计</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=文员&jcity1Hidden=101700" target="_blank" title="文员">文员</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=业务员&jcity1Hidden=101700" target="_blank" title="业务员">业务员</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=外贸业务员&jcity1Hidden=101700" target="_blank" title="外贸业务员">外贸业务员</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=客服&jcity1Hidden=101700" target="_blank" title="客服">客服</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=普工&jcity1Hidden=101700" target="_blank" title="普工">普工</a>&nbsp;<a href="/search/resume_search_result.aspx?keyword=跟单文员&jcity1Hidden=101700" target="_blank" title="跟单文员">跟单文员</a>&nbsp;</div>
+                        <div class="r blue">
+                            <a href="/search/listalljob.aspx" target="_blank">职位遍历</a>&nbsp;&nbsp;
+                            
+                            <a href="/JobBaike/index.aspx" target="_blank" style="color: red; position: relative;">职位百科</a>&nbsp;&nbsp;
+                            
+                            <a href="/search/offer_search_result_map.aspx" target="_blank">地图搜索</a>&nbsp;&nbsp;<a href="/search/offer_searcher.aspx" target="_blank">高级搜索</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div style="height: 25px"></div>
+        <div style="margin: auto; width: 1100px;">
+            <div class="lcaidan l" selectm="1" id="leftmenu">
+                
+<div class="caidan" id="m1">
+    <a href="/ent/manage.aspx" class="caidan1"></a>
+    <a href="/ent/manage.aspx" class="l" style="display: block">管理首页</a>
+</div>
+
+<div class="caidan" id="m1">
+    <a href="javascript:" class="Emp"></a>
+    <a href="javascript:" class="l">友雇</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm1">
+   
+    <a href="http://www.bczp.cn/Activity/Emp/Index.aspx">什么是友雇</a>
+   
+    <a href="/yougu/list.aspx">精彩案例</a>
+  
+    <a href="/Emp/Buy.aspx" id="ctl00_menu1_openyg">开通友雇</a>
+  
+    
+   
+  
+</div>
+
+
+<div class="caidan" id="m2">
+    <a href="javascript:" class="caidan2"></a>
+    <a href="javascript:" class="l">招聘管理</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm2">
+    
+    <a href="/ent/publishjob.aspx">发布招聘职位</a>
+    
+    <a href="/ent/mgjoblist.aspx">管理招聘信息</a>
+    
+    <a href="/ent/AutoRefresh/Index.aspx" style="color: #f00;">职位自动刷新</a>
+    
+    <a href="/ent/history.aspx">谁浏览我的招聘职位</a>
+    
+    <a href="/ent/guestbook.aspx">求职者咨询列表</a>
+    
+    <a href="/Ent/stallbooking2.aspx" style="color: red;">招聘会预订及管理</a>
+    <a href="/Ent/JobFairRecresume.aspx" style="color: red;">招聘会预约面试</a>
+    
+    <a href="/ent/compete.aspx" style="border-bottom: none">管理竞价排名</a>
+    
+</div>
+<div class="caidan" id="m3">
+    <a href="javascript:" class="caidan3"></a>
+    <a href="javascript:" class="l">简历管理</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm3">
+    
+    <a href="/ent/recresume.aspx">收到的求职简历</a>
+    
+    <a href="/ent/recommend.aspx">推荐的简历</a>
+    
+    <a href="/ent/queryhistory.aspx">我浏览过谁的简历</a>
+    
+    <a href="/ent/HasMaillist.aspx">订阅简历管理</a>
+    
+    <a href="/ent/favorlist.aspx" style="border-bottom: none">简历收藏夹</a>
+    
+    <a href="/ent/phone_error.aspx">无效简历举报</a>
+    
+</div>
+<div class="caidan" id="m4">
+    <a href="javascript:" class="caidan4"></a>
+    <a href="javascript:" class="l">记录统计</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm4">
+    
+    <a href="/ent/notice_history.aspx">面试通知</a>
+    
+    <a href="/ent/totalinv.aspx">招聘邀请历史记录</a>
+    
+    <a href="/ent/myemailog.aspx">已发在线邮件</a>
+    
+    <a href="/ent/creditcenter.aspx">信用投诉记录</a>
+    
+    <a href="/ent/viewsummary.aspx" style="display: none">招聘统计</a>
+    
+</div>
+<div class="caidan" id="m5">
+    <a href="javascript:" class="caidan5"></a>
+    <a href="javascript:" class="l">公司管理</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm5">
+    
+    <a href="/ent/changereg.aspx">修改公司信息</a>
+    
+    <a href="/ent/TemplateInfo.aspx" style="color: red;" target="_blank">专属个性化模板</a>
+    <a href="/ent/Wp/MyWp.aspx" style="color: red;">我的微聘</a>
+    <a href="/ent/map.aspx">标注公司地图</a>
+    <a href="/ent/visualize.aspx">企业形象图片</a>
+    <a href="/ent/upZhizhao.aspx">营业执照图片</a>
+    <a href="/ent/mgDept.aspx">招聘部门管理</a>
+    <a href="/ent/msmSeting.aspx">短信发送设置</a>
+    <a href="/ent/emailSeting.aspx">邮件发送设置</a>
+    <a href="/ent/DeviceAuthList.aspx" style="color: red;">账号安全管理</a>
+    
+    <a href="/ent/WxBindList.aspx">微信绑定账号管理</a>
+    <a href="/ent/changepwd.aspx">修改账号密码</a>
+</div>
+<div class="caidan" id="m6">
+    <a href="javascript:" class="caidan6"></a>
+    <a href="javascript:" class="l">人才搜索</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm6">
+    <a href="/ent/resume_searcher.aspx">简历高级查询</a>
+    <a href="/ent/search.aspx">简历搜索器</a>
+    <a href="/ent/matching.aspx">自动匹配简历</a>
+</div>
+
+<div class="caidan" id="m8">
+    <a href="javascript:" class="caidan8"></a>
+    <a href="javascript:" class="l">服务支持</a>
+    <a href="javascript:" class="menuup"></a>
+</div>
+<div class="cai2" id="mm8">
+    <a id="ctl00_menu1_dowloads" href="/ent/buylog.aspx">简历下载情况</a>
+    <a href="/ent/salesRecord.aspx" style="color: red;">会员缴费记录</a>
+
+    
+    <a href="/ent/paylog.aspx">在线支付记录</a>
+    <a id="ctl00_menu1_bank" href="/ent/bank.aspx">汇款帐号</a>
+    
+    <a href="/ent/ReportList.aspx">我的投诉列表</a>
+    
+    <a href="/ent/QList.aspx">我的反馈列表</a>
+    <a href="/ent/QtoSys.aspx">意见反馈</a>
+    
+</div>
+
+
+            </div>
+            <div class="r" style="width: 950px;" id="rightmenu">
+                
+    <div class="dan clearfix" style="height: 220px; padding: 0; position: relative;">
+        <div class="l" style="position: relative; margin: 45px 0 0 40px; _margin-left: 20px; _width: 656px;">
+            <div class="l" style="margin-right: 20px;">
+                <a href="/ent/editentlogo.aspx" class="elogo">
+                    <img id="ctl00_ContentPlaceHolder1_imgLogo" src="http://pic.bczp.cn/uploadfiles/entlogo/131402629295966711.png" style="border-width:0px;" />
+                    <div class="Tips">上传企业LOGO</div>
+                </a>
+            </div>
+            <div class="l">
+                <div class="Ent_Name">
+                    <a id="ctl00_ContentPlaceHolder1_Ent_Name" title="汕头市熊猫猫玩具有限公司" href="/jw/showent_1580624.aspx" target="_blank">汕头市熊猫猫玩具有限公司</a>
+                </div>
+                <div style="margin-bottom: 5px;max-width:500px">
+                    会员状态：正式会员 [会员期至：2020/6/2<font>(剩678天)</font>,查:<font color="#cc0000">5969</font>次] [会员有效期至：2023/5/26]
+                    <a href="holdlog.aspx">[使用记录]</a>&nbsp;<a style="color:red;" href="salesRecord.aspx">[缴费记录]</a>
+                </div>
+                <div>
+                    <div class="phone l"></div>
+                    <div id="ctl00_ContentPlaceHolder1_phone" class="l">招聘过程如有疑问，欢迎拨打客服专员直线：<font class='csphone'>0754-86396593</font> (19) </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div style="height: 15px"></div>
+
+            <div style="border-top: 1px dotted #eeeeee">
+                <div class="yangzheng l">
+                    <a class="mobile l"></a>
+                    <a id="mobileyz" href="/ent/changereg.aspx" jtitle='手机号码验证' jtext="<font color='red'>手机号码未验证</a>" jstyle='top' autoshow='false' autohide='true'>未验证</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="yangzheng l">
+                    <a class="zhizao l"></a>
+                    <a id="zzyz" href="/ent/upZhizhao.aspx" jtitle='营业执照验证' jtext="<font color='green'>营业执照已验证</a>" jstyle='top' autoshow='false' autohide='true'>已验证</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="yangzheng l" style="width: 140px">
+                    <a class="ditu l"></a>
+                    <a id="dituyz" href="/ent/map.aspx" jtitle='电子地图' jtext="<font color='green'>电子地图已标注</a>" jstyle='top' autoshow='false' autohide='true'>已标注电子地图</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="yangzheng l" style="width: 145px">
+                    <a class="logox l"></a>
+                    <a id="logox" href="/ent/editentlogo.aspx" jtitle='企业LOGO' jtext="<font color='green'>企业LOGO已上传</a>" jstyle='top' autoshow='false' autohide='true'>已上传企业LOGO</a>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="yangzheng l">
+                    <span id="ctl00_ContentPlaceHolder1_wxbind_label"><a class="wx_ico2 l"></a><a href="javascript:show_my_wxbind();">未绑定</a></span>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="r" style="margin: 18px 40px 0 0; _margin-right: 20px; position: relative;">
+            <style type="text/css">
+                .entwpin {
+                    display: block;
+                    width: 137px;
+                    height: 35px;
+                    margin-bottom: 15px;
+                    position: relative;
+                }
+
+                    .entwpin .wpin_icon {
+                        text-indent: -9999px;
+                        background: url(/images/ent/wp1.gif) no-repeat center 0;
+                        height: 34px;
+                        position: relative;
+                        z-index: 100;
+                        border: 1px solid #e2e2e1;
+                        display: block;
+                    }
+            </style>
+            <div id="ctl00_ContentPlaceHolder1_entwpin" class="entwpin ">
+                <a class="wpin_icon" href="/ent/WpTemplate.aspx" target="_blank" title="点击查看微聘模板">微聘
+                </a>
+            </div>
+            <a class="rbottom1" href="/ent/publishjob.aspx"></a>
+            <a href="javascript:checkNeedUpdate();" id="idcRefreshOffer" class="rbottom1 rbottom2" jtitle="刷新招聘信息"
+                jtext="经常刷新招聘信息到网站首页可以大大提高招聘信息被求职者查看到的几率，从而提高招聘效果。<br/><a href='/ent/refreshlog.aspx'>点击查看刷新纪录</a> | <a href='javascript:RefreshRanking();'>查看当前排名</a>"
+                jstyle="top" autoshow="false" autohide="true"></a>
+            <a class="rbottom1 rbottom3" style="margin-bottom: 0" href="/ent/resume_searcher.aspx"></a>
+            <div id="ctl00_ContentPlaceHolder1_panAutoRefTips" class="AutoRefTips">
+	
+                手动刷新太麻烦？<br />
+                试试<a href="/ent/AutoRefresh/Index.aspx">自动刷新</a>，低至<span>1元</span>
+                <i></i>
+                <u></u>
+                <img src="/images/x.png" alt="" onclick="$('.AutoRefTips').hide();$.cookie('closeRefTips', 1, { expires: 365 });" />
+            
+</div>
+        </div>
+    </div>
+    
+    <div class="dan" style="height: 78px; padding: 0px">
+        <div class="tbox l">
+            <div class="count">
+                <a href="/ent/mgjoblist.aspx">
+                    31</a>
+            </div>
+            <a href="/ent/mgjoblist.aspx">已发布职位</a>
+        </div>
+        <div class="tbox l">
+            <div class="count">
+                <a href="/ent/recresume.aspx">
+                    0</a>
+            </div>
+            <a href="/ent/recresume.aspx">未读的简历</a>
+        </div>
+        <div class="tbox l">
+            <div class="count">
+                <a href="/ent/guestbook.aspx">
+                    0</a>
+            </div>
+            <a href="/ent/guestbook.aspx">求职者新留言</a>
+        </div>
+        <div class="tbox l">
+            <div class="count">
+                <a href="/ent/vipcardlog.aspx" id="cfcard" style="float: none;" jtitle="什么是才富卡?"
+                    jtext="才富卡可以用于预订现场招聘会摊位" jstyle="top" autoshow="false" autohide="true">
+                    0元</a>
+            </div>
+            <a href="/ent/vipcardlog.aspx" id="cfcard" style="float: none;" jtitle="什么是才富卡?"
+                jtext="才富卡可以用于预订现场招聘会摊位" jstyle="top" autoshow="false" autohide="true">才富卡余额</a>
+        </div>
+        <div class="tbox l">
+            <div class="count">
+                <a href="/ent/msmSeting.aspx">
+                    2567</a>
+            </div>
+            <a href="/ent/msmSeting.aspx">可用短信</a>
+        </div>
+        <div class="tbox l" style="border-right: 0px">
+            <div class="count">
+                <a href="javascript:__fastopen('/ent/partials/12s.aspx')" id="s12intro" style="float: none;"
+                    jwidth="320" jtitle="什么是优质雇主福利保障体系?" jtext="是用户研究中心经过对数十万求职者的调研和分析，提炼出的12个求职者最为关心的求职因素。&nbsp;<a href='/ent/bao12intro.aspx' target='_blank' >[查看介绍]</a>"
+                    jstyle="top" autoshow="false" autohide="true">
+                    7/12</a>
+            </div>
+            <a href="javascript:__fastopen('/ent/partials/12s.aspx')" id="s12intro" style="float: none;"
+                jwidth="320" jtitle="什么是优质雇主福利保障体系?" jtext="是用户研究中心经过对数十万求职者的调研和分析，提炼出的12个求职者最为关心的求职因素。&nbsp;<a href='/ent/bao12intro.aspx' target='_blank' >[查看介绍]</a>"
+                jstyle="top" autoshow="false" autohide="true">点亮福利</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="dan" style="height: 480px; padding-right: 0px">
+        <div class="l" style="width: 590px;">
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ContentPlaceHolder1$commend1$ScriptManager1', 'aspnetForm', ['tctl00$ContentPlaceHolder1$commend1$UpdatePanel1',''], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+<div id="ctl00_ContentPlaceHolder1_commend1_UpdatePanel1">
+	
+        <div id="ctl00_ContentPlaceHolder1_commend1_commendlist">
+		
+            <div class="title l">
+                <span class="sign"></span>
+                <span class="ch">您可能感兴趣的简历</span>
+            </div>
+            <div class="r" style="padding-right: 30px">
+                <div class="l shezhiicon"></div>
+                <div class="l"><a href="/ent/mgjoblist.aspx">设置匹配职位</a></div>
+                <div class="l huanicon"></div>
+                <div class="l">
+                    <a id="ctl00_ContentPlaceHolder1_commend1_huanyipi" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$commend1$huanyipi&#39;,&#39;&#39;)">换一批</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div style="margin-top: 10px">
+                
+                        <div class="jobsbox l">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=6902003&ressn=6275741" class="Jw_Name" target="_blank">翁纯</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;20&nbsp;&nbsp;|&nbsp;&nbsp;中专&nbsp;&nbsp;|&nbsp;&nbsp;1年&nbsp;&nbsp;|&nbsp;&nbsp;面议
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：文员/文秘&nbsp;销售人员&nbsp;网店客服
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l" style="margin-right: 0px">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=7418327&ressn=6942261" class="Jw_Name" target="_blank">林家颖</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                男&nbsp;&nbsp;|&nbsp;&nbsp;19&nbsp;&nbsp;|&nbsp;&nbsp;中专&nbsp;&nbsp;|&nbsp;&nbsp;1年&nbsp;&nbsp;|&nbsp;&nbsp;2-3千
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网店客服&nbsp;网店运营&nbsp;运营专员/助理
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=5435399&ressn=4673381" class="Jw_Name" target="_blank">葛锐宇</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                男&nbsp;&nbsp;|&nbsp;&nbsp;22&nbsp;&nbsp;|&nbsp;&nbsp;高中&nbsp;&nbsp;|&nbsp;&nbsp;2年&nbsp;&nbsp;|&nbsp;&nbsp;面议
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网店客服&nbsp;网络/在线销售&nbsp;售前/售后支持
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l" style="margin-right: 0px">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=5712397&ressn=4984472" class="Jw_Name" target="_blank">陈晓杭</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;21&nbsp;&nbsp;|&nbsp;&nbsp;大专&nbsp;&nbsp;|&nbsp;&nbsp;2年&nbsp;&nbsp;|&nbsp;&nbsp;3-5千
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网店客服&nbsp;公司文职&nbsp;行政/人事
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=7522693&ressn=7070461" class="Jw_Name" target="_blank">余佳玲</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;18&nbsp;&nbsp;|&nbsp;&nbsp;中专&nbsp;&nbsp;|&nbsp;&nbsp;无&nbsp;&nbsp;|&nbsp;&nbsp;面议
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网店客服&nbsp;文员/文秘&nbsp;奶茶/水吧员
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l" style="margin-right: 0px">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=5499686&ressn=5193135" class="Jw_Name" target="_blank">张丹玉</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;23&nbsp;&nbsp;|&nbsp;&nbsp;大专&nbsp;&nbsp;|&nbsp;&nbsp;4年&nbsp;&nbsp;|&nbsp;&nbsp;面议
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网店客服&nbsp;卫生医疗&nbsp;幼师
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=7341471&ressn=6837272" class="Jw_Name" target="_blank">林静芸</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;21&nbsp;&nbsp;|&nbsp;&nbsp;高中&nbsp;&nbsp;|&nbsp;&nbsp;2年&nbsp;&nbsp;|&nbsp;&nbsp;面议
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：网络营销&nbsp;网店客服&nbsp;文员/文秘
+                            </div>
+                        </div>
+                    
+                        <div class="jobsbox l" style="margin-right: 0px">
+                            <div class="l"><a href="/ent/showresume.aspx?jwsn=7589478&ressn=7153178" class="Jw_Name" target="_blank">蔡英纯</a></div>
+                            <div class="r" style="margin-right: 10px"></div>
+                            <div class="clear"></div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                女&nbsp;&nbsp;|&nbsp;&nbsp;22&nbsp;&nbsp;|&nbsp;&nbsp;大专&nbsp;&nbsp;|&nbsp;&nbsp;4年&nbsp;&nbsp;|&nbsp;&nbsp;3-5千
+                            </div>
+                            <div style="width: 260px; height: 25px; overflow: hidden; margin-top: 5px">
+                                求职意向：市场助理/专员&nbsp;网店客服&nbsp;客户服务专员/助理
+                            </div>
+                        </div>
+                    
+
+            </div>
+            <div class="clear"></div>
+        
+	</div>
+        
+    
+</div>
+
+        </div>
+        <div class="l" style="margin-left: 10px;">
+            <div class="focus-silder" id="banner">
+<div class="conbox">
+<a href="/adv/adtrace.aspx?id=120040" title="优雇"  target="_blank"><img src="http://pic.stzp.cn/uploadfiles/pic/jpllw/logo_upfiles/131703876426243163.jpg"/></a>
+<a href="/adv/adtrace.aspx?id=118398" title="新三板上市"  target="_blank"><img src="http://pic.stzp.cn/uploadfiles/pic/jpllw/logo_upfiles/131570205473262654.jpg"/></a>
+<a href="/adv/adtrace.aspx?id=103196" title="百城国慧学校"  target="_blank"><img src="http://pic.stzp.cn/uploadfiles/pic/jpllw/logo_upfiles/131504386402170341.gif"/></a>
+<a href="/adv/adtrace.aspx?id=109272" title="汕招RPO - 精细化人才招聘服务"  target="_blank"><img src="http://pic.stzp.cn/uploadfiles/pic/jpllw/logo_upfiles/131413666606382164.jpg"/></a>
+<a href="/adv/adtrace.aspx?id=110078" title="HR为什么也频繁离职"  target="_blank"><img src="http://pic.stzp.cn/uploadfiles/pic/jpllw/logo_upfiles/131425681124900152.jpg"/></a>
+</div>
+ <div class="switcher">
+<a class="cur">&nbsp;</a>
+<a class="">&nbsp;</a>
+<a class="">&nbsp;</a>
+<a class="">&nbsp;</a>
+<a class="">&nbsp;</a>
+</div>
+</div>
+<script type="text/javascript">$("#banner").Xslider({affect: 'fade',ctag: 'a'});</script>
+
+            <div class="ArtZt">
+                <a href="http://www.stzp.cn/infos/" target="_blank"><img src="http://pic.stzp.cn/uploadfiles/Zczt/131297026079246378.gif" alt="" /><span class="Title">你关注的上头条啦！</span></a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="dan" style="height: 170px; margin-bottom: 0px">
+        <div class="title">
+            <span class="sign"></span>
+            <span class="ch">HR实用工具</span>
+        </div>
+        <div>
+
+            
+                    <div class="caidanicon l" >
+                        <a href="/adv/compete/" class="caidan1 caidan1" target='_blank'></a>
+                        <a href="/adv/compete/" target='_blank'>竞价排名</a>
+                    </div>
+                
+                    <div class="caidanicon l" >
+                        <a href="/zpzk/" class="caidan1 caidan2" target='_blank'></a>
+                        <a href="/zpzk/" target='_blank'>百城招刊</a>
+                    </div>
+                
+                    <div class="caidanicon l" >
+                        <a href="/newpages/hrtools.aspx" class="caidan1 caidan3" target='_blank'></a>
+                        <a href="/newpages/hrtools.aspx" target='_blank'>人事工具</a>
+                    </div>
+                
+                    <div class="caidanicon l" >
+                        <a href="/Activity/AppDownload/Index.aspx" class="caidan1 caidan4" target='_blank'></a>
+                        <a href="/Activity/AppDownload/Index.aspx" target='_blank'>招聘宝 APP</a>
+                    </div>
+                
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+
+
+
+    <div id="ctl00_ContentPlaceHolder1_WxBingWarp">
+	
+        <style type="text/css">
+            .jw_wxbind_close {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+
+            .wxbind_iwindow {
+                width: 350px;
+                left: 50%;
+                margin-left: -175px;
+                top: 10%;
+                position: absolute;
+                z-index: 10002;
+                position: relative;
+                text-align: center;
+                background-color: #fff;
+            }
+        </style>
+        <div id="mcover" onclick="closeWxBindWarp();" style="display: none; z-index: 10001; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); text-align: right;">
+            <div class="wxbind_iwindow" id="idw_subscribewin" onclick="stopBubble(event)">
+                <a href="javascript:closeWxBindWarp()" class="jw_wxbind_close">
+                    <img src="../images/x.png" />
+                </a>
+                <img src="../images/wxbing/2-1.png" style="margin-top: 35px;" />
+                <div style="padding-top: 11px; text-align: center" id="wxleadpic">
+                    <img id="jw_wxbind_pic" src="/images/gray.gif" style="width: 200px; height: 200px; padding-top: 10px;" />
+                    <img src="/adv/WxPushAdv/images/ent_pic.png" id="wxleadpic_warp" style="position: absolute; left: 273px; top: 37px; display: none;" />
+                </div>
+                <img src="../images/wxbing/2-2.png" style="margin-top: 20px;" />
+                <a href="/adv/WxPushAdv/index2.aspx" target="_blank" style="margin: auto; display: block; margin-top: 30px;">
+                    <img src="../adv/WxPushAdv/images/look.jpg" /></a>
+                <div style="text-align: right; padding-bottom: 20px; margin-right: 20px; margin-top: 30px;">
+                    <input type="checkbox" id="noShowWxBind" />
+                    <label for="noShowWxBind" style="position: relative; top: -2px;">不再显示此信息框</label>
+
+                </div>
+            </div>
+        </div>
+        <script src="/Wx_Login/Wx_Login.js"></script>
+        <script type="text/javascript">
+            function closeWxBindWarp() {
+                __close('idw_subscribewin');
+                $('#mcover').hide();
+                var note = $("#noShowWxBind:checked");
+                window.wx_stime && window.clearInterval(window.wx_stime);
+                if (note && note.length > 0) {
+                    $.get("/ajax/NoShowWxBind.ashx?action=ent");
+                }
+            }
+            function show_my_wxbind() {
+                $("#mcover").show();
+                $("#idw_subscribewin").show();
+                window.GetWxLoginUrl({ img: $('#jw_wxbind_pic'), positiontype: 6 });
+                window.wxlogin_success = function () {
+                    window.location.href = window.location.href;
+                }
+            }
+            $(function () {
+                $("#wxleadpic").hover(function () {
+                    $("#wxleadpic_warp").show();
+                }, function () {
+                    $("#wxleadpic_warp").hide();
+                });
+            });
+        </script>
+    
+</div>
+    
+
+    <div id="ctl00_ContentPlaceHolder1_isShowPayEmail">
+	
+        <style type="text/css">
+            .payemail_close {
+                position: absolute;
+                right: -6px;
+                top: -6px;
+                width: 25px;
+                height: 25px;
+                line-height: 22px;
+                text-indent: -999999px;
+                background: url(/images/ent/emailsetting_bg.png);
+                background-position: -94px -60px;
+            }
+
+            .payemail_iwindow {
+                width: 216px;
+                left: 50%;
+                margin-left: -108px;
+                top: 15%;
+                position: absolute;
+                z-index: 10002;
+                position: relative;
+                text-align: center;
+                background-color: #ff9900;
+                color: #fff;
+                border-radius: 11px;
+            }
+
+            .payemail_alink {
+                color: #ff9900;
+                background-color: #fff;
+                width: 190px;
+                display: block;
+                line-height: 30px;
+                margin: auto;
+                border-radius: 15px;
+                margin-top: 10px;
+                font-size: 14px;
+                text-decoration: none;
+            }
+        </style>
+        <div id="payemail_mcover" onclick="closePayEmailWarp();" style="display: none; z-index: 10001; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); text-align: right;">
+            <div class="payemail_iwindow" onclick="stopBubble(event)">
+                <a href="javascript:closePayEmailWarp()" class="payemail_close">X
+                </a>
+                <img src="/images/ent/manage_payemail.png" style="margin: 3px;" />
+                <a class="payemail_alink" href="/ent/emailSeting.aspx" target="_blank" onclick="closePayEmailWarp()">立即查看</a>
+                <div style="text-align: right; padding-bottom: 10px; margin-right: 20px; margin-top: 10px; font-size: 12px;">
+                    <input type="checkbox" id="noShowPayEmail" />
+                    <label for="noShowPayEmail" style="position: relative; top: -2px;">不再提示</label>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            function closePayEmailWarp() {
+                $('#payemail_mcover').hide();
+                $(".payemail_iwindow").hide();
+                var note = $("#noShowPayEmail:checked");
+                if (note && note.length > 0) {
+                    $.get("/ajax/NoShowAd.ashx?action=payemail");
+                }
+            }
+            function show_my_payemail() {
+                $("#payemail_mcover").show();
+                $(".payemail_iwindow").show();
+            }
+            $(function () {
+                show_my_payemail();
+            });
+        </script>
+    
+</div>
+
+
+
+    
+
+
+
+    
+    <div id="ctl00_ContentPlaceHolder1_partTimeJobWarp">
+	
+
+        <style type="text/css">
+            .mcover_pt {
+                /*display: none;*/
+                z-index: 10001;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                text-align: right;
+            }
+
+            .jw_parttimejob_close {
+                position: absolute;
+                right: -320px;
+                top: 10px;
+            }
+
+            .parttimejob_iwindow {
+                position: fixed;
+                width: 290px;
+                height: 120px;
+                background-color: white;
+                left: 50%;
+                top: 35%;
+                margin-left: -145px;
+                z-index: 10002;
+                text-align: center;
+                padding: 25px 0 0 0;
+            }
+
+            .divtip {
+                text-align: center;
+                font-size: 14px;
+                margin-bottom: 28px;
+            }
+
+            .ptbutton {
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
+                width: 143px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 16px;
+                background-color: #e4e4e4;
+                color: #888;
+                border: 1px solid #e4e4e4;
+            }
+
+            .updatebtn {
+                background-color: #f90;
+                color: white;
+                border: 1px solid #f90;
+            }
+        </style>
+
+        <!--[if lt IE 9]>
+	        <style>
+	            .mcover_pt {
+	                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
+	            }
+
+	        </style>
+        <![endif]-->
+
+        <div id="mcoverPt" class="mcover_pt hidden" onclick="closePartTimeJobWarp();">
+        </div>
+        <div class="parttimejob_iwindow hidden" id="idw_subscribewinPt" onclick="stopBubble(event)">
+            <div class="divtip">
+                <div style="font-size: 18px; margin-bottom: 8px;">兼职改版大升级</div>
+                <div><span style="color: #f90">更新</span>后刷新，收到简历快、多、准</div>
+            </div>
+          <a class="ptbutton updatebtn" href="mgjoblist.aspx?pt=1">立即更新</a><a class="ptbutton" href="javascript:void(0)" onclick="closePartTimeJobWarp(); checkNeedUpdateSalary();">继续刷新</a>
+        </div>
+
+        <script type="text/javascript">
+            function closePartTimeJobWarp() {
+                __close('idw_subscribewinPt');
+                $('#mcoverPt').hide();
+                window.wx_stime && window.clearInterval(window.wx_stime);
+            }
+            function show_my_partTimeJob() {
+                $("#mcoverPt").show();
+                $("#idw_subscribewinPt").show();
+                window.wxlogin_success = function () {
+                    window.location.href = window.location.href;
+                }
+            }
+            function checkNeedUpdate() {
+                // 如果存在旧版本的兼职职位，则在点击刷新职位时弹出弹窗提示
+                var bl = 0;
+                if (bl == 1) {
+                    show_my_partTimeJob();
+                    return;
+                }
+                checkNeedUpdateSalary1();
+            }
+        </script>
+    
+</div>
+
+
+    
+    <div id="ctl00_ContentPlaceHolder1_plFillSalary">
+	
+
+        <style type="text/css">
+            .jw_parttimejob_close {
+                position: absolute;
+                right: -320px;
+                top: 10px;
+            }
+
+            .updatesalary_iwindow {
+                position: fixed;
+                width: 600px;
+                max-height: 600px;
+                background-color: white;
+                left: 50%;
+                top: 20%;
+                margin-left: -300px;
+                z-index: 10002;
+                text-align: center;
+            }
+
+            .updatesalaryhead {
+                height: 40px;
+                line-height: 40px;
+                background-color: #f90;
+                color: white;
+                text-decoration: none;
+                padding: 0 17px;
+                font-size: 16px;
+            }
+
+            .updatesalarytitle {
+                float: left;
+            }
+
+            .updatesalaryclose {
+                float: right;
+                color: white;
+                text-decoration: none;
+            }
+
+            .updatesalarybody {
+                padding: 15px 12px;
+            }
+
+            .updatesalarytip {
+                background-color: #F5FAFF;
+                text-align: left;
+                padding: 12px;
+                color: #777;
+            }
+
+            .updatesalarycontent {
+                text-align: center;
+                font-size: 14px;
+                margin: 10px 0 18px;
+                max-height: 280px;
+                overflow-y: auto;
+            }
+
+            .usctable {
+                width: 100%;
+                margin: 0 auto;
+                border: 1px solid #ccc;
+                border-collapse: collapse;
+            }
+
+                .usctable td {
+                    border: 1px solid #ccc;
+                    padding: 7px;
+                }
+
+            .uschead {
+                background-color: #eee;
+            }
+
+            .updatesalarybutton {
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+                width: 180px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 16px;
+                background-color: #f90;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+                .updatesalarybutton:hover {
+                    background-color: #f80;
+                }
+            /*.iwindow {
+            background:none;
+            }
+                 .iwindow h2 {
+        background:none;
+        }
+            .iwindow h2 a {
+            background:none;
+            }*/
+        </style>
+
+        <div id="mcoverSalary" class="mcover_pt hidden">
+        </div>
+        <div class="updatesalary_iwindow hidden" id="idw_subscribewinSalary" onclick="stopBubble(event)">
+            <div class="updatesalaryhead">
+                <span class="updatesalarytitle">提示</span>
+                <a class="updatesalaryclose" href="javascript: void(0)" onclick="closeUpdateSalaryJobWarp()">X</a>
+                <div class="clear"></div>
+            </div>
+            <div class="updatesalarybody">
+                <div class="updatesalarytip">
+                    温馨提示：<br />
+                    根据 <a href="http://www.mohrss.gov.cn/SYrlzyhshbzb/zcfg/flfg/fl/201605/t20160509_239643.html" style="color: #00e;" target="_blank">新劳动法</a> 规定，招聘职位不能带“工资面议”字样，请尽快修改职位月薪，明确的薪资更有助于吸引求职者。
+                </div>
+                <div class="updatesalarycontent">
+                    <table class="usctable">
+                        <tr class="uschead">
+                            <td style="width: 30%;">职位</td>
+                            <td style="width: 70%;">月薪（请输入整数，最高月薪不能超过最低月薪的<span style="color: red;">2倍</span>）</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                <input type="submit" name="ctl00$ContentPlaceHolder1$btnUpdateSalary" value="保存并刷新至首页" onclick="return CheckSalary();" id="ctl00_ContentPlaceHolder1_btnUpdateSalary" class="updatesalarybutton" />
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function closeUpdateSalaryJobWarp() {
+                __close('idw_subscribewinSalary');
+                $('#mcoverSalary').hide();
+                window.wx_stime && window.clearInterval(window.wx_stime);
+            }
+            function show_my_updateSalary() {
+                $("#mcoverSalary").show();
+                $("#idw_subscribewinSalary").show();
+            }
+            function checkNeedUpdateSalary() {
+                // 如果存在薪资为面议的职位，则在点击刷新职位时弹出弹窗提示
+                var bl = 0;
+                if (bl == 1) {
+                    show_my_updateSalary();
+                    return;
+                }
+               RefreshOffer();
+            }
+            function checkNeedUpdateSalary1() {
+                // 如果存在薪资为面议的职位，则在点击刷新职位时弹出弹窗提示
+                var bl = 0;
+                 if (bl == 1) {
+                     show_my_updateSalary();
+                     return;
+                 }
+                 __open1("refreshoffer", { caption: "刷新招聘信息", w: 400, h: 450, scrolling: "no", url: "/ent/refresh_offer1.aspx" });
+             }
+            // 用于快速选择月薪
+            function SelectMinMaxSalary(obj) {
+
+                var ele = $(obj).prevAll();
+                var salaryLow = $(ele[1]);
+                var salaryHigh = $(ele[0]);
+                var value = $(obj).val();
+                if (value === "") {
+                    salaryLow.val("");
+                    salaryHigh.val("");
+                } else if (value === "1千以下") {
+                    salaryLow.val("100");
+                    salaryHigh.val("1000");
+                } else if (value === "5万以上") {
+                    salaryLow.val("50000");
+                    salaryHigh.val("100000");
+                } else {
+                    var salaryValue = value.split("-");
+                    if (salaryValue[1].indexOf("万") != -1) {
+                        salaryLow.val(salaryValue[0] * 10000);
+                        salaryHigh.val(salaryValue[1].substring(0, salaryValue[1].indexOf("万")) * 10000);
+                    } else {
+                        salaryLow.val(salaryValue[0] * 1000);
+                        salaryHigh.val(salaryValue[1].substring(0, salaryValue[1].indexOf("千")) * 1000);
+                    }
+                }
+                CheckMinMaxSalary(obj, true);
+
+            }
+
+            function CheckSalary() {
+
+                $(".tbsalary").blur();
+                var haveWarn = false;
+                $(".checkSalary").each(function () {
+                    if ($(this).html() != "")
+                        haveWarn = true;
+                });
+                return !haveWarn;
+
+            }
+
+            function CheckMinMaxSalary(obj, showTip) {
+
+                var td = $(obj).parent();
+
+                var ele = $(td).children();
+                var lowValue = $(ele[0]).val();
+                var highValue = $(ele[1]).val();
+                var salaryTip = $($(ele[3]).children("span"));
+
+                var errStr = "";
+                if (lowValue === "") {
+                    errStr = "请输入最低薪资";
+                } else if (highValue === "") {
+                    errStr = "请输入最高薪资";
+                } else if (isNaN(lowValue)) {
+                    errStr = "最低薪资为大于等于0的整数";
+                } else if (isNaN(highValue) || highValue == 0) {
+                    errStr = "最高薪资为大于0的整数";
+                } else if (lowValue < 500 && highValue > 1000) {
+                    errStr = "当前薪资最高为1000元";
+                } else if (lowValue >= 500 && lowValue * 2 < highValue) {
+                    errStr = "最高薪资最多为最低薪资的2倍";
+                } else if (parseInt(lowValue) > parseInt(highValue)) {
+                    errStr = "最高薪资不能小于最低薪资";
+                } else if (parseInt(highValue) > 100000) {
+                    errStr = "最高薪资不能大于10万元";
+                }
+
+                if (errStr.length > 0 && showTip) {
+                    salaryTip.html(errStr);
+                    $(ele[3]).show();
+                    return false;
+                }
+
+                salaryTip.html("");
+                $(ele[3]).hide();
+                return true;
+
+            }
+
+            // 月薪输入检查，只能输入数字
+            function CheckInputSalary(obj) {
+                var value = $(obj).val();
+                value = value.replace(/(^0+)|([^0123456789])/g, ""),
+                    $(obj).val(value);
+
+            }
+
+        </script>
+    
+</div>
+
+    
+
+    <script type="text/javascript">
+
+            function stopBubble(e) {
+                //如果提供了事件对象，则这是一个非IE浏览器
+                if (e && e.stopPropagation)
+                    //因此它支持W3C的stopPropagation()方法
+                    e.stopPropagation();
+                else
+                    //否则，我们需要使用IE的方式来取消事件冒泡
+                    if(window.event){window.event.cancelBubble = true;}
+            }
+    </script>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div style="height: 25px"></div>
+        
+<div class="footer">
+    <div class="menu clearfix">
+        <div class="menuInfo l">
+            <div class="menuItem l home">
+                <div class="title">
+                    关于我们
+                </div>
+                <a href="/newpages/aboutus.aspx" target="_blank" class="item l">关于我们</a><a href="/newpages/Affiche.aspx" target="_blank" class="item l">网站动态</a><a href="/newpages/drumbeating.aspx" target="_blank" class="item l">品牌推广</a><a href="/newpages/protocol.aspx" target="_blank" class="item l">法律声明</a>
+            </div>
+            <div class="menuItem l">
+                <div class="title">
+                    个人求职
+                </div>
+                <a href="/jw/register1.aspx" target="_blank" class="item l">注册简历</a><a href="/search/offer_searcher.aspx" target="_blank" class="item l">查询职位</a><a href="http://www.stzp.cn/longtou/" target="_blank" class="item l">名企招聘</a><a href="/good/" target="_blank" class="item l">点亮绿标</a>
+            </div>
+            <div class="menuItem l">
+                <div class="title">
+                    企业招聘
+                </div>
+                <a href="/ent/register1.aspx" target="_blank" class="item l">企业注册</a><a href="/search/resume_searcher.aspx" target="_blank" class="item l">搜索人才</a><a href="http://www.stzp.cn/vip/" target="_blank" class="item l">个性化页面</a><a href="/search/resume_pugong.aspx" target="_blank" class="item l">普工专区</a>
+            </div>
+            <div class="menuItem l">
+                <div class="title">
+                    资讯中心
+                </div>
+                <a href="/infos/zhaopinhui" target="_blank" class="item l">招聘会信息</a><a href="http://www.stzp.cn/gdft/" target="_blank" class="item l">高端访谈</a><a href="/infos/qiuzhi" target="_blank" class="item l">求职攻略</a><a href="/infos/zhiyan" target="_blank" class="item l">职言不讳</a>
+            </div>
+            <div class="menuItem l">
+                <div class="title">
+                    帮助中心
+                </div>
+                <a href="/newpages/product1.aspx" target="_blank" class="item l">收费标准</a><a href="/book/index.aspx" target="_blank" class="item l">新手指引</a><a href="/help/index.aspx" target="_blank" class="item l">常见问题</a><a href="/flink/index.aspx" target="_blank" class="item l">友情链接</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="phoneInfo r">
+            <div class="Item">
+                <div class="Title">手机APP下载</div>
+                <div class="l qrCodeInfo">
+                    <img src="/images/v/JwApp.png" alt="手机客户端下载"><br />
+                    百城求职宝
+                </div>
+                <div class="l qrCodeInfo">
+                    <img src="/images/v/EntApp.png" alt="手机客户端下载"><br />
+                    百城招聘宝
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="Item">
+                <div class="Title">服务热线</div>
+                <div class="info">
+                    业务办理：0754-88138888<br />
+                    企业客服：0754-86730000<br />
+                    求职客服：0754-86736672<br />
+                    电子邮件：2880628134@qq.com<br />
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#QqPicUrl").attr("src", "http://wpa.qq.com/pa?p=2:2880628134:41");
+                        })
+                    </script>
+                    招聘顾问：<a target="_blank" href=" http://wpa.qq.com/msgrd?v=3&uin=2880628134&site=qq&menu=yes">
+                        <img id="QqPicUrl" alt="点击这里给我发消息" title="点击这里给我发消息" class="qqImg" />
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="background: #f4f4f4; padding: 25px 0;" id="CopyWarp">
+        <div class="Copyright clearfix">
+            <div id="ctl00_footer1_pclink" class="Terminal">
+                <a class="Link Pc" href="/index.aspx" target="_blank">电脑版
+                </a>
+                <a class="Link Phone" href="http://m.stzp.cn" target="_blank">手机版
+                </a>
+            </div>
+            <div class="CopyrightInfo">
+                <div class="Text">	Copyright &#169; 广东百城人力资源服务有限公司 版权所有 特别敬告：未经允许，不得转载本站任何信息。<br />法律顾问：<a rel="nofollow" href="http://www.gdjiage.com" target="_blank">广东嘉格律师事务所</a>&nbsp; <a rel="nofollow" title="网站备案号" href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备08035182号</a>&nbsp;&nbsp;<span style="white-space:normal;">增值电信业务经营许可证：粤B2-20060220</span>&nbsp;&nbsp;<a rel="nofollow" href="http://weibo.com/wwwstzp/" target="_blank"><b>汕头招聘网官方微博</b></a>&nbsp;&nbsp;</div><div class="Img">	<a rel="nofollow" href="http://www.stzp.cn/newpages/aboutus.aspx?id=386" target="_blank"> <img alt="经营性站点备案信息" src="http://pic.bczp.cn/uploadfiles/sp_images/t5.gif" border="0" /> </a> <a rel="nofollow" href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4405073010503" target="_blank"> <img alt="公共信息安全网络监察" src="http://pic.bczp.cn/uploadfiles/sp_images/t4.gif" border="0" /> </a> <a rel="nofollow" href="http://www.stzp.cn/newpages/aboutus.aspx?id=386" target="_blank"> <img alt="广东劳动学会理事单位" src="http://pic.bczp.cn/uploadfiles/sp_images/t3.gif" border="0" /> </a> <a rel="nofollow" href="http://www.stzp.cn/newpages/aboutus.aspx?id=386" target="_blank"> <img alt="软件园入园企业认证" src="http://pic.bczp.cn/uploadfiles/sp_images/t7.gif" border="0" /> </a> <a rel="nofollow" href="http://www.stzp.cn/newpages/aboutus.aspx?id=386" target="_blank"> <img alt="人力资源协会副会长单位" src="http://pic.bczp.cn/uploadfiles/sp_images/t6.gif" border="0" /> </a> <a rel="nofollow" href="http://www.12377.cn" target="_blank"> <img alt="违法和不良信息举报中心" src="http://pic.bczp.cn/uploadfiles/sp_images/t2.gif" border="0" /> </a> <a rel="nofollow" title="企业名称：汕头市阳光网络有限公司标识状态：已激活 粤工商备E051411000688电子标识有效期：2014-11-28～2018-04-07" href="http://wljg.gdgs.gov.cn/corpsrch.aspx?key=440500000022082" target="_blank"> <img alt="工商红盾电子标识" src="http://pic.bczp.cn/uploadfiles/sp_images/t1.gif" border="0" /> </a> </div><script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?9c09fb6bb32d4dafc6fd4ec18d310d5b";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script><script>$(function() {var cz1=document.createElement("script");cz1.src = "https://s19.cnzz.com/z_stat.php?id=49160&web_id=49160";document.getElementsByTagName('body')[0].appendChild(cz1);});</script>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="DivRightButton"><div class="GoToTop" title="回到顶部"></div><div class="FeedBack" title="反馈" onclick='javascript:$(".FeedBackBg,.FeedBackBox").show();'></div><div class="MyNews chat_client_redpoint" title="我的消息" onclick="chat_client_redpoint_click(this)" compkey="76ac66c750dd2fd6d983387c4f94d84f" userid="ent1580624" key1="6545e38c" key2="30b4c663" device="1"></div></div>
+
+<div id="ctl00_footer1_wall" class="wall">
+    <a href="/wall/index.aspx" target="_blank">
+        <img src="/images/wall.jpg" /></a>
+    <div class="Close" onclick='CloseWall()'>
+    </div>
+</div>
+<div id="ctl00_footer1_DivQR" class="DivQR">
+    <div class="TopText">
+        <a href="/3g/weixin.aspx" target="_blank">微信公众号</a>
+    </div>
+    <div class="Close" onclick='CloseQR()'>
+    </div>
+    <img id="ctl00_footer1_imgWeiXinQR" class="WXQR" src="http://pic.stzp.cn/uploadfiles/weixin/jpllw.gif" style="border-width:0px;" />
+    <div class="BottomText">
+        打开微信 "扫一扫"<br />
+        每天多点职场经验
+    </div>
+</div>
+<div id="ctl00_footer1_panFeedBack">
+	
+    <div class="FeedBackBg">
+    </div>
+    <div class="FeedBackBox">
+        <div class="Content">
+            <div class="Title">
+                意见反馈
+                    <div class="Close" onclick='javascript:$(".FeedBackBg,.FeedBackBox").hide();'></div>
+            </div>
+            <div class="Item">
+                <div class="Th">
+                    <span class="Must">*</span>类型
+                </div>
+                <div style="display: inline-block; width: 400px; overflow: hidden; padding-top: 4px;">
+                    <table id="ctl00_footer1_rblCategory" border="0">
+		<tr>
+			<td><input id="ctl00_footer1_rblCategory_0" type="radio" name="ctl00$footer1$rblCategory" value="101" /><label for="ctl00_footer1_rblCategory_0">建议</label></td><td><input id="ctl00_footer1_rblCategory_1" type="radio" name="ctl00$footer1$rblCategory" value="102" /><label for="ctl00_footer1_rblCategory_1">投诉</label></td><td></td><td></td>
+		</tr>
+	</table>
+                </div>
+            </div>
+            <div class="Item">
+                
+                        <div id="category_101" style="display: inline-block; width: 400px; overflow: hidden; margin-left: 93px; display: none;">
+                            
+                                    <div class="CategoryItem l" value="10101">功能建议</div>
+                                
+                                    <div class="CategoryItem l" value="10102">招聘会建议</div>
+                                
+                                    <div class="CategoryItem l" value="10103">其他建议</div>
+                                
+                        </div>
+                    
+                        <div id="category_102" style="display: inline-block; width: 400px; overflow: hidden; margin-left: 93px; display: none;">
+                            
+                                    <div class="CategoryItem l" value="10201">我要举报</div>
+                                
+                                    <div class="CategoryItem l" value="10202">虚假信息</div>
+                                
+                                    <div class="CategoryItem l" value="10203">非法行为</div>
+                                
+                                    <div class="CategoryItem l" value="10204">租房频道</div>
+                                
+                        </div>
+                    
+            </div>
+            <div class="Item" style="height: 122px;">
+                <div class="Th">
+                    <span class="Must">*</span>内容
+                </div>
+                <textarea id="txtContent" style="width: 280px; height: 120px;"></textarea>（500 个字符以内）
+            </div>
+            
+            <div class="Item">
+                <input class="SubmitBtn" onclick="SugFeedBack()" type="button" value="提交" />
+                <span class="ErrorMsg"></span>
+                <input name="ctl00$footer1$hasLogin" type="hidden" id="ctl00_footer1_hasLogin" value="1" />
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+        //百度分享
+        window._bd_share_config = {
+            common: {
+                bdText: '',
+                bdDesc: '',
+                bdPic: '',
+                bdMini: "1",
+                bdMiniList: ["tsina", "weixin", "sqq", "qzone"],
+                bdStyle: "0",
+                bdSize: "16",
+                bdPopupOffsetLeft: "-78"
+            },
+            share: [{
+                "tag": ''
+            }]
+        };
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+    </script>
+
+<div id="ctl00_footer1_panBChatJs">
+	
+    <script src="/js/BChat/chat_client_redpoint.js"></script>
+
+</div>
+        <span id="ctl00_Tips1"></span>
+        
+    
+
+<script type="text/javascript">
+//<![CDATA[
+CreateQr('MobileQr','http://m.stzp.cn/download.aspx',89,89);//]]>
+</script>
+</form>
+    <script src="/selector/selector.all.v1.js"></script>
+    <script src="/js/ScrollBar/perfect-scrollbar-0.4.10.with-mousewheel.min.js"></script>
+</body>
+</html>

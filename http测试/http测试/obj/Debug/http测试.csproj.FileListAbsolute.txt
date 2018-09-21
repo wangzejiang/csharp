@@ -1,0 +1,14 @@
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\http测试.exe.config
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\http测试.exe
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\http测试.pdb
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\BasicFormatsForCore.dll
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\BCMakeCert.dll
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\CertMaker.dll
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\FiddlerCore4.dll
+d:\documents\visual studio 2015\Projects\http测试\http测试\bin\Debug\FiddlerCore4.xml
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.Form1.resources
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.Properties.Resources.resources
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.csproj.GenerateResource.Cache
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.exe
+d:\documents\visual studio 2015\Projects\http测试\http测试\obj\Debug\http测试.pdb
