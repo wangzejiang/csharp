@@ -10,3 +10,9 @@ d:\documents\visual studio 2015\Projects\单品关键词分析\单品关键词�
 D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\bin\Debug\单品关键词分析.exe.config
 D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.exe
 D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.pdb
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\bin\Debug\单品关键词分析.exe
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\bin\Debug\单品关键词分析.pdb
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.Form1.resources
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.Properties.Resources.resources
+D:\Documents\GitHub\csharp\单品关键词分析\单品关键词分析\obj\Debug\单品关键词分析.csproj.GenerateResource.Cache

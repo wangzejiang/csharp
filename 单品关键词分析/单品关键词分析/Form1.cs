@@ -100,6 +100,23 @@ namespace 单品关键词分析
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string str = textBox1.Text;
+            string path = @"\xxx.txt";
+            if (textBox2.Text.IndexOf(str) == -1)
+            {
+                using (StreamWriter sw = new StreamWriter(path, true))
+                {
+                    sw.Write(str);
+                    sw.WriteLine();
+                    sw.Close();
+                }
+            }
+            using (StreamReader reader = new StreamReader(path))
+            {
+                textBox2.Text = reader.ReadToEnd();
+                reader.Close();
+            }
+
             DataTable dt = new DataTable();
             dt.Columns.Add("词", typeof(string));
             dt.Columns.Add("浏览量", typeof(float));
@@ -113,7 +130,6 @@ namespace 单品关键词分析
 
             DataTable ds = (DataTable)dataGridView1.DataSource;
             if (ds == null || ds.Rows.Count == 0) return;
-            string str = textBox1.Text;
             string[] ss = str.Split(' ');
             foreach (string s in ss)
             {
@@ -130,18 +146,6 @@ namespace 单品关键词分析
                 dt.Rows.Add(dr);
             }
             dataGridView2.DataSource = dt;
-
-            string path = @"\xxx.txt";
-            if((textBox2.Text.IndexOf(str) > -1)==false)
-            {
-                textBox2.Text += str;
-                textBox2.Text += "\r\n";
-            }
-            using (StreamWriter sw = new StreamWriter(path, true))
-            {
-                sw.Write(textBox2.Text);
-                sw.WriteLine();
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
