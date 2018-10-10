@@ -1,0 +1,10 @@
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.exe.config
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form1.resources
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Properties.Resources.resources
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csproj.GenerateResource.Cache
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.exe
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.pdb
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.exe
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.pdb
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form2.resources
