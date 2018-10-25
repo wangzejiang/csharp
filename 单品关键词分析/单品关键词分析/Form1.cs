@@ -42,7 +42,16 @@ namespace 单品关键词分析
                 string[] fns = openFileDialog1.FileNames;
                 foreach (var f in fns)
                 {
-                    DataTable rsdt = excelToDataTable(f);
+                    DataTable rsdt = null;
+                    try
+                    {
+                        rsdt = excelToDataTable(f);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(f);
+                        return;
+                    }
                     DataRowCollection rsdr = rsdt.Rows;
                     foreach (DataRow rs in rsdr)
                     {
@@ -57,7 +66,7 @@ namespace 单品关键词分析
                         dr["支付商品件数"] = toFloat(rs[i++]);
                         dr["支付金额"] = toFloat(rs[i++]);
                         dr["支付转化率"] = toFloat(rs[i++]);
-                        dr["日期"] = f.Substring(f.IndexOf("_")+1,10);
+                        dr["日期"] = f.Substring(f.IndexOf("_") + 1, 10);
                         dt.Rows.Add(dr);
                     }
                 }

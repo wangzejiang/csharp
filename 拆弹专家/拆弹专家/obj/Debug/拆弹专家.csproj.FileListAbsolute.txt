@@ -1,0 +1,10 @@
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\bin\Debug\拆弹专家.exe.config
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\bin\Debug\拆弹专家.exe
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\bin\Debug\拆弹专家.pdb
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.Form1.resources
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.Properties.Resources.resources
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.csproj.GenerateResource.Cache
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.exe
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.pdb
+d:\documents\visual studio 2015\Projects\拆弹专家\拆弹专家\obj\Debug\拆弹专家.Form2.resources
