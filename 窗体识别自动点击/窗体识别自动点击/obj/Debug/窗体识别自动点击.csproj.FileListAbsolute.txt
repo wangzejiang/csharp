@@ -8,3 +8,5 @@ d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别�
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.exe
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.pdb
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form2.resources
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\Interop.SpeechLib.dll
+d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csproj.ResolveComReference.cache

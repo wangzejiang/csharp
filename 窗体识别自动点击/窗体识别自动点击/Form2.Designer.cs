@@ -40,6 +40,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -126,7 +127,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(238, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(351, 21);
+            this.textBox1.Size = new System.Drawing.Size(160, 21);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "未合并,已完成";
             // 
@@ -139,11 +140,20 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "label3";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(422, 19);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 10;
+            this.textBox2.Text = "退款";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 484);
+            this.ClientSize = new System.Drawing.Size(787, 115);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button4);
@@ -176,5 +186,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

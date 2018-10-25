@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpeechLib;
+using System.Threading;
 
 namespace 窗体识别自动点击
 {
@@ -79,7 +76,13 @@ namespace 窗体识别自动点击
             }
             return retHwh;
         }
+
         private void timer1_Tick(object sender, EventArgs e)
+        {
+            test();
+        }
+
+        public void test()
         {
             string[] words = textBox1.Text.Split(',');
             label1.Text = "";
@@ -94,6 +97,7 @@ namespace 窗体识别自动点击
                 IntPtr tmp = IntPtr.Zero;
                 IntPtr ok = IntPtr.Zero;
                 IntPtr text = IntPtr.Zero;
+                IntPtr speak = IntPtr.Zero;
                 // 获取子控件
                 IntPtr hwd = GetWindow(ParenthWnd, (int)WindowSearch.GW_CHILD);
                 do
@@ -109,6 +113,8 @@ namespace 窗体识别自动点击
                             break;
                         };
                     }
+                    tmp = isTextPtr(hwd, textBox2.Text, 1);
+                    if (tmp != IntPtr.Zero) speak = tmp;
                     hwd = GetWindow(hwd, (int)WindowSearch.GW_HWNDNEXT);
                 } while (hwd != IntPtr.Zero);
                 if (ok != IntPtr.Zero && text != IntPtr.Zero)
@@ -116,8 +122,25 @@ namespace 窗体识别自动点击
                     SetForegroundWindow(ParenthWnd);
                     click(ok);
                 }
+                if (speak != IntPtr.Zero)
+                {
+                    SetForegroundWindow(ParenthWnd);
+                    StringBuilder sb = new StringBuilder(256);
+                    GetWindowTextW(speak, sb, sb.Capacity);
+                    SendMessage(ParenthWnd, 12, IntPtr.Zero, "退款提示框");
+                    Thread thread = new Thread(() =>
+                    {
+                        SpVoice voice = new SpVoice();
+                        voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(0);
+                        //voice.Volume = 100;
+                        voice.Speak(sb.ToString(), SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+                        thread = null;
+                    });
+                    thread.Start();
+                }
             }
         }
+
         public struct RECT
         {
             public int left;
@@ -171,7 +194,8 @@ namespace 窗体识别自动点击
 
         private void button4_Click(object sender, EventArgs e)
         {
-            new Form1().Show();
+            MessageBox.Show("测试退款了", "网店管家(云端版)");
+            //new Form1().Show();
         }
     }
 }
