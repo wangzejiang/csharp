@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using SpeechLib;
 using System.Threading;
+using System.Media;
 
 namespace 窗体识别自动点击
 {
@@ -130,10 +131,11 @@ namespace 窗体识别自动点击
                     SendMessage(ParenthWnd, 12, IntPtr.Zero, "退款提示框");
                     Thread thread = new Thread(() =>
                     {
-                        SpVoice voice = new SpVoice();
-                        voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(0);
-                        //voice.Volume = 100;
-                        voice.Speak(sb.ToString(), SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+                        //SpVoice voice = new SpVoice();
+                        //voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(0);
+                        //voice.Speak(sb.ToString(), SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+                        SoundPlayer sound = new SoundPlayer(@"xgtk.wav");
+                        sound.Play();
                         thread = null;
                     });
                     thread.Start();

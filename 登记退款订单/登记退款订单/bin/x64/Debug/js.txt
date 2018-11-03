@@ -1,0 +1,13 @@
+var myset=function(){
+var id = ".0.$root_1.1:$rootContainer_1.$SellerDataContainer_1.$sellerDonutContainer_1.$donutContainer_1.1.1:$2.1";
+var spans = document.getElementsByTagName("span");
+//alert(spans[0].getAttribute('data-reactid'));
+for (var i=0;i<spans.length;i++){
+	var value = spans[i].getAttribute('data-reactid');
+	if(value == id){
+		spans[i].click();
+	}
+}
+window.scrollTo(0,20000);
+};
+setTimeout(myset(), 3000);

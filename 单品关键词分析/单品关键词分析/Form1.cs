@@ -20,6 +20,8 @@ namespace 单品关键词分析
             InitializeComponent();
         }
 
+        string path = @"xxx.txt";
+
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Multiselect = true;
@@ -109,13 +111,13 @@ namespace 单品关键词分析
 
         private void button2_Click(object sender, EventArgs e)
         {
+            tabControl1.SelectedTab = tabPage2;
             string str = textBox1.Text;
-            string path = @"\xxx.txt";
             if (textBox2.Text.IndexOf(str) == -1)
             {
                 using (StreamWriter sw = new StreamWriter(path, true))
                 {
-                    sw.Write(str);
+                    sw.Write(string.Format("{0}:{1}", DateTime.Now.ToLongDateString(), str));
                     sw.WriteLine();
                     sw.Close();
                 }
@@ -159,7 +161,6 @@ namespace 单品关键词分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string path = @"\xxx.txt";
             if (File.Exists(path))
             {
                 using (StreamReader reader = new StreamReader(path))
@@ -177,6 +178,14 @@ namespace 单品关键词分析
             {
                 File.Create(path).Close();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataTable ds = (DataTable)dataGridView1.DataSource;
+            ds.Clear();
+            DataTable ds2 = (DataTable)dataGridView2.DataSource;
+            ds2.Clear();
         }
     }
 }

@@ -10,3 +10,15 @@ d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别�
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form2.resources
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\Interop.SpeechLib.dll
 d:\documents\visual studio 2015\Projects\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csproj.ResolveComReference.cache
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.exe.config
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\Interop.SpeechLib.dll
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csproj.ResolveComReference.cache
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.exe
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.pdb
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.exe
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\bin\Debug\窗体识别自动点击.pdb
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form1.resources
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Form2.resources
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.Properties.Resources.resources
+D:\Documents\GitHub\csharp\窗体识别自动点击\窗体识别自动点击\obj\Debug\窗体识别自动点击.csproj.GenerateResource.Cache
