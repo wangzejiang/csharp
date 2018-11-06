@@ -1,5 +1,0 @@
-﻿var myset=function(){
-document.getElementById('TPL_username_1').value='宝儿玩具专营店:小江';
-document.getElementById('TPL_password_1').value='zejiang123';
-};
-setTimeout(myset(), 3000);

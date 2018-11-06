@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace 登记退款订单
             };
             Cef.Initialize(settings);
             wb = new ChromiumWebBrowser(listurl);
-            wb = new ChromiumWebBrowser("about:bank");
+            wb1 = new ChromiumWebBrowser("about:bank");
             tabPage1.Controls.Add(wb);
             tabPage3.Controls.Add(wb1);
             wb.Dock = DockStyle.Fill;
@@ -67,6 +68,7 @@ namespace 登记退款订单
                         dr["href"] = div.SelectSingleNode("div/div[8]/a").GetAttributeValue("href", null);
                         HtmlNode remarkNode = div.SelectSingleNode(string.Format("//*[@id='sellerGirdRemarkContainer_{0}@2']/span/div/span", iid));
                         dr["remark"] = remarkNode != null ? remarkNode.InnerText.Trim() : "";
+                        dr["status"] = div.SelectSingleNode("div/div[8]/a/span/font").InnerText.Trim();
                         dt.Rows.Add(dr);
                     }
                 }
@@ -115,6 +117,7 @@ namespace 登记退款订单
         private void Form1_Load(object sender, EventArgs e)
         {
             wb.Load(listurl);
+
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("iid", typeof(string)));
             dt.Columns.Add(new DataColumn("id", typeof(string)));
@@ -122,12 +125,17 @@ namespace 登记退款订单
             dt.Columns.Add(new DataColumn("remark", typeof(string)));
             dt.Columns.Add(new DataColumn("express", typeof(string)));
             dt.Columns.Add(new DataColumn("number", typeof(string)));
+            dt.Columns.Add(new DataColumn("status", typeof(string)));
+            dt.Columns.Add(new DataColumn("msg", typeof(string)));
             dataGridView1.DataSource = dt;
+
+            tabControl1.SelectedTab = tabPage3;
+            tabControl1.SelectedTab = tabPage2;
+            tabControl1.SelectedTab = tabPage1;
         }
 
         private void button3_Click(object sender1, EventArgs e1)
         {
-            StringVisitor sv = new StringVisitor();
             if (wb == null) return;
             wb.Load(listurl);
             input(@"js3.txt");
@@ -136,8 +144,6 @@ namespace 登记退款订单
         private void button4_Click(object sender, EventArgs e)
         {
             input(@"js.txt");
-            DataTable dt = (DataTable)dataGridView1.DataSource;
-            dt.Clear();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -150,21 +156,89 @@ namespace 登记退款订单
             DataTable dt = (DataTable)dataGridView1.DataSource;
             foreach (DataRow row in dt.Rows)
             {
-                string href = string.Format("https:{0}", row["href"].ToString());
-                wb1.Load(href);
-                HtmlAgilityPack.HtmlDocument hd = getText(wb1);
-                HtmlNode div = hd.DocumentNode.SelectSingleNode("//*[@id='contentContainer_1']/div[3]/div/p");
-                if (div != null)
+                string status = row["status"].ToString();
+                string remark = row["remark"].ToString();
+                string _msg = row["msg"].ToString();
+                if ("待商家收货".Equals(status) && remark.IndexOf("登记") == -1 && "".Equals(_msg))
                 {
-                    Console.WriteLine(div.InnerText);
-                    row["express"] = div.InnerText.Substring(div.InnerText.IndexOf("：") + 1, div.InnerText.IndexOf("（") - div.InnerText.IndexOf("：") - 1);
-                    row["number"] = div.InnerText.Substring(div.InnerText.IndexOf("（") + 1, div.InnerText.IndexOf(")") - div.InnerText.IndexOf("（") - 1);
+                    string href = string.Format("https:{0}", row["href"].ToString());
+                    wb1.Load(href);
+                    HtmlAgilityPack.HtmlDocument hd = getText(wb1);
+                    HtmlNode div = hd.DocumentNode.SelectSingleNode("//*[@id='contentContainer_1']/div[3]/div/p");
+                    if (div != null)
+                    {
+                        Console.WriteLine(div.InnerText);
+                        row["express"] = div.InnerText.Substring(div.InnerText.IndexOf("：") + 1, div.InnerText.IndexOf("（") - div.InnerText.IndexOf("：") - 1);
+                        row["number"] = div.InnerText.Substring(div.InnerText.IndexOf("（") + 1, div.InnerText.IndexOf(")") - div.InnerText.IndexOf("（") - 1);
+                    }
                 }
             }
+            saveDt();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            saveDt();
+        }
+
+        private void saveDt()
+        {
+            DataTable dt = (DataTable)dataGridView1.DataSource;
+            string context = Utils.DataTableToJson(dt);
+            File.WriteAllText(@"data.txt", context);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string context = File.ReadAllText(@"data.txt");
+            if ("".Equals(context))
+            {
+                return;
+            }
+            DataTable dt = Utils.ToDataTable(context);
+            dataGridView1.DataSource = dt;
+            tabControl1.SelectedTab = tabPage2;
+        }
+
+        //[DllImport("guanjia.dll")]
+        //public unsafe static extern sbyte* exec(sbyte* ch1, sbyte* ch2, sbyte* ch3, sbyte* ch4);
+
+        private unsafe void button9_Click(object sender, EventArgs e)
+        {
+            MyFunc fun = new MyFunc();
+            DataTable dt = (DataTable)dataGridView1.DataSource;
+            foreach (DataRow row in dt.Rows)
+            {
+                string status = row["status"].ToString();
+                string remark = row["remark"].ToString();
+                string id = row["id"].ToString();
+                string number = row["number"].ToString();
+                string express = row["express"].ToString();
+                string _msg = row["msg"].ToString();
+                if ("待商家收货".Equals(status) && remark.IndexOf("登记") == -1 && "".Equals(_msg))
+                {
+                    sbyte* _ch1 = (sbyte*)(IntPtr)Marshal.StringToHGlobalAnsi(id);
+                    sbyte* _ch2 = (sbyte*)(IntPtr)Marshal.StringToHGlobalAnsi("质量问题");
+                    sbyte* _ch3 = (sbyte*)(IntPtr)Marshal.StringToHGlobalAnsi(express);
+                    sbyte* _ch4 = (sbyte*)(IntPtr)Marshal.StringToHGlobalAnsi(number);
+                    sbyte* rs = fun.exec(_ch1, _ch2, _ch3, _ch4);
+                    string msg = new string(rs);
+                    row["msg"] = msg;
+                    Console.WriteLine(msg +"->" + id);
+                }
+            }
+            saveDt();
+            MessageBox.Show("over");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            DataTable dt = (DataTable)dataGridView1.DataSource;
+            dt.Clear();
         }
     }
 }
