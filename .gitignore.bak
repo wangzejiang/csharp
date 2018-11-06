@@ -1,8 +1,10 @@
-
 *.log
 *.rar
 *.pak
-招聘网刷新/招聘网刷新/bin/x64/Debug/cache
 *.old
 *.ldb
-登记退款订单/登记退款订单/bin/x64/Debug/test/cache
+*.exe
+*.pdb
+bin
+obj
+Debug
