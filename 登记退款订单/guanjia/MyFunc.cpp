@@ -1,7 +1,7 @@
 #include "MyFunc.h"
-#include <stdio.h>
 #include <windows.h>
 #include <commctrl.h>
+#include <stdio.h>
 #include <iostream>
 #include <string>
 
@@ -22,7 +22,7 @@ HWND s1()
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TEdit = FindWindowEx(TPanel, 0, TEXT("TEdit"), NULL);
 	TEdit = FindWindowEx(TPanel, TEdit, TEXT("TEdit"), NULL);
-
+	if(TEdit==0)MessageBox(0, LPCTSTR("s1"), LPCTSTR("myMbox"), MB_OK);
 	return TEdit;
 }
 
@@ -37,6 +37,7 @@ HWND s11()
 	HWND TComboBox = FindWindowEx(TPanel, 0, TEXT("TComboBox"), NULL);
 	TComboBox = FindWindowEx(TPanel, TComboBox, TEXT("TComboBox"), NULL);
 	HWND Edit = FindWindowEx(TComboBox, 0, TEXT("Edit"), NULL);
+	if (Edit == 0)MessageBox(0, LPCTSTR("s11"), LPCTSTR("myMbox"), MB_OK);
 	return Edit;
 }
 
@@ -51,6 +52,7 @@ HWND s12()
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TComboBox = FindWindowEx(TPanel, 0, TEXT("TComboBox"), NULL);
 	HWND Edit = FindWindowEx(TComboBox, 0, TEXT("Edit"), NULL);
+	if (Edit == 0)MessageBox(0, LPCTSTR("s12"), LPCTSTR("myMbox"), MB_OK);
 	return Edit;
 }
 
@@ -63,6 +65,7 @@ HWND s13()
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TEdit = FindWindowEx(TPanel, 0, TEXT("TEdit"), NULL);
+	if (TEdit == 0)MessageBox(0, LPCTSTR("s13"), LPCTSTR("myMbox"), MB_OK);
 	return TEdit;
 }
 
@@ -74,6 +77,7 @@ HWND s2()
 	HWND TPanel = FindWindowEx(TTabSheet, 0, TEXT("TPanel"), NULL);
 	TPanel = FindWindowEx(TTabSheet, TPanel, TEXT("TPanel"), NULL);
 	HWND TEdit = FindWindowEx(TPanel, 0, TEXT("TEdit"), NULL);
+	if (TEdit == 0)MessageBox(0, LPCTSTR("s2"), LPCTSTR("myMbox"), MB_OK);
 	return TEdit;
 }
 
@@ -84,6 +88,7 @@ HWND s3()
 	HWND TPageControl = FindWindowEx(mhwnd, 0, TEXT("TPageControl"), NULL);
 	HWND TTabSheet = FindWindowEx(TPageControl, 0, TEXT("TTabSheet"), TEXT("销售单"));
 	HWND TListView = FindWindowEx(TTabSheet, 0, TEXT("TListView"), NULL);
+	if (TListView == 0)MessageBox(0, LPCTSTR("s3"), LPCTSTR("myMbox"), MB_OK);
 	return TListView;
 }
 
@@ -96,6 +101,7 @@ HWND s4()
 	HWND TPanel = FindWindowEx(TForm_SellBack_New, 0, TEXT("TPanel"), NULL);
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TBitBtn = FindWindowEx(TPanel, 0, TEXT("TBitBtn"), TEXT("取消[&C]"));
+	if (TBitBtn == 0)MessageBox(0, LPCTSTR("s4"), LPCTSTR("myMbox"), MB_OK);
 	return TBitBtn;
 }
 
@@ -107,6 +113,7 @@ HWND s5()
 	HWND TPanel = FindWindowEx(TForm_SellBack_New, 0, TEXT("TPanel"), NULL);
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TBitBtn = FindWindowEx(TPanel, 0, TEXT("TBitBtn"), TEXT("保存[&S]"));
+	if (TBitBtn == 0)MessageBox(0, LPCTSTR("s5"), LPCTSTR("myMbox"), MB_OK);
 	return TBitBtn;
 }
 
@@ -118,12 +125,14 @@ HWND s8()
 	HWND TPanel = FindWindowEx(TForm_SellBack_New, 0, TEXT("TPanel"), NULL);
 	TPanel = FindWindowEx(TForm_SellBack_New, TPanel, TEXT("TPanel"), NULL);
 	HWND TBitBtn = FindWindowEx(TPanel, 0, TEXT("TBitBtn"), TEXT("新建[&N]"));
+	if (TBitBtn == 0)MessageBox(0, LPCTSTR("s8"), LPCTSTR("myMbox"), MB_OK);
 	return TBitBtn;
 }
 
 HWND s6()
 {
 	HWND mhwnd = FindWindow(NULL, TEXT("请确认"));
+	if (mhwnd == 0)MessageBox(0, LPCTSTR("s6"), LPCTSTR("myMbox"), MB_OK);
 	return mhwnd;
 }
 
@@ -131,6 +140,7 @@ HWND s7()
 {
 	HWND mhwnd = FindWindow(NULL, TEXT("请确认"));
 	HWND Button = FindWindowEx(mhwnd, 0, TEXT("Button"), TEXT("否(&N)"));
+	if (Button == 0)MessageBox(0, LPCTSTR("s7"), LPCTSTR("myMbox"), MB_OK);
 	return Button;
 }
 
@@ -138,6 +148,7 @@ void cl() {
 	BOOL ret;
 	RECT rect;
 	HWND TBitBtn1 = s4();
+	if (TBitBtn1 == 0) return;
 	ret = GetWindowRect(TBitBtn1, &rect);
 	if (!ret) return;
 	SetCursorPos(rect.left + 20, rect.top + 10);
@@ -147,7 +158,8 @@ void cl() {
 void ok() {
 	BOOL ret;
 	RECT rect;
-	HWND TBitBtn2 = s5();
+	HWND TBitBtn2 = s5(); 
+	if (TBitBtn2 == 0) return;
 	ret = GetWindowRect(TBitBtn2, &rect);
 	if (!ret) return;
 	SetCursorPos(rect.left + 20, rect.top + 10);
@@ -174,6 +186,7 @@ char * MyFunc::exec(char * ch1, char * ch2, char * ch3, char * ch4)
 	RECT rect;
 	HWND TEdit4 = s2();
 	HWND TEdit = s1();
+	if (TEdit == 0) return "错误0";
 	if (TEdit4 == 0) {
 		SetForegroundWindow(TEdit);
 		ret = GetWindowRect(TEdit, &rect);
@@ -183,6 +196,7 @@ char * MyFunc::exec(char * ch1, char * ch2, char * ch3, char * ch4)
 		Sleep(s);
 		TEdit4 = s2();
 	}
+	if (TEdit4 == 0) return "错误0";
 	SetForegroundWindow(TEdit4);
 	SendMessageA(TEdit4, WM_SETTEXT, 0, (LPARAM)ch1);
 	Sleep(s);
@@ -190,6 +204,7 @@ char * MyFunc::exec(char * ch1, char * ch2, char * ch3, char * ch4)
 	keybd_event(13, 0, 0, 0);
 	Sleep(s);
 	HWND TListView = s3();
+	if (TListView == 0) return "错误0";
 	// 总行数:进程的数量
 	int rows = (int)::SendMessage(TListView, LVM_GETITEMCOUNT, 0, 0);
 	if (rows == 1) {
@@ -215,13 +230,15 @@ char * MyFunc::exec(char * ch1, char * ch2, char * ch3, char * ch4)
 		//cl();
 		return "多个订单"; // 有问题
 	}
-
 	SetForegroundWindow(TEdit);
 	HWND TEdit1 = s11();
+	if (TEdit1 == 0) return "错误0";
 	SendMessageA(TEdit1, WM_SETTEXT, 0, (LPARAM)ch2);
 	HWND TEdit2 = s12();
+	if (TEdit2 == 0) return "错误0";
 	SendMessageA(TEdit2, WM_SETTEXT, 0, (LPARAM)ch3);
 	HWND TEdit3 = s13();
+	if (TEdit3 == 0) return "错误0";
 	SendMessageA(TEdit3, WM_SETTEXT, 0, (LPARAM)ch4);
 	Sleep(s);
 	ok();

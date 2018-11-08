@@ -168,12 +168,13 @@ namespace 登记退款订单
                     if (div != null)
                     {
                         Console.WriteLine(div.InnerText);
-                        row["express"] = div.InnerText.Substring(div.InnerText.IndexOf("：") + 1, div.InnerText.IndexOf("（") - div.InnerText.IndexOf("：") - 1);
+                        string express = div.InnerText.Substring(div.InnerText.IndexOf("：") + 1, div.InnerText.IndexOf("（") - div.InnerText.IndexOf("：") - 1);
+                        row["express"] = express.Substring(0, 2);
                         row["number"] = div.InnerText.Substring(div.InnerText.IndexOf("（") + 1, div.InnerText.IndexOf(")") - div.InnerText.IndexOf("（") - 1);
+                        saveDt();
                     }
                 }
             }
-            saveDt();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -229,6 +230,10 @@ namespace 登记退款订单
                     string msg = new string(rs);
                     row["msg"] = msg;
                     Console.WriteLine(msg +"->" + id);
+                    if ("好了".Equals(msg))
+                    {
+                        saveDt();
+                    }
                 }
             }
             saveDt();

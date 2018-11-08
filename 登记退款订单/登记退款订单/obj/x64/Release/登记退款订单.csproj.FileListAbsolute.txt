@@ -92,3 +92,4 @@ D:\Documents\GitHub\csharp\登记退款订单\登记退款订单\bin\x64\Release
 D:\Documents\GitHub\csharp\登记退款订单\登记退款订单\bin\x64\Release\HtmlAgilityPack.xml
 D:\Documents\GitHub\csharp\登记退款订单\登记退款订单\obj\x64\Release\登记退款订单.exe
 D:\Documents\GitHub\csharp\登记退款订单\登记退款订单\obj\x64\Release\登记退款订单.pdb
+D:\Documents\GitHub\csharp\登记退款订单\登记退款订单\bin\x64\Release\guanjia.dll

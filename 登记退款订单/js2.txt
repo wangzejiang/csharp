@@ -1,0 +1,5 @@
+var next = document.getElementsByClassName("rc-pagination-next");
+if(next){
+next[0].click();
+window.scrollTo(0,20000);
+}
