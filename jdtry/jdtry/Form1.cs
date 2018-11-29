@@ -56,7 +56,7 @@ namespace jdtry
             StringVisitor sv = new StringVisitor();
             tabControl1.SelectedTab = tabPage1;
             var wb = getChromiumWebBrowser(tabPage1);
-            string url = string.Format("https://try.jd.com/activity/getActivityList?page={0}&activityType=1&cids=670", page);
+            string url = string.Format("https://try.jd.com/activity/getActivityList?page={0}&activityType=1&cids={1}", page,textBox2.Text);
             wb.Load(url);
             wb.GetBrowser().MainFrame.GetSource(sv);
             while (sv.Value == null || "".Equals(sv.Value))
@@ -111,7 +111,7 @@ namespace jdtry
             StringVisitor sv = new StringVisitor();
             tabControl1.SelectedTab = tabPage1;
             var wb = getChromiumWebBrowser(tabPage1);
-            string url = "https://try.jd.com/activity/getActivityList?page=1&activityType=1&cids=670";
+            string url = string.Format("https://try.jd.com/activity/getActivityList?page=1&activityType=1&cids={0}",textBox2.Text);
             wb.Load(url);
             EventHandler<LoadingStateChangedEventArgs> handler = null;
             handler = (sender, e) =>
