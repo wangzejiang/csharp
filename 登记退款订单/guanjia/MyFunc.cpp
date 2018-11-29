@@ -41,7 +41,6 @@ HWND s11()
 	return Edit;
 }
 
-
 HWND s12()
 {
 	HWND mhwnd = FindWindow(NULL, TEXT("Íøµê¹Ü¼ÒÔÆ¶Ë°æ - [ÍË»»µÇ¼Ç]"));

@@ -18,13 +18,13 @@ namespace CSharpCallCpp
             InitializeComponent();
         }
 
-        [DllImport(@"D:\Users\zejiang\Documents\GitHub\csharp\CSharpCallCpp\Debug\DLLTest.dll", EntryPoint = "Test1")]
+        [DllImport(@"DLLTest.dll", EntryPoint = "Test1")]
         extern static int Test1();
 
-        [DllImport(@"D:\Users\zejiang\Documents\GitHub\csharp\CSharpCallCpp\Debug\DLLTest.dll", EntryPoint = "Test2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"DLLTest.dll", EntryPoint = "Test2", CallingConvention = CallingConvention.Cdecl)]
         extern static int Test2(int a, int b);
 
-        [DllImport(@"D:\Users\zejiang\Documents\GitHub\csharp\CSharpCallCpp\Debug\DLLTest.dll", CharSet = CharSet.Auto, EntryPoint = "Test3", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"DLLTest.dll", CharSet = CharSet.Auto, EntryPoint = "Test3", CallingConvention = CallingConvention.Cdecl)]
         public unsafe extern static sbyte* Test3(sbyte* a, sbyte* b);
         
 
@@ -37,6 +37,7 @@ namespace CSharpCallCpp
             sbyte*  rs = Test3(_ch1, _ch2);
             string msg = new string(rs);
             Console.WriteLine(msg);
+            MessageBox.Show(msg);
         }
 
     }

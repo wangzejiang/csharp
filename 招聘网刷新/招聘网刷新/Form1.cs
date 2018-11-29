@@ -18,7 +18,7 @@ namespace 招聘网刷新
         {
             InitializeComponent();
             var settings = new CefSettings();
-            settings.CachePath = "cache";
+            settings.CachePath = @"cache";
             Cef.Initialize(settings);
             tabPage1.Controls.Add(createChromiumWebBrowser());
         }
@@ -74,12 +74,19 @@ namespace 招聘网刷新
         private void input()
         {
             var wb = getChromiumWebBrowser(tabPage1);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("var myset=function(){");
-            sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginID').value='13825856178';");
-            sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginPwd').value='13825856178';");
-            sb.Append("};setTimeout(myset(),3000);");
-            wb.ExecuteScriptAsync(sb.ToString());
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("var myset=function(){");
+                sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginID').value='13825856178';");
+                sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginPwd').value='13825856178';");
+                sb.Append("};setTimeout(myset(),3000);");
+                wb.ExecuteScriptAsync(sb.ToString());
+            }
+            catch
+            {
+
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -169,6 +176,7 @@ namespace 招聘网刷新
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             this.ShowInTaskbar = false;
             tologin();
             timer2.Start();
