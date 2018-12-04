@@ -31,6 +31,7 @@ namespace jdtry
             {
                 JsDialogHandler = new JsDialogHandler(),
             };
+            wb.RequestHandler = new RequestHandler();
             wb.Name = "ChromiumWebBrowser";
             return wb;
         }
@@ -42,13 +43,16 @@ namespace jdtry
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            tabControl1.SelectedTab = tabPage2;
             tabControl1.SelectedTab = tabPage1;
+
             var wb = getChromiumWebBrowser(tabPage1);
             string url = "https://passport.jd.com/new/login.aspx";
             wb.Load(url);
 
             timer1.Interval = 1000 * 10;
             timer2.Start();
+
         }
 
         private List<string> exec(int page)
@@ -56,7 +60,7 @@ namespace jdtry
             StringVisitor sv = new StringVisitor();
             tabControl1.SelectedTab = tabPage1;
             var wb = getChromiumWebBrowser(tabPage1);
-            string url = string.Format("https://try.jd.com/activity/getActivityList?page={0}&activityType=1&cids={1}", page,textBox2.Text);
+            string url = string.Format("https://try.jd.com/activity/getActivityList?page={0}&activityType=1&cids={1}", page,comboBox1.Text);
             wb.Load(url);
             wb.GetBrowser().MainFrame.GetSource(sv);
             while (sv.Value == null || "".Equals(sv.Value))
@@ -80,7 +84,7 @@ namespace jdtry
                     string str = div.InnerText.Trim();
                     Console.WriteLine(str); 
                     string activity_id = item.GetAttributeValue("activity_id", null);
-                    if (activity_id != null && "我要申请".Equals(str))
+                    if (activity_id != null && str.StartsWith("我要"))
                     {
                         string uurl = string.Format("https://try.jd.com/{0}.html", activity_id);
                         Console.WriteLine(uurl);
@@ -111,7 +115,7 @@ namespace jdtry
             StringVisitor sv = new StringVisitor();
             tabControl1.SelectedTab = tabPage1;
             var wb = getChromiumWebBrowser(tabPage1);
-            string url = string.Format("https://try.jd.com/activity/getActivityList?page=1&activityType=1&cids={0}",textBox2.Text);
+            string url = string.Format("https://try.jd.com/activity/getActivityList?page=1&activityType=1&cids={0}", comboBox1.Text);
             wb.Load(url);
             EventHandler<LoadingStateChangedEventArgs> handler = null;
             handler = (sender, e) =>
