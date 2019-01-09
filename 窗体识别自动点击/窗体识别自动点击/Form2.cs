@@ -43,6 +43,7 @@ namespace 窗体识别自动点击
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Text = "已开";
             timer1.Stop();
             timer1.Start();
         }
@@ -99,6 +100,7 @@ namespace 窗体识别自动点击
                 IntPtr ok = IntPtr.Zero;
                 IntPtr text = IntPtr.Zero;
                 IntPtr speak = IntPtr.Zero;
+                string ff = null;
                 // 获取子控件
                 IntPtr hwd = GetWindow(ParenthWnd, (int)WindowSearch.GW_CHILD);
                 do
@@ -111,6 +113,7 @@ namespace 窗体识别自动点击
                         if (tmp != IntPtr.Zero)
                         {
                             text = tmp;
+                            ff = word;
                             break;
                         };
                     }
@@ -118,10 +121,21 @@ namespace 窗体识别自动点击
                     if (tmp != IntPtr.Zero) speak = tmp;
                     hwd = GetWindow(hwd, (int)WindowSearch.GW_HWNDNEXT);
                 } while (hwd != IntPtr.Zero);
+                
                 if (ok != IntPtr.Zero && text != IntPtr.Zero)
                 {
                     SetForegroundWindow(ParenthWnd);
                     click(ok);
+                }
+                if (ff == "已完成")
+                {
+                    Thread thread = new Thread(() =>
+                    {
+                        SoundPlayer sound = new SoundPlayer(@"finish.wav");
+                        sound.Play();
+                        thread = null;
+                    });
+                    thread.Start();
                 }
                 if (speak != IntPtr.Zero)
                 {

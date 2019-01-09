@@ -17,89 +17,56 @@ namespace 招聘网刷新
         public Form1()
         {
             InitializeComponent();
-            var settings = new CefSettings();
-            settings.CachePath = @"cache";
-            Cef.Initialize(settings);
-            tabPage1.Controls.Add(createChromiumWebBrowser());
         }
 
         private void button1_Click(object sender1, EventArgs e1)
         {
+            var wb1 = createChromiumWebBrowser("http://www.stzp.cn/login/entlogin.aspx");
+            var wb2 = createChromiumWebBrowser("http://www.stzp.cn/ent/mgjoblist.aspx");
+            tabPage1.Controls.Add(wb1);
+            tabPage3.Controls.Add(wb2);
+            input(wb1);
+            input(wb2);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
             refash();
-            tabControl1.SelectedTab = tabPage2;
             timer1.Stop();
             timer1.Interval = 1000;
             timer1.Start();
         }
         
-        private int i = 0;
-
-        private void tologin()
+        private int ig = 0;
+        
+        private void input(ChromiumWebBrowser wb)
         {
-            //StringVisitor sv = new StringVisitor();
-            tabControl1.SelectedTab = tabPage1;
-            var wb = getChromiumWebBrowser(tabPage1);
-            string url = "http://www.stzp.cn/login/entlogin.aspx";
-            wb.Load(url);
-
-            //EventHandler<LoadingStateChangedEventArgs> handler = null;
-            //handler = (sender, e) =>
-            //{
-            //    if (!e.IsLoading)
-            //    {
-            //        e.Browser.MainFrame.GetSource(sv);
-            //        //wb.LoadingStateChanged -= handler;
-            //    }
-            //};
-            //wb.LoadingStateChanged += handler;
-            //while (sv.Value == null || "".Equals(sv.Value))
-            //{
-            //    Application.DoEvents();
-            //}
-            //string text = sv.Value;
-            //HtmlAgilityPack.HtmlDocument hd = new HtmlAgilityPack.HtmlDocument();
-            //hd.LoadHtml(text);
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            input();
-        }
-
-        private void input()
-        {
-            var wb = getChromiumWebBrowser(tabPage1);
-            try
+            EventHandler<LoadingStateChangedEventArgs> handler = null;
+            handler = (sender, args) =>
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("var myset=function(){");
+                //sb.Append("var myset=function(){");
                 sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginID').value='13825856178';");
                 sb.Append("document.getElementById('ctl00_ContentPlaceHolder1_txtLoginPwd').value='13825856178';");
-                sb.Append("};setTimeout(myset(),3000);");
+                //sb.Append("};setTimeout(myset(),3000);");
                 wb.ExecuteScriptAsync(sb.ToString());
-            }
-            catch
-            {
-
-            }
+            };
+            //wb.IsBrowserInitializedChanged += handler;
+            wb.LoadingStateChanged += handler;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            i++;
+            ig++;
             //textBox1.Text += i + ".";
             int num = int.Parse(textBox2.Text);
-            if (i > num * 60)
+            int num2 = int.Parse(textBox3.Text);
+            if (ig % (60 * num) == 0)
             {
-                i = 0;
                 refash();
             }
-            if (i > num * 60-1)
+            if (ig % (60 * num2) == 0)
             {
                 refash2();
             }
@@ -113,11 +80,19 @@ namespace 招聘网刷新
             textBox1.Text += "refresh:" + DateTime.Now.ToString() + "\r\n";
         }
 
+        private int g_number = 0;
+
         private void refash2()
         {
-            string name = textBox3.Text;
+            g_number++;
+            if(g_number > 19)
+            {
+                g_number = 0;
+            }
+            string f = string.Format("ctl00_ContentPlaceHolder1_repJob_ctl{0:00}_lbIsRefresh", g_number);
+            Console.WriteLine(f);
             StringVisitor sv = new StringVisitor();
-            var wb = getChromiumWebBrowser(tabPage1);
+            var wb = getChromiumWebBrowser(tabPage3);
             string url = "http://www.stzp.cn/ent/mgjoblist.aspx";
             wb.Load(url);
             EventHandler<LoadingStateChangedEventArgs> handler = null;
@@ -138,7 +113,7 @@ namespace 招聘网刷新
             HtmlAgilityPack.HtmlDocument hd = new HtmlAgilityPack.HtmlDocument();
             hd.LoadHtml(text);
             HtmlAgilityPack.HtmlNode node =
-                hd.DocumentNode.SelectSingleNode("//*[@id='"+name+"']");
+                hd.DocumentNode.SelectSingleNode("//*[@id='"+f+"']");
             if (node == null)
             {
                 Console.WriteLine("nulll");
@@ -147,11 +122,12 @@ namespace 招聘网刷新
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("var myset=function(){");
-                sb.Append("document.getElementById('" + name + "').click();");
+                sb.Append("document.getElementById('" + f + "').click();");
                 sb.Append("};setTimeout(myset(),3000);");
                 wb.ExecuteScriptAsync(sb.ToString());
                 Console.WriteLine(node.InnerText);
             }
+            textBox1.Text += "refresh2:" + DateTime.Now.ToString() + "\r\n";
         }
 
         private ChromiumWebBrowser createChromiumWebBrowser(string url = "about:blank")
@@ -176,10 +152,10 @@ namespace 招聘网刷新
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            this.ShowInTaskbar = false;
-            tologin();
-            timer2.Start();
+            var settings = new CefSettings();
+            settings.CachePath = @"cache";
+            Cef.Initialize(settings);
+            ShowInTaskbar = false;
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
