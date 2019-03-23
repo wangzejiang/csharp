@@ -171,6 +171,10 @@ namespace 单品关键词分析
                 using (StreamReader reader = new StreamReader(path))
                 {
                     string str = reader.ReadLine();
+                    while (!reader.EndOfStream)
+                    {
+                        str = reader.ReadLine();
+                    }
                     textBox1.Text = str.Split(':')[1];
                     reader.Close();
                 }

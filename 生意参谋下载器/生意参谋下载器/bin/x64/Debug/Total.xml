@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <NewDataSet>
 <Commbox>
 	<brandId>578432511123</brandId>
@@ -29,12 +29,20 @@
 	<brandName>乐斯宝-m24</brandName>
 </Commbox>
 <Commbox>
+	<brandId>580559603157</brandId>
+	<brandName>熊猫猫-m416</brandName>
+</Commbox>
+<Commbox>
 	<brandId>583452065128</brandId>
 	<brandName>乐斯宝-m416</brandName>
 </Commbox>
 <Commbox>
 	<brandId>584004134721</brandId>
-	<brandName>乐斯宝-kc98k</brandName>
+	<brandName>乐斯宝-套餐</brandName>
+</Commbox>
+<Commbox>
+	<brandId>587805068838</brandId>
+	<brandName>乐斯宝-钓鱼</brandName>
 </Commbox>
 <Commbox>
 	<brandId>582083553320</brandId>
@@ -48,6 +56,16 @@
 	<brandId>585263673379</brandId>
 	<brandName>乐斯宝-奥特曼</brandName>
 </Commbox>
-
-
-</NewDataSet>
+<Commbox>
+	<brandId>573256132525</brandId>
+	<brandName>熊猫猫-三级包</brandName>
+</Commbox>
+<Commbox>
+	<brandId>580745491622</brandId>
+	<brandName>熊猫猫-M24</brandName>
+</Commbox>
+<Commbox>
+	<brandId>569727581342</brandId>
+	<brandName>熊猫猫-AWM</brandName>
+</Commbox>
+</NewDataSet> 
