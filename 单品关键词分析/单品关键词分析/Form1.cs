@@ -62,7 +62,7 @@ namespace 单品关键词分析
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(f);
+                        MessageBox.Show(f + ex.Message);
                         return;
                     }
                     DataRowCollection rsdr = rsdt.Rows;
@@ -206,6 +206,7 @@ namespace 单品关键词分析
             DataTable ds = (DataTable)dataGridView1.DataSource;
             var query = from t in ds.AsEnumerable().Where(dd => dd.Field<string>("关键词").IndexOf(word) > -1)
                         group t by new { 日期 = t.Field<string>("日期") } into m
+                        orderby m.Key.日期 ascending
                         select new
                         {
                             日期 = m.Key.日期,
