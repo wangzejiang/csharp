@@ -31,13 +31,8 @@ namespace WindowsFormsApplication2
             webBrowser1.Size = new System.Drawing.Size(886, 373);
             webBrowser1.TabIndex = 0;
             tabPage1.Controls.Add(this.webBrowser1);
-
             webBrowser1.Navigate("https://sycm.taobao.com");
-
             BindingComboBox();
-
-
-
         }
 
         private void BindingComboBox()
@@ -45,7 +40,8 @@ namespace WindowsFormsApplication2
             DataSet ds = new DataSet();
             ds.ReadXml(@"Total.xml");
             Console.WriteLine(ConvertDataSetToXML(ds));
-            comboBox1.DataSource = ds.Tables["Commbox"];
+            var table = ds.Tables["Commbox"];
+            comboBox1.DataSource = table;
             comboBox1.ValueMember = "brandId";
             comboBox1.DisplayMember = "brandName";
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -85,14 +81,18 @@ namespace WindowsFormsApplication2
         {
             string name = comboBox1.Text;
             string id = comboBox1.SelectedValue as string;
-
+            if (id == "0")
+            {
+                MessageBox.Show("Test");
+                return;
+            } 
             DateTime date = DateTime.Now.AddDays(-1);  //昨天
             int day = 0;
             for (int i = 0; i < 29; i++)
             {
                 string datestr = date.AddDays(day--).ToString("yyyy-MM-dd");
-                string path2 = string.Format(@"D:/sycmData/{0}", name);
-                string path = string.Format(@"D:/sycmData/{0}/{1}_{2}.xls", name, id, datestr);
+                string path2 = string.Format(@"sycmData/{0}", name);
+                string path = string.Format(@"sycmData/{0}/{1}_{2}.xls", name, id, datestr);
                 Console.WriteLine(string.Format("file:{0}", path));
                 if (!Directory.Exists(path2))
                 {
@@ -101,8 +101,11 @@ namespace WindowsFormsApplication2
                 if (!File.Exists(path))
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("https://sycm.taobao.com/bda/download/excel/items/itemanaly/ItemKeywordAnalysisExcel.do");
-                    sb.Append("?device=2&itemId={0}&dateRange={1}|{2}&dateType=recent1&order=avgSeRank&orderType=asc&search=&searchType=taobao");
+                    // sb.Append("https://sycm.taobao.com/bda/download/excel/items/itemanaly/ItemKeywordAnalysisExcel.do");
+                    //sb.Append("?device=2&itemId={0}&dateRange={1}|{2}&dateType=recent1&order=avgSeRank&orderType=asc&search=&searchType=taobao");
+                    sb.Append("https://sycm.taobao.com/flow/excel.do");
+                    sb.Append("?_path_ =v3/new/excel/item/source/detail&order=desc&orderBy=uv&dateType=day&dateRange={1}|{2}");
+                    sb.Append("&itemId={0}&device=2&pageId=23.s1150&pPageId=23&pageLevel=2&childPageType=se_keyword&belong=all");
                     string url = string.Format(sb.ToString(), id, datestr, datestr);
                     Console.WriteLine(url);
                     webBrowser1.DownloadFile(url, path);
@@ -110,6 +113,19 @@ namespace WindowsFormsApplication2
                 }
             }
             MessageBox.Show("下载完成");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void comboBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BindingComboBox();
         }
     }
 }
