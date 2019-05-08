@@ -31,13 +31,8 @@ namespace 生意参谋下载器
             webBrowser1.Size = new System.Drawing.Size(886, 373);
             webBrowser1.TabIndex = 0;
             tabPage1.Controls.Add(this.webBrowser1);
-
             webBrowser1.Navigate("https://sycm.taobao.com");
-
             BindingComboBox();
-
-
-
         }
 
         private void BindingComboBox()
@@ -45,7 +40,8 @@ namespace 生意参谋下载器
             DataSet ds = new DataSet();
             ds.ReadXml(@"Total.xml");
             Console.WriteLine(ConvertDataSetToXML(ds));
-            comboBox1.DataSource = ds.Tables["Commbox"];
+            var table = ds.Tables["Commbox"];
+            comboBox1.DataSource = table;
             comboBox1.ValueMember = "brandId";
             comboBox1.DisplayMember = "brandName";
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -85,7 +81,11 @@ namespace 生意参谋下载器
         {
             string name = comboBox1.Text;
             string id = comboBox1.SelectedValue as string;
-
+            if (id == "0")
+            {
+                MessageBox.Show("Test");
+                return;
+            } 
             DateTime date = DateTime.Now.AddDays(-1);  //昨天
             int day = 0;
             for (int i = 0; i < 29; i++)
@@ -110,6 +110,19 @@ namespace 生意参谋下载器
                 }
             }
             MessageBox.Show("下载完成");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void comboBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BindingComboBox();
         }
     }
 }
