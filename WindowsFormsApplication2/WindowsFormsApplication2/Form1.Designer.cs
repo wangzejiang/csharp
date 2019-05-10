@@ -43,12 +43,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Multiline = true;
+            this.textBox1.Location = new System.Drawing.Point(218, 43);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(717, 100);
+            this.textBox1.Size = new System.Drawing.Size(331, 21);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "98K狙击抢";
             // 
             // panel1
             // 
@@ -63,7 +62,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(752, 48);
+            this.button2.Location = new System.Drawing.Point(1253, 31);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -73,7 +72,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(880, 48);
+            this.button1.Location = new System.Drawing.Point(738, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -39,54 +40,89 @@ namespace WindowsFormsApplication2
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("https://sycm.taobao.com/mc/mq/search_analyze?");
-            sb.AppendFormat("activeKey=overview&dateRange={0}%7C{0}&dateType=day&device=0&keyword={1}", "2019-05-07", "98k");
-            webBrowser1.Navigate(sb.ToString());
-            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+            DateTime now = DateTime.Now.AddHours(-1).AddDays(-2);
+            string word = textBox1.Text;
+            for (int i = 0; i < 30; i++)
+            {
+                string datestr = now.AddDays(-i).ToString("yyyy-MM-dd");
+                string path = string.Format(@"../../sycmGData/{0}_{1}.txt", word, datestr);
+                if (File.Exists(path)) continue;
+                StringBuilder sb = new StringBuilder();
+                sb.Append("https://sycm.taobao.com/mc/mq/search_analyze?");
+                sb.AppendFormat("activeKey=overview&dateRange={0}%7C{0}&dateType=day&device=0&keyword={1}", datestr, word);
+                webBrowser1.Navigate(sb.ToString());
+                while (File.Exists(path) == false)
+                {
+                    Application.DoEvents();
+                }
+                break;
+            }
+            //webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+        }
+
+        private void runjs()
+        {
+            HtmlElement script = webBrowser1.Document.CreateElement("script");
+            script.SetAttribute("type", "text/javascript");
+            script.SetAttribute("text", File.ReadAllText(@"../../cc.js"));
+            HtmlElement head = webBrowser1.Document.Body.AppendChild(script);
+            webBrowser1.Document.InvokeScript("_func");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private HtmlElement getElemet(string tag, string className)
         {
             HtmlElement el = null;
-            // Console.WriteLine(webBrowser1.DocumentText);
-            //webBrowser1.DocumentText;
-            HtmlElementCollection elements = webBrowser1.Document.GetElementsByTagName("div");
+            HtmlElementCollection elements = webBrowser1.Document.GetElementsByTagName(tag);
             foreach (HtmlElement element in elements)
             {
-                if ("oui-index-cell-indexValue oui-num".ToUpper().Equals(element.GetAttribute("className").ToUpper()))
+                if (className.ToUpper().Equals(element.GetAttribute("className").ToUpper()))
                 {
                     el = element;
                     break;
                 }
             }
+            return el;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            HtmlElement el;
+            string date, key, num = null;
+
+            // 获取数字
+            el = getElemet("div", "oui-index-cell-indexValue oui-num");
             if (el == null) return;
-            Console.WriteLine(el.InnerHtml);
-            foreach (HtmlElement element in elements)
+            num = el.InnerHtml;
+            // 获取日期
+            el = getElemet("div", "oui-date-picker-current-date");
+            if (el == null) return;
+            date = el.InnerHtml;
+            // 获取单词
+            el = getElemet("span", "item-keyword");
+            if (el == null) return;
+            key = el.InnerHtml;
+            num = num.Replace(",", "");
+            num = num.Remove(num.IndexOf("<!-"), num.IndexOf("->") + 2 - num.IndexOf("<!-"));
+            num = num.Remove(num.IndexOf("<!-"), num.IndexOf("->") + 2 - num.IndexOf("<!-"));
+            date = date.Replace("统计时间 ", "");
+            date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
+            date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
+            date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
+            date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
+            Console.WriteLine("{0},{1},{2}", key, num, date);
+            string path = string.Format(@"../../sycmGData/{0}_{1}.txt", key, date);
+            int day = DateTime.Now.AddHours(-8).AddDays(-1).DayOfYear - Convert.ToDateTime(date).DayOfYear;
+            if (File.Exists(path) == false && day < 30)
             {
-                if ("oui-date-picker-current-date".ToUpper().Equals(element.GetAttribute("className").ToUpper()))
-                {
-                    el = element;
-                    break;
-                }
+                var os = File.CreateText(path);
+                os.Write(num);
+                os.Close();
+                runjs();
             }
-            if (el == null) return;
-            Console.WriteLine(el.InnerHtml);
-            elements = webBrowser1.Document.GetElementsByTagName("span");
-            foreach (HtmlElement element in elements)
-            {
-                if ("item-keyword".ToUpper().Equals(element.GetAttribute("className").ToUpper()))
-                {
-                    el = element;
-                    break;
-                }
-            }
-            if (el == null) return;
-            Console.WriteLine(el.InnerHtml);
         }
     }
 }

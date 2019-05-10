@@ -38,7 +38,7 @@ namespace WindowsFormsApplication2
         private void BindingComboBox()
         {
             DataSet ds = new DataSet();
-            ds.ReadXml(@"Total.xml");
+            ds.ReadXml(@"../../Total.xml");
             Console.WriteLine(ConvertDataSetToXML(ds));
             var table = ds.Tables["Commbox"];
             comboBox1.DataSource = table;
@@ -91,8 +91,8 @@ namespace WindowsFormsApplication2
             for (int i = 0; i < 29; i++)
             {
                 string datestr = date.AddDays(day--).ToString("yyyy-MM-dd");
-                string path2 = string.Format(@"sycmData/{0}", name);
-                string path = string.Format(@"sycmData/{0}/{1}_{2}.xls", name, id, datestr);
+                string path2 = string.Format(@"../../sycmData/{0}", name);
+                string path = string.Format(@"../../sycmData/{0}/{1}_{2}.xls", name, id, datestr);
                 Console.WriteLine(string.Format("file:{0}", path));
                 if (!Directory.Exists(path2))
                 {
