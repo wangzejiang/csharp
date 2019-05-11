@@ -29,10 +29,10 @@ namespace WindowsFormsApplication2
             webBrowser1.Name = "webBrowser1";
             webBrowser1.Size = new System.Drawing.Size(886, 373);
             webBrowser1.TabIndex = 0;
-            tabPage1.Controls.Add(this.webBrowser1);
+            tabPage1.Controls.Add(webBrowser1);
             webBrowser1.Navigate("https://sycm.taobao.com");
-
-            timer1.Interval = 1000;
+            Text = webBrowser1.Version.Major.ToString();
+            timer1.Interval = 2000;
             timer1.Start();
         }
         private void webBrowser1_DocumentCompleted(object sender, EventArgs e)//这个就是当网页载入完毕后要进行的操作
@@ -123,6 +123,12 @@ namespace WindowsFormsApplication2
                 os.Close();
                 runjs();
             }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+            webBrowser1.Navigate("https://sycm.taobao.com");
         }
     }
 }

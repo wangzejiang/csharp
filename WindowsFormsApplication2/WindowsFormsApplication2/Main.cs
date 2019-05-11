@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,16 +17,31 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
         }
-        Form f1 = new Form1();
-        Form f2 = new Form2();
         private void button1_Click(object sender, EventArgs e)
         {
+            Form f1 = new Form1();
             f1.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Form f2 = new Form2();
             f2.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form f3 = new Form3();
+            f3.Show();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            IE.SetIE();
         }
     }
 }
