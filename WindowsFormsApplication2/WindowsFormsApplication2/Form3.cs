@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApplication2
 {
@@ -98,30 +99,60 @@ namespace WindowsFormsApplication2
             DataTable data = (DataTable)dataGridView1.DataSource;
             DataTable dt = new DataTable();
             dt.Columns.Add("日期", typeof(string));
+            dt.Columns.Add("统计", typeof(float));
             string[] keys = textBox1.Text.Split(',');
             foreach (var key in keys)
             {
                 dt.Columns.Add(key, typeof(float));
             }
             DateTime now = DateTime.Now.AddHours(-8).AddDays(-1);
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 29; i++)
             {
                 string datestr = now.AddDays(-i).ToString("yyyy-MM-dd");
                 DataRow row = dt.NewRow();
+                row["日期"] = datestr;
+                float 统计 = 0f;
                 foreach (var key in keys)
                 {
                     string sql = string.Format("日期 ='{0}' and 关键词='{1}'", datestr, key);
                     DataRow[] datarows = data.Select(sql);
                     string number = datarows.Length == 0 ? "0" : (datarows.Length == 1 ? datarows[0]["访客数"].ToString() : "99999999");
-                    row["日期"] = datestr;
+
                     float 自己 = toFloat(number);
                     string path = string.Format(@"../../sycmGData/{0}_{1}.txt", key, datestr);
                     float 市场 = File.Exists(path) ? toFloat(File.ReadAllText(path)) : -1f;
-                    row[key] = 自己 / 市场 * 1000;
+                    float 比例 = 自己 / 市场 * 1000;
+                    统计 += 比例;
+                    row[key] = 比例;
                 }
+                row["统计"] = float.Parse(统计.ToString("#0.00"));
                 dt.Rows.Add(row);
             }
             dataGridView2.DataSource = dt;
+
+            // 设置报表
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add(new ChartArea());
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
+            chart1.ChartAreas[0].AxisX.IntervalOffset = 1;
+            var s = new Series();
+            s.ChartType = SeriesChartType.Line;
+            s.BorderWidth = 3;
+            s.XValueType = ChartValueType.DateTime;
+            s.Name = "xxxx";
+            DataRow[] dataRows = dt.Select("1=1", "日期 asc");
+            foreach (DataRow row in dataRows)
+            {
+                string 日期 = (string)row["日期"];
+                int 统计 = (int)((float)row["统计"]/1);
+                s.Points.AddXY(日期, 统计);
+                //Console.WriteLine(item.日期 + "\t" + item.统计);
+            }
+            s.IsValueShownAsLabel = true;
+            chart1.Series.Add(s);
         }
     }
 }

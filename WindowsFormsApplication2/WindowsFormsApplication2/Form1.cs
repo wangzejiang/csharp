@@ -40,24 +40,33 @@ namespace WindowsFormsApplication2
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now.AddHours(-1).AddDays(-2);
-            string word = textBox1.Text;
-            for (int i = 0; i < 30; i++)
+            staticnum = 0;
+            getKey();
+        }
+
+        private static int staticnum = 0;
+
+        private void getKey()
+        {
+            string[] keys = textBox1.Text.Split(',');
+            for (; staticnum < keys.Length; staticnum++)
             {
-                string datestr = now.AddDays(-i).ToString("yyyy-MM-dd");
-                string path = string.Format(@"../../sycmGData/{0}_{1}.txt", word, datestr);
-                if (File.Exists(path)) continue;
-                StringBuilder sb = new StringBuilder();
-                sb.Append("https://sycm.taobao.com/mc/mq/search_analyze?");
-                sb.AppendFormat("activeKey=overview&dateRange={0}%7C{0}&dateType=day&device=0&keyword={1}", datestr, word);
-                webBrowser1.Navigate(sb.ToString());
-                while (File.Exists(path) == false)
+                DateTime now = DateTime.Now.AddHours(-8).AddDays(-1);
+                string word = keys[staticnum];
+                for (int i = 0; i < 30; i++)
                 {
-                    Application.DoEvents();
+                    string datestr = now.AddDays(-i).ToString("yyyy-MM-dd");
+                    string path = string.Format(@"../../sycmGData/{0}_{1}.txt", word, datestr);
+                    if (File.Exists(path)) continue;
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("https://sycm.taobao.com/mc/mq/search_analyze?");
+                    sb.AppendFormat("activeKey=overview&dateRange={0}%7C{0}&dateType=day&device=0&keyword={1}", datestr, word);
+                    webBrowser1.Navigate(sb.ToString());
+                    return;
                 }
-                break;
             }
-            //webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+            MessageBox.Show("over"+ staticnum);
         }
 
         private void runjs()
@@ -87,7 +96,6 @@ namespace WindowsFormsApplication2
             }
             return el;
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             HtmlElement el;
@@ -122,6 +130,14 @@ namespace WindowsFormsApplication2
                 os.Write(num);
                 os.Close();
                 runjs();
+            }
+            else
+            {
+                staticnum++;
+                if (textBox1.Text.Split(',').Length > staticnum)
+                {
+                    getKey();
+                }
             }
         }
 
