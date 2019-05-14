@@ -144,7 +144,7 @@ namespace WindowsFormsApplication2
         private void button2_Click_1(object sender, EventArgs e)
         {
 
-            webBrowser1.Navigate("https://sycm.taobao.com");
+            webBrowser1.Navigate("https://ie.icoa.cn/");
         }
     }
 }
