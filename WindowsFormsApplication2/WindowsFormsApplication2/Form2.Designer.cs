@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication2
+﻿namespace anylsycm
 {
     partial class Form2
     {

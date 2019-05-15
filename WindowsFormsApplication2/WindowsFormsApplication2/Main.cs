@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication2
+namespace anylsycm
 {
     public partial class Main : Form
     {
@@ -37,11 +39,20 @@ namespace WindowsFormsApplication2
 
         private void Main_Load(object sender, EventArgs e)
         {
+            var settings = new CefSettings
+            {
+                Locale = "zh-CN",
+                AcceptLanguageList = "zh-CN",
+                MultiThreadedMessageLoop = true
+            };
+            Cef.Initialize(settings);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            IE.SetIE();
+
+            Form f4 = new Form4();
+            f4.Show();
         }
     }
 }

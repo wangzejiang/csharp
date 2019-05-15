@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace WindowsFormsApplication2
+namespace anylsycm
 {
     public partial class Form3 : Form
     {
@@ -119,7 +119,7 @@ namespace WindowsFormsApplication2
                     string number = datarows.Length == 0 ? "0" : (datarows.Length == 1 ? datarows[0]["访客数"].ToString() : "99999999");
 
                     float 自己 = toFloat(number);
-                    string path = string.Format(@"../../sycmGData/{0}_{1}.txt", key, datestr);
+                    string path = string.Format(@"cc/sycmGData/{0}_{1}.txt", key, datestr);
                     float 市场 = File.Exists(path) ? toFloat(File.ReadAllText(path)) : -1f;
                     float 比例 = 自己 / 市场 * 1000;
                     统计 += 比例;
