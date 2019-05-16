@@ -56,7 +56,7 @@ namespace anylsycm
                 for (int i = 0; i < 30; i++)
                 {
                     string datestr = now.AddDays(-i).ToString("yyyy-MM-dd");
-                    string path = string.Format(@"cc/sycmGData/{0}_{1}.txt", word, datestr);
+                    string path = string.Format(Utils.getConfig(@"sycmGData/{0}_{1}.txt"), word, datestr);
                     if (File.Exists(path)) continue;
 
                     StringBuilder sb = new StringBuilder();
@@ -66,14 +66,14 @@ namespace anylsycm
                     return;
                 }
             }
-            MessageBox.Show("over"+ staticnum);
+            MessageBox.Show("over" + staticnum);
         }
 
         private void runjs()
         {
             HtmlElement script = webBrowser1.Document.CreateElement("script");
             script.SetAttribute("type", "text/javascript");
-            script.SetAttribute("text", File.ReadAllText(@"cc/cc.js"));
+            script.SetAttribute("text", File.ReadAllText(Utils.getConfig(@"cc.js")));
             HtmlElement head = webBrowser1.Document.Body.AppendChild(script);
             webBrowser1.Document.InvokeScript("_func");
         }
@@ -122,7 +122,7 @@ namespace anylsycm
             date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
             date = date.Remove(date.IndexOf("<!-"), date.IndexOf("->") + 2 - date.IndexOf("<!-"));
             Console.WriteLine("{0},{1},{2}", key, num, date);
-            string path = string.Format(@"cc/sycmGData/{0}_{1}.txt", key, date);
+            string path = string.Format(Utils.getConfig(@"sycmGData/{0}_{1}.txt"), key, date);
             int day = DateTime.Now.AddHours(-8).AddDays(-1).DayOfYear - Convert.ToDateTime(date).DayOfYear;
             if (File.Exists(path) == false && day < 30)
             {

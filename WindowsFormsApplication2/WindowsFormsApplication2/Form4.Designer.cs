@@ -67,7 +67,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(911, 394);
+            this.tabPage2.Size = new System.Drawing.Size(1352, 508);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(832, 71);
+            this.button2.Location = new System.Drawing.Point(832, 40);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -109,7 +109,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(408, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "98K狙击抢";
+            this.textBox1.Text = "98K狙击抢,98K";
             // 
             // timer1
             // 

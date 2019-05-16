@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace anylsycm
         private void BindingComboBox()
         {
             DataSet ds = new DataSet();
-            ds.ReadXml(@"cc/Total.xml");
+            ds.ReadXml(Utils.getConfig(@"Total.xml"));
             Console.WriteLine(ConvertDataSetToXML(ds));
             var table = ds.Tables["Commbox"];
             comboBox1.DataSource = table;
@@ -85,14 +86,14 @@ namespace anylsycm
             {
                 MessageBox.Show("Test");
                 return;
-            } 
-            DateTime date = DateTime.Now.AddDays(-1);  //昨天
+            }
+            DateTime date = DateTime.Now.AddHours(-8).AddDays(-1);  //昨天
             int day = 0;
             for (int i = 0; i < 29; i++)
             {
                 string datestr = date.AddDays(day--).ToString("yyyy-MM-dd");
-                string path2 = string.Format(@"cc/sycmData/{0}", name);
-                string path = string.Format(@"cc/sycmData/{0}/{1}_{2}.xls", name, id, datestr);
+                string path2 = string.Format(Utils.getConfig(@"sycmData/{0}"), name);
+                string path = string.Format(Utils.getConfig(@"sycmData/{0}/{1}_{2}.xls"), name, id, datestr);
                 Console.WriteLine(string.Format("file:{0}", path));
                 if (!Directory.Exists(path2))
                 {
@@ -126,6 +127,70 @@ namespace anylsycm
         private void button2_Click(object sender, EventArgs e)
         {
             BindingComboBox();
+        }
+
+        public DataTable excelToDataTable(string Path)
+        {
+            string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Path + ";" + "Extended Properties=Excel 8.0;";
+            OleDbConnection conn = new OleDbConnection(strConn);
+            conn.Open();
+            DataTable dtSheetName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "Table" });
+            DataTable dt = new DataTable();
+            string strExcel = "select * from [$A1:R65536]";
+            OleDbDataAdapter myCommand = new OleDbDataAdapter(strExcel, strConn);
+            dt = new DataTable();
+            myCommand.Fill(dt);
+            conn.Close();
+            dt.Rows.RemoveAt(0);
+            dt.Rows.RemoveAt(0);
+            dt.Rows.RemoveAt(0);
+            dt.Rows.RemoveAt(0);
+            dt.Rows.RemoveAt(0);
+            dt.Rows.RemoveAt(0);
+            return dt;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string name = comboBox1.Text;
+            string id = comboBox1.SelectedValue as string;
+            if (id == "0")
+            {
+                MessageBox.Show("Test");
+                return;
+            }
+            DateTime edate = DateTime.Now.AddHours(-8).AddDays(-1);  //昨天
+            DateTime sdate = edate.AddDays(-29);  //30
+            string path2 = string.Format(Utils.getConfig(@"sycmData/{0}/30"), name);
+            string path = string.Format(Utils.getConfig(@"sycmData/{0}/30/{1}_{2}_{3}.xls"), name, id, sdate.ToString("yyyy-MM-dd"), edate.ToString("yyyy-MM-dd"));
+            Console.WriteLine(string.Format("file:{0}", path));
+            if (!Directory.Exists(path2))
+            {
+                Directory.CreateDirectory(path2);
+            }
+            if (!File.Exists(path))
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("https://sycm.taobao.com/flow/excel.do");
+                sb.Append("?_path_=v3/new/excel/item/source/detail&order=desc&orderBy=uv&dateType=recent30&dateRange={1}|{2}");
+                sb.Append("&itemId={0}&device=2&pageId=23.s1150&pPageId=23&pageLevel=2&childPageType=se_keyword&belong=all");
+                string url = string.Format(sb.ToString(), id, sdate.ToString("yyyy-MM-dd"), edate.ToString("yyyy-MM-dd"));
+                Console.WriteLine(url);
+                webBrowser1.DownloadFile(url, path);
+                Thread.Sleep(1000);
+            }
+            StringBuilder text = new StringBuilder();
+            DataRowCollection rsdr = excelToDataTable(path).Rows;
+            for (int i = 0; i < int.Parse(textBox2.Text); i++)
+            {
+                string key = rsdr[i][0].ToString();
+                if ("其他".Equals(key) == false)
+                {
+                    text.Append(key).Append(",");
+                }
+            }
+            textBox1.Text = text.Remove(text.Length-1, 1).ToString();
+            MessageBox.Show("下载完成");
         }
     }
 }
