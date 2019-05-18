@@ -22,6 +22,7 @@ namespace anylsycm
         private MyWebBrowser webBrowser1;
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.Text = Utils.readTopWords();
             webBrowser1 = new MyWebBrowser();
             webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             webBrowser1.Location = new System.Drawing.Point(3, 3);
@@ -143,8 +144,16 @@ namespace anylsycm
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
             webBrowser1.Navigate("https://ie.icoa.cn/");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            HtmlElement script = webBrowser1.Document.CreateElement("script");
+            script.SetAttribute("type", "text/javascript");
+            script.SetAttribute("text", File.ReadAllText(Utils.getConfig(@"login.js")));
+            HtmlElement head = webBrowser1.Document.Body.AppendChild(script);
+            webBrowser1.Document.InvokeScript("_login");
         }
     }
 }

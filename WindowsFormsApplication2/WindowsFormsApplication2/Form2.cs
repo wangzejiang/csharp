@@ -24,6 +24,7 @@ namespace anylsycm
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            textBox1.Text = Utils.readTopWords();
             webBrowser1 = new MyWebBrowser();
             webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             webBrowser1.Location = new System.Drawing.Point(3, 3);
@@ -189,7 +190,7 @@ namespace anylsycm
                     text.Append(key).Append(",");
                 }
             }
-            textBox1.Text = text.Remove(text.Length-1, 1).ToString();
+            textBox1.Text = Utils.writeTopWords(text.Remove(text.Length - 1, 1).ToString());
             MessageBox.Show("下载完成");
         }
     }

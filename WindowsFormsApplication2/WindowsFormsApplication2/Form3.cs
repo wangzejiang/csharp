@@ -92,6 +92,7 @@ namespace anylsycm
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            textBox1.Text = Utils.readTopWords();
         }
 
         private void button2_Click(object sender, EventArgs e)

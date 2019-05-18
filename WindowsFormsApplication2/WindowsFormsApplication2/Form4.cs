@@ -31,6 +31,7 @@ namespace anylsycm
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.Text = Utils.readTopWords();
             timer1.Interval = 2000;
             timer1.Start();
         }
@@ -133,6 +134,11 @@ namespace anylsycm
         private void button2_Click(object sender, EventArgs e)
         {
             runjs();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            browser.ExecuteScriptAsync(File.ReadAllText(Utils.getConfig(@"login.js")));
         }
     }
 }

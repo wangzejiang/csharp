@@ -50,7 +50,6 @@ namespace anylsycm
 
         private void button4_Click(object sender, EventArgs e)
         {
-
             Form f4 = new Form4();
             f4.Show();
         }
