@@ -88,7 +88,7 @@ namespace anylsycm
                 MessageBox.Show("Test");
                 return;
             }
-            DateTime date = DateTime.Now.AddHours(-8).AddDays(-1);  //昨天
+            DateTime date = DateTime.Now.AddHours(-8).AddDays(getDay());  //昨天
             int day = 0;
             for (int i = 0; i < 29; i++)
             {
@@ -132,25 +132,36 @@ namespace anylsycm
 
         public DataTable excelToDataTable(string Path)
         {
-            string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Path + ";" + "Extended Properties=Excel 8.0;";
-            OleDbConnection conn = new OleDbConnection(strConn);
-            conn.Open();
-            DataTable dtSheetName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "Table" });
             DataTable dt = new DataTable();
-            string strExcel = "select * from [$A1:R65536]";
-            OleDbDataAdapter myCommand = new OleDbDataAdapter(strExcel, strConn);
-            dt = new DataTable();
-            myCommand.Fill(dt);
-            conn.Close();
-            dt.Rows.RemoveAt(0);
-            dt.Rows.RemoveAt(0);
-            dt.Rows.RemoveAt(0);
-            dt.Rows.RemoveAt(0);
-            dt.Rows.RemoveAt(0);
-            dt.Rows.RemoveAt(0);
+            try
+            {
+                string strConn = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'", Path);
+                OleDbConnection conn = new OleDbConnection(strConn);
+                conn.Open();
+                DataTable dtSheetName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "Table" });
+                string strExcel = "select * from [$A1:R65536]";
+                OleDbDataAdapter myCommand = new OleDbDataAdapter(strExcel, strConn);
+                dt = new DataTable();
+                myCommand.Fill(dt);
+                conn.Close();
+                dt.Rows.RemoveAt(0);
+                dt.Rows.RemoveAt(0);
+                dt.Rows.RemoveAt(0);
+                dt.Rows.RemoveAt(0);
+                dt.Rows.RemoveAt(0);
+                dt.Rows.RemoveAt(0);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                File.Delete(Path);
+            }
             return dt;
         }
-
+        private int getDay()
+        {
+            return int.Parse(textBox3.Text);
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             string name = comboBox1.Text;
@@ -160,7 +171,7 @@ namespace anylsycm
                 MessageBox.Show("Test");
                 return;
             }
-            DateTime edate = DateTime.Now.AddHours(-8).AddDays(-1);  //昨天
+            DateTime edate = DateTime.Now.AddHours(-8).AddDays(getDay());  //昨天
             DateTime sdate = edate.AddDays(-29);  //30
             string path2 = string.Format(Utils.getConfig(@"sycmData/{0}/30"), name);
             string path = string.Format(Utils.getConfig(@"sycmData/{0}/30/{1}_{2}_{3}.xls"), name, id, sdate.ToString("yyyy-MM-dd"), edate.ToString("yyyy-MM-dd"));
@@ -182,7 +193,7 @@ namespace anylsycm
             }
             StringBuilder text = new StringBuilder();
             DataRowCollection rsdr = excelToDataTable(path).Rows;
-            for (int i = 0; i < int.Parse(textBox2.Text); i++)
+            for (int i = 0; i < int.Parse(textBox2.Text) && i < rsdr.Count; i++)
             {
                 string key = rsdr[i][0].ToString();
                 if ("其他".Equals(key) == false)
@@ -190,8 +201,15 @@ namespace anylsycm
                     text.Append(key).Append(",");
                 }
             }
-            textBox1.Text = Utils.writeTopWords(text.Remove(text.Length - 1, 1).ToString());
-            MessageBox.Show("下载完成");
+            if(text.Length > 0)
+            {
+                textBox1.Text = Utils.writeTopWords(text.Remove(text.Length - 1, 1).ToString());
+                MessageBox.Show("下载完成");
+            }
+            else
+            {
+                MessageBox.Show("下载失败");
+            }
         }
     }
 }

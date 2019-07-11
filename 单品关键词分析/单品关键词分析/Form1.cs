@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace 单品关键词分析
 {
@@ -100,7 +101,15 @@ namespace 单品关键词分析
 
         public DataTable excelToDataTable(string Path)
         {
-            string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Path + ";" + "Extended Properties=Excel 8.0;";
+            Excel.Application excel = new Excel.Application();
+            Excel.Workbook wb = null;
+            excel.Visible = false;//设置调用引用的 Excel文件是否可见
+            excel.DisplayAlerts = false;
+            wb = excel.Workbooks.Open(Path);
+            Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets[1];
+            wb.Close();
+
+            string strConn = "Provider=Microsoft.ACE.OleDb.12.0;" + "Data Source=" + Path + ";" + "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection conn = new OleDbConnection(strConn);
             conn.Open();
             DataTable dtSheetName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "Table" });
