@@ -254,9 +254,12 @@ namespace 单品关键词分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            bool flag = UserShareUtils.isOK();
+            if (flag == false)
+            {
+                Application.Exit();
+            };
             chart1.GetToolTipText += new EventHandler<ToolTipEventArgs>(chart_GetToolTipText);
-
             if (File.Exists(path))
             {
                 using (StreamReader reader = new StreamReader(path))
