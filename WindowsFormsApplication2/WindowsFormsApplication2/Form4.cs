@@ -86,7 +86,7 @@ namespace anylsycm
             browser.ExecuteScriptAsync(File.ReadAllText(Utils.getConfig(@"main.js")));
             Random ro = new Random();
             int interval = ro.Next(2000, 5000);
-            Console.WriteLine(interval);
+            //Console.WriteLine(interval);
             timer1.Interval = interval;
             string date, key, num = null;
             // 获取日期

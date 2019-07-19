@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -132,6 +127,14 @@ namespace anylsycm
 
         public DataTable excelToDataTable(string Path)
         {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook wb = null;
+            excel.Visible = false;//设置调用引用的 Excel文件是否可见
+            excel.DisplayAlerts = false;
+            wb = excel.Workbooks.Open(Path);
+            Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
+            wb.Close();
+
             DataTable dt = new DataTable();
             try
             {
