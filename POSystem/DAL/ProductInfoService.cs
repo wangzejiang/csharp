@@ -19,11 +19,12 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddProductInfo(ProductInfo productInfo)
         {
-            string sql = "insert into [ProductInfo](pImageID,update_date,create_date,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@UPDATEDATE,@CREATEDATE,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
+            // string sql = "insert into [ProductInfo](pImageID,update_date,create_date,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@UPDATEDATE,@CREATEDATE,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
+            string sql = "insert into [ProductInfo](pImageID,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@PIMAGEID",productInfo.PImageID == null ? Convert.DBNull : productInfo.PImageID),
-                new SqlParameter("@UPDATEDATE",productInfo.UpdateDate == null ? Convert.DBNull : productInfo.UpdateDate),
-                new SqlParameter("@CREATEDATE",productInfo.CreateDate == null ? Convert.DBNull : productInfo.CreateDate),
+                // new SqlParameter("@UPDATEDATE",productInfo.UpdateDate == null ? Convert.DBNull : productInfo.UpdateDate),
+               // new SqlParameter("@CREATEDATE",productInfo.CreateDate == null ? Convert.DBNull : productInfo.CreateDate),
                 new SqlParameter("@PPRICE",productInfo.PPrice == null ? Convert.DBNull : productInfo.PPrice),
                 new SqlParameter("@PWEIGTH",productInfo.PWeigth == null ? Convert.DBNull : productInfo.PWeigth),
                 new SqlParameter("@PNAME",productInfo.PName == null ? Convert.DBNull : productInfo.PName),
@@ -63,6 +64,41 @@ namespace POSystem.DAL
             fieldsParameter.AddRange(conditionParameter);
             SqlParameter[] paras = fieldsParameter.ToArray();
             return SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionString, CommandType.Text, sql, paras);
+        }
+        /// <summary>
+        /// 查询ProductInfo表信息
+        /// </summary>
+        /// <param name="productInfo">productInfo表查询对象</param>
+        /// <returns>IList对象集合</returns>
+        public IList<ProductInfo> GetProductInfo2(ProductInfo productInfo)
+        {
+            string sql = "select * from [Products] where 1=1";
+            List<SqlParameter> paraList = new List<SqlParameter>();
+            if (productInfo != null)
+            {
+                paraList = GetCondition(productInfo, ref sql);
+            }
+
+            IList<ProductInfo> productInfoList = new List<ProductInfo>();
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
+            while (reader.Read())
+            {
+                ProductInfo obj = new ProductInfo();
+                obj.PImageID = Convert.IsDBNull(reader["pImageID"]) ? null : (Object)reader["pImageID"];
+                obj.PID = Convert.IsDBNull(reader["pID"]) ? null : (int?)reader["pID"];
+                obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
+                obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
+                obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (double?)reader["pPrice"];
+                obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (double?)reader["pWeigth"];
+                obj.PName = Convert.IsDBNull(reader["pName"]) ? null : (string)reader["pName"];
+                obj.PNumber = Convert.IsDBNull(reader["pNumber"]) ? null : (string)reader["pNumber"];
+                obj.PSuppliter = Convert.IsDBNull(reader["pSuppliter"]) ? null : (string)reader["pSuppliter"];
+                obj.PRemark = Convert.IsDBNull(reader["pRemark"]) ? null : (string)reader["pRemark"];
+                obj.PImageBytes = Convert.IsDBNull(reader["Content"]) ? null : (byte[])reader["Content"];
+                productInfoList.Add(obj);
+            }
+            reader.Close();
+            return productInfoList;
         }
 
         /// <summary>

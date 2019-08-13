@@ -19,10 +19,11 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddCustomerInfo(CustomerInfo customerInfo)
         {
-            string sql = "insert into [CustomerInfo](create_date,update_date,cName,cPhone,cAddress) values(@CREATEDATE,@UPDATEDATE,@CNAME,@CPHONE,@CADDRESS)";
+            //string sql = "insert into [CustomerInfo](create_date,update_date,cName,cPhone,cAddress) values(@CREATEDATE,@UPDATEDATE,@CNAME,@CPHONE,@CADDRESS)";
+            string sql = "insert into [CustomerInfo](cName,cPhone,cAddress) values(@CNAME,@CPHONE,@CADDRESS)";
             SqlParameter[] paras = new SqlParameter[]{
-                new SqlParameter("@CREATEDATE",customerInfo.CreateDate == null ? Convert.DBNull : customerInfo.CreateDate),
-                new SqlParameter("@UPDATEDATE",customerInfo.UpdateDate == null ? Convert.DBNull : customerInfo.UpdateDate),
+                //new SqlParameter("@CREATEDATE",customerInfo.CreateDate == null ? Convert.DBNull : customerInfo.CreateDate),
+                //new SqlParameter("@UPDATEDATE",customerInfo.UpdateDate == null ? Convert.DBNull : customerInfo.UpdateDate),
                 new SqlParameter("@CNAME",customerInfo.CName == null ? Convert.DBNull : customerInfo.CName),
                 new SqlParameter("@CPHONE",customerInfo.CPhone == null ? Convert.DBNull : customerInfo.CPhone),
                 new SqlParameter("@CADDRESS",customerInfo.CAddress == null ? Convert.DBNull : customerInfo.CAddress)

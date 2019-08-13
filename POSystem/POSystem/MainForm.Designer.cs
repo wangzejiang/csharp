@@ -150,14 +150,14 @@
             // 新增商品ToolStripMenuItem
             // 
             this.新增商品ToolStripMenuItem.Name = "新增商品ToolStripMenuItem";
-            this.新增商品ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.新增商品ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.新增商品ToolStripMenuItem.Text = "新增商品";
             this.新增商品ToolStripMenuItem.Click += new System.EventHandler(this.新增商品ToolStripMenuItem_Click);
             // 
             // 商品查询ToolStripMenuItem
             // 
             this.商品查询ToolStripMenuItem.Name = "商品查询ToolStripMenuItem";
-            this.商品查询ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.商品查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.商品查询ToolStripMenuItem.Text = "商品查询";
             this.商品查询ToolStripMenuItem.Click += new System.EventHandler(this.商品查询ToolStripMenuItem_Click);
             // 
@@ -204,8 +204,8 @@
             // 
             // tabPage商品列表
             // 
-            this.tabPage商品列表.Controls.Add(this.panel1);
             this.tabPage商品列表.Controls.Add(this.dgvProducts);
+            this.tabPage商品列表.Controls.Add(this.panel1);
             this.tabPage商品列表.Controls.Add(this.Gb_ProductWhere);
             this.tabPage商品列表.Location = new System.Drawing.Point(4, 24);
             this.tabPage商品列表.Name = "tabPage商品列表";
@@ -225,14 +225,16 @@
             // 
             // dgvProducts
             // 
-            this.dgvProducts.AllowUserToOrderColumns = true;
+            this.dgvProducts.AllowUserToAddRows = false;
+            this.dgvProducts.AllowUserToDeleteRows = false;
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProducts.Location = new System.Drawing.Point(3, 81);
             this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.RowTemplate.Height = 23;
-            this.dgvProducts.Size = new System.Drawing.Size(1153, 473);
+            this.dgvProducts.ReadOnly = true;
+            this.dgvProducts.RowTemplate.Height = 100;
+            this.dgvProducts.Size = new System.Drawing.Size(1153, 438);
             this.dgvProducts.TabIndex = 2;
             // 
             // Gb_ProductWhere

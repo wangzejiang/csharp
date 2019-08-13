@@ -15,7 +15,7 @@ namespace POSystem.BLL
         public static ProductInfoService service = new ProductInfoService();
 
         #region BasicMethod
-		/// <summary>
+        /// <summary>
         /// 增加ProductInfo表信息
         /// </summary>
         /// <param name="productInfo">productInfo表对象</param>
@@ -60,6 +60,16 @@ namespace POSystem.BLL
         /// 查询ProductInfo表信息
         /// </summary>
         /// <param name="productInfo">productInfo表查询对象</param>
+        /// <returns>IList对象集合</returns>
+        public static IList<ProductInfo> GetProductInfoAll2(ProductInfo productInfo = null)
+        {
+            return service.GetProductInfo2(productInfo);
+        }
+
+        /// <summary>
+        /// 查询ProductInfo表信息
+        /// </summary>
+        /// <param name="productInfo">productInfo表查询对象</param>
         /// <returns>ProductInfo表对象</returns>
         public static ProductInfo GetProductInfo(ProductInfo productInfo)
         {
@@ -75,10 +85,21 @@ namespace POSystem.BLL
         {
             return service.GetProductInfo(productInfo).Count > 0 ? true : false;
         }
-	    #endregion
 
-		#region  ExtensionMethod
+        public static int AddProductInfo(ProductInfo pInfo, Attachment attachment)
+        {
+            attachment.ID = pInfo.PImageID;
+            int idx = AttachmentManager.AddAttachment(attachment);
+            if(idx > 0)
+            {
+                return service.AddProductInfo(pInfo);
+            }
+            return 0;
+        }
+        #endregion
 
-		#endregion  ExtensionMethod
+        #region  ExtensionMethod
+
+        #endregion  ExtensionMethod
     }
 }

@@ -32,7 +32,7 @@ namespace POSystem.Model
             this.PSuppliter = PSuppliter;
             this.PRemark = PRemark;
         }
-
+        public byte[] PImageBytes { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -56,6 +56,10 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
+        public string PName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double? PPrice { get; set; }
 
         /// <summary>
@@ -66,18 +70,11 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
-        public string PName { get; set; }
-
+        public string PSuppliter { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public string PNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string PSuppliter { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
