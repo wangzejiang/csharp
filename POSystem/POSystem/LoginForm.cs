@@ -27,7 +27,7 @@ namespace POSystem
             if (flag)
             {
                 MainForm mForm = new MainForm(this);
-                mForm.Show();
+                mForm.Show(this);
                 this.Hide();
             }
             else

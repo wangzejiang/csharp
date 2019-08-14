@@ -90,11 +90,11 @@ namespace POSystem.DAL
                 obj.OID = Convert.IsDBNull(reader["oID"]) ? null : (int?)reader["oID"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
-                obj.SWeigth = Convert.IsDBNull(reader["sWeigth"]) ? null : (double?)reader["sWeigth"];
-                obj.SSupplier = Convert.IsDBNull(reader["sSupplier"]) ? null : (double?)reader["sSupplier"];
-                obj.SNumber = Convert.IsDBNull(reader["sNumber"]) ? null : (double?)reader["sNumber"];
-                obj.SPrice = Convert.IsDBNull(reader["sPrice"]) ? null : (double?)reader["sPrice"];
-                obj.SSellPrice = Convert.IsDBNull(reader["sSellPrice"]) ? null : (double?)reader["sSellPrice"];
+                obj.SWeigth = Convert.IsDBNull(reader["sWeigth"]) ? null : (decimal?)reader["sWeigth"];
+                obj.SSupplier = Convert.IsDBNull(reader["sSupplier"]) ? null : (decimal?)reader["sSupplier"];
+                obj.SNumber = Convert.IsDBNull(reader["sNumber"]) ? null : (decimal?)reader["sNumber"];
+                obj.SPrice = Convert.IsDBNull(reader["sPrice"]) ? null : (decimal?)reader["sPrice"];
+                obj.SSellPrice = Convert.IsDBNull(reader["sSellPrice"]) ? null : (decimal?)reader["sSellPrice"];
                 obj.SName = Convert.IsDBNull(reader["sName"]) ? null : (string)reader["sName"];
                 subOrderList.Add(obj);
             }

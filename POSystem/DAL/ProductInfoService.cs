@@ -12,7 +12,7 @@ namespace POSystem.DAL
     public class ProductInfoService
     {
         #region BasicMethod
-		/// <summary>
+        /// <summary>
         /// 增加ProductInfo表信息
         /// </summary>
         /// <param name="productInfo">productInfo表对象</param>
@@ -59,7 +59,7 @@ namespace POSystem.DAL
             string conditions = "";
             List<SqlParameter> fieldsParameter = GetUpdateFields(productInfo, ref fields);
             List<SqlParameter> conditionParameter = GetCondition(oldProductInfo, ref conditions);
-            string sql = "update [ProductInfo] set " + fields + 
+            string sql = "update [ProductInfo] set " + fields +
                          " where 1=1" + conditions;
             fieldsParameter.AddRange(conditionParameter);
             SqlParameter[] paras = fieldsParameter.ToArray();
@@ -88,8 +88,8 @@ namespace POSystem.DAL
                 obj.PID = Convert.IsDBNull(reader["pID"]) ? null : (int?)reader["pID"];
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
-                obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (double?)reader["pPrice"];
-                obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (double?)reader["pWeigth"];
+                obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (decimal?)reader["pPrice"];
+                obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (decimal?)reader["pWeigth"];
                 obj.PName = Convert.IsDBNull(reader["pName"]) ? null : (string)reader["pName"];
                 obj.PNumber = Convert.IsDBNull(reader["pNumber"]) ? null : (string)reader["pNumber"];
                 obj.PSuppliter = Convert.IsDBNull(reader["pSuppliter"]) ? null : (string)reader["pSuppliter"];
@@ -110,7 +110,7 @@ namespace POSystem.DAL
         {
             string sql = "select * from [ProductInfo] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
-            if(productInfo!=null)
+            if (productInfo != null)
             {
                 paraList = GetCondition(productInfo, ref sql);
             }
@@ -124,8 +124,8 @@ namespace POSystem.DAL
                 obj.PID = Convert.IsDBNull(reader["pID"]) ? null : (int?)reader["pID"];
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
-                obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (double?)reader["pPrice"];
-                obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (double?)reader["pWeigth"];
+                obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (decimal?)reader["pPrice"];
+                obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (decimal?)reader["pWeigth"];
                 obj.PName = Convert.IsDBNull(reader["pName"]) ? null : (string)reader["pName"];
                 obj.PNumber = Convert.IsDBNull(reader["pNumber"]) ? null : (string)reader["pNumber"];
                 obj.PSuppliter = Convert.IsDBNull(reader["pSuppliter"]) ? null : (string)reader["pSuppliter"];
@@ -171,18 +171,18 @@ namespace POSystem.DAL
             }
             if (productInfo.PName != null)
             {
-                sql += " and pName=@PNAME";
-                paraList.Add(new SqlParameter("@PNAME", productInfo.PName));
+                sql += " and pName like @PNAME";
+                paraList.Add(new SqlParameter("@PNAME", "%" + productInfo.PName + "%"));
             }
             if (productInfo.PNumber != null)
             {
-                sql += " and pNumber=@PNUMBER";
-                paraList.Add(new SqlParameter("@PNUMBER", productInfo.PNumber));
+                sql += " and pNumber like @PNUMBER";
+                paraList.Add(new SqlParameter("@PNUMBER", "%" + productInfo.PNumber + "%"));
             }
             if (productInfo.PSuppliter != null)
             {
-                sql += " and pSuppliter=@PSUPPLITER";
-                paraList.Add(new SqlParameter("@PSUPPLITER", productInfo.PSuppliter));
+                sql += " and pSuppliter like @PSUPPLITER";
+                paraList.Add(new SqlParameter("@PSUPPLITER", "%" + productInfo.PSuppliter + "%"));
             }
             if (productInfo.PRemark != null)
             {
@@ -244,10 +244,10 @@ namespace POSystem.DAL
             fields = fields.Substring(0, fields.Length - 1);
             return paraList;
         }
-	    #endregion
+        #endregion
 
         #region ExtensionMethod
-		 
-	    #endregion
+
+        #endregion
     }
 }

@@ -113,18 +113,18 @@ namespace POSystem.DAL
             }
             if (customerInfo.CName != null)
             {
-                sql += " and cName=@CNAME";
-                paraList.Add(new SqlParameter("@CNAME", customerInfo.CName));
+                sql += " and cName like @CNAME";
+                paraList.Add(new SqlParameter("@CNAME", "%" + customerInfo.CName + "%"));
             }
             if (customerInfo.CPhone != null)
             {
-                sql += " and cPhone=@CPHONE";
-                paraList.Add(new SqlParameter("@CPHONE", customerInfo.CPhone));
+                sql += " and cPhone like @CPHONE";
+                paraList.Add(new SqlParameter("@CPHONE", "%" + customerInfo.CPhone + "%"));
             }
             if (customerInfo.CAddress != null)
             {
-                sql += " and cAddress=@CADDRESS";
-                paraList.Add(new SqlParameter("@CADDRESS", customerInfo.CAddress));
+                sql += " and cAddress like @CADDRESS";
+                paraList.Add(new SqlParameter("@CADDRESS", "%" + customerInfo.CAddress + "%"));
             }
             return paraList;
         }

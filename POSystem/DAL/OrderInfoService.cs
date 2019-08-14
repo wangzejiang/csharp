@@ -94,9 +94,9 @@ namespace POSystem.DAL
                 obj.ODate = Convert.IsDBNull(reader["oDate"]) ? null : (DateTime?)reader["oDate"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
-                obj.OPrice = Convert.IsDBNull(reader["oPrice"]) ? null : (double?)reader["oPrice"];
-                obj.OWeigth = Convert.IsDBNull(reader["oWeigth"]) ? null : (double?)reader["oWeigth"];
-                obj.OFirstCost = Convert.IsDBNull(reader["oFirstCost"]) ? null : (double?)reader["oFirstCost"];
+                obj.OPrice = Convert.IsDBNull(reader["oPrice"]) ? null : (decimal?)reader["oPrice"];
+                obj.OWeigth = Convert.IsDBNull(reader["oWeigth"]) ? null : (decimal?)reader["oWeigth"];
+                obj.OFirstCost = Convert.IsDBNull(reader["oFirstCost"]) ? null : (decimal?)reader["oFirstCost"];
                 obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];
                 obj.ORemark = Convert.IsDBNull(reader["oRemark"]) ? null : (string)reader["oRemark"];
                 obj.ORemark2 = Convert.IsDBNull(reader["oRemark2"]) ? null : (string)reader["oRemark2"];

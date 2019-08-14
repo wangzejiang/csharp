@@ -77,6 +77,16 @@ namespace POSystem.BLL
         }
 
         /// <summary>
+        /// 查询ProductInfo表信息
+        /// </summary>
+        /// <param name="productInfo">productInfo表查询对象</param>
+        /// <returns>ProductInfo表对象</returns>
+        public static ProductInfo GetProductInfo2(ProductInfo productInfo)
+        {
+            return service.GetProductInfo2(productInfo).Count > 0 ? service.GetProductInfo2(productInfo)[0] : null;
+        }
+
+        /// <summary>
         /// 查询ProductInfo表信息是否存在
         /// </summary>
         /// <param name="productInfo">productInfo表查询对象</param>

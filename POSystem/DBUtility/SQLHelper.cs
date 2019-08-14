@@ -306,7 +306,7 @@ namespace POSystem.DBUtility
         /// <param name="cmdParms">用于执行命令的参数数组</param>
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {
-
+            Console.WriteLine(cmdText);
             if (conn.State != ConnectionState.Open)
                 conn.Open();
 

@@ -19,7 +19,7 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public SubOrder(Object SImageID, int? SID, int? OID, DateTime? CreateDate, DateTime? UpdateDate, double? SWeigth, double? SSupplier, double? SNumber, double? SPrice, double? SSellPrice, string SName)
+        public SubOrder(Object SImageID, int? SID, int? OID, DateTime? CreateDate, DateTime? UpdateDate, decimal? SWeigth, decimal? SSupplier, decimal? SNumber, decimal? SPrice, decimal? SSellPrice, string SName)
         {
             this.SImageID = SImageID;
             this.SID = SID;
@@ -62,27 +62,27 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
-        public double? SWeigth { get; set; }
+        public decimal? SWeigth { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? SSupplier { get; set; }
+        public decimal? SSupplier { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? SNumber { get; set; }
+        public decimal? SNumber { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? SPrice { get; set; }
+        public decimal? SPrice { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? SSellPrice { get; set; }
+        public decimal? SSellPrice { get; set; }
 
         /// <summary>
         /// 
