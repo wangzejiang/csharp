@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <NewDataSet>
 <Commbox>
+	<brandId>597899903705</brandId>
+	<brandName>乐斯宝-黄金龙骨</brandName>
+</Commbox>
+<Commbox>
 	<brandId>583522442176</brandId>
 	<brandName>乐斯宝-变形</brandName>
 </Commbox>
@@ -23,6 +27,10 @@
 <Commbox>
 	<brandId>584004134721</brandId>
 	<brandName>乐斯宝-套餐</brandName>
+</Commbox>
+<Commbox>
+	<brandId>591549119175</brandId>
+	<brandName>乐斯宝-吉利服套餐</brandName>
 </Commbox>
 <Commbox>
 	<brandId>583452065128</brandId>

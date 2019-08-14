@@ -71,6 +71,13 @@ namespace anylsycm
 
         public DataTable excelToDataTable(string Path)
         {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook wb = null;
+            excel.Visible = false;//设置调用引用的 Excel文件是否可见
+            excel.DisplayAlerts = false;
+            wb = excel.Workbooks.Open(Path);
+            Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
+            wb.Close();
             string strConn = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'", Path);
             OleDbConnection conn = new OleDbConnection(strConn);
             conn.Open();
