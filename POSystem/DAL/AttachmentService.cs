@@ -66,7 +66,7 @@ namespace POSystem.DAL
         /// <returns>IList对象集合</returns>
         public IList<Attachment> GetAttachment(Attachment attachment)
         {
-            string sql = "select * from [Attachment] where 1=1";
+            string sql = "select top 100 * from [Attachment] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if(attachment!=null)
             {

@@ -67,7 +67,7 @@ namespace POSystem.DAL
         /// <returns>IList对象集合</returns>
         public IList<UserInfo> GetUserInfo(UserInfo userInfo)
         {
-            string sql = "select * from [UserInfo] where 1=1";
+            string sql = "select top 100 * from [UserInfo] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if(userInfo!=null)
             {

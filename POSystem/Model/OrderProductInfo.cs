@@ -19,10 +19,12 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public OrderProductInfo(Object OpImageID, int? OpID, DateTime? UpdateDate, DateTime? CreateDate, decimal? OpPrice, decimal? OpWeigth, decimal? OpCount, decimal? OpPriceX, string OpName, string OpNumber, string OpSuppliter, string OpRemark)
+        public OrderProductInfo(Object OpImageID, int? OpID, int? OID, string ONumber, DateTime? UpdateDate, DateTime? CreateDate, decimal? OpPrice, decimal? OpWeigth, decimal? OpCount, decimal? OpPriceX, string OpName, string OpNumber, string OpSuppliter, string OpRemark)
         {
             this.OpImageID = OpImageID;
             this.OpID = OpID;
+            this.OID = OID;
+            this.ONumber = ONumber;
             this.UpdateDate = UpdateDate;
             this.CreateDate = CreateDate;
             this.OpPrice = OpPrice;
@@ -44,7 +46,8 @@ namespace POSystem.Model
         /// 
         /// </summary>
         public int? OpID { get; set; }
-
+        public int? OID { get; set; }
+        public string ONumber { get; set; }
         /// <summary>
         /// 
         /// </summary>

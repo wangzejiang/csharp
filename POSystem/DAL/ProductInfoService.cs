@@ -73,7 +73,7 @@ namespace POSystem.DAL
         /// <returns>IList对象集合</returns>
         public IList<ProductInfo> GetProductInfo2(ProductInfo productInfo)
         {
-            string sql = "select * from [Products] where 1=1";
+            string sql = "select top 100 * from [Products] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if (productInfo != null)
             {
@@ -110,7 +110,7 @@ namespace POSystem.DAL
         /// <returns>IList对象集合</returns>
         public IList<ProductInfo> GetProductInfo(ProductInfo productInfo)
         {
-            string sql = "select * from [ProductInfo] where 1=1";
+            string sql = "select top 100 * from [ProductInfo] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if (productInfo != null)
             {
@@ -169,7 +169,7 @@ namespace POSystem.DAL
             }
             if (productInfo.PPriceX != null)
             {
-                sql += " and pPrice=@PPRICEX";
+                sql += " and pPriceX=@PPRICEX";
                 paraList.Add(new SqlParameter("@PPRICEX", productInfo.PPriceX));
             }
             if (productInfo.PWeigth != null)

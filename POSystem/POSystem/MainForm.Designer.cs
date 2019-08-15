@@ -100,9 +100,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvSubOrders = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_OrderRemark2 = new System.Windows.Forms.TextBox();
+            this.txt_OrderRemark = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtp_OrderDate = new System.Windows.Forms.DateTimePicker();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -128,10 +132,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txt_orderNumber = new System.Windows.Forms.TextBox();
             this.mianMenu.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.tabPage商品列表.SuspendLayout();
@@ -185,14 +187,14 @@
             // 新订单ToolStripMenuItem
             // 
             this.新订单ToolStripMenuItem.Name = "新订单ToolStripMenuItem";
-            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.新订单ToolStripMenuItem.Text = "新订单";
             this.新订单ToolStripMenuItem.Click += new System.EventHandler(this.新订单ToolStripMenuItem_Click);
             // 
             // 订单查询ToolStripMenuItem
             // 
             this.订单查询ToolStripMenuItem.Name = "订单查询ToolStripMenuItem";
-            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.订单查询ToolStripMenuItem.Text = "订单列表";
             this.订单查询ToolStripMenuItem.Click += new System.EventHandler(this.订单查询ToolStripMenuItem_Click);
             // 
@@ -761,7 +763,7 @@
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
-            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.Location = new System.Drawing.Point(0, 61);
@@ -855,6 +857,7 @@
             // 
             this.dgvSubOrders.AllowUserToAddRows = false;
             this.dgvSubOrders.AllowUserToDeleteRows = false;
+            this.dgvSubOrders.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvSubOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSubOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSubOrders.Location = new System.Drawing.Point(0, 0);
@@ -868,14 +871,48 @@
             // 
             this.panel4.Controls.Add(this.label27);
             this.panel4.Controls.Add(this.label26);
-            this.panel4.Controls.Add(this.textBox2);
-            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.txt_OrderRemark2);
+            this.panel4.Controls.Add(this.txt_OrderRemark);
             this.panel4.Controls.Add(this.button10);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 600);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1357, 68);
             this.panel4.TabIndex = 3;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(409, 14);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(77, 14);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "内部备注：";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(16, 14);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(77, 14);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "订单备注：";
+            // 
+            // txt_OrderRemark2
+            // 
+            this.txt_OrderRemark2.Location = new System.Drawing.Point(492, 11);
+            this.txt_OrderRemark2.Multiline = true;
+            this.txt_OrderRemark2.Name = "txt_OrderRemark2";
+            this.txt_OrderRemark2.Size = new System.Drawing.Size(277, 49);
+            this.txt_OrderRemark2.TabIndex = 1;
+            // 
+            // txt_OrderRemark
+            // 
+            this.txt_OrderRemark.Location = new System.Drawing.Point(99, 11);
+            this.txt_OrderRemark.Multiline = true;
+            this.txt_OrderRemark.Name = "txt_OrderRemark";
+            this.txt_OrderRemark.Size = new System.Drawing.Size(277, 49);
+            this.txt_OrderRemark.TabIndex = 1;
             // 
             // button10
             // 
@@ -885,10 +922,13 @@
             this.button10.TabIndex = 0;
             this.button10.Text = "提交订单";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dateTimePicker1);
+            this.panel2.Controls.Add(this.dtp_OrderDate);
+            this.panel2.Controls.Add(this.txt_orderNumber);
+            this.panel2.Controls.Add(this.label28);
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.groupBox8);
             this.panel2.Controls.Add(this.groupBox7);
@@ -900,17 +940,17 @@
             this.panel2.Size = new System.Drawing.Size(1357, 145);
             this.panel2.TabIndex = 1;
             // 
-            // dateTimePicker1
+            // dtp_OrderDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(438, 106);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(150, 23);
-            this.dateTimePicker1.TabIndex = 2;
+            this.dtp_OrderDate.Location = new System.Drawing.Point(595, 110);
+            this.dtp_OrderDate.Name = "dtp_OrderDate";
+            this.dtp_OrderDate.Size = new System.Drawing.Size(150, 23);
+            this.dtp_OrderDate.TabIndex = 2;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(355, 112);
+            this.label22.Location = new System.Drawing.Point(512, 114);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(77, 14);
             this.label22.TabIndex = 4;
@@ -927,7 +967,7 @@
             this.groupBox8.Controls.Add(this.button8);
             this.groupBox8.Location = new System.Drawing.Point(19, 14);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(587, 86);
+            this.groupBox8.Size = new System.Drawing.Size(726, 86);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "客户信息";
@@ -945,23 +985,23 @@
             // 
             this.txt_Order_CName.Location = new System.Drawing.Point(70, 16);
             this.txt_Order_CName.Name = "txt_Order_CName";
-            this.txt_Order_CName.Size = new System.Drawing.Size(107, 23);
+            this.txt_Order_CName.Size = new System.Drawing.Size(245, 23);
             this.txt_Order_CName.TabIndex = 1;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(219, 19);
+            this.label18.Location = new System.Drawing.Point(378, 20);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(63, 14);
+            this.label18.Size = new System.Drawing.Size(77, 14);
             this.label18.TabIndex = 0;
-            this.label18.Text = "联系方式";
+            this.label18.Text = "联系方式：";
             // 
             // txt_Order_CPhone
             // 
-            this.txt_Order_CPhone.Location = new System.Drawing.Point(288, 16);
+            this.txt_Order_CPhone.Location = new System.Drawing.Point(456, 16);
             this.txt_Order_CPhone.Name = "txt_Order_CPhone";
-            this.txt_Order_CPhone.Size = new System.Drawing.Size(281, 23);
+            this.txt_Order_CPhone.Size = new System.Drawing.Size(232, 23);
             this.txt_Order_CPhone.TabIndex = 1;
             // 
             // label19
@@ -977,12 +1017,12 @@
             // 
             this.txt_Order_CAddress.Location = new System.Drawing.Point(70, 48);
             this.txt_Order_CAddress.Name = "txt_Order_CAddress";
-            this.txt_Order_CAddress.Size = new System.Drawing.Size(499, 23);
+            this.txt_Order_CAddress.Size = new System.Drawing.Size(618, 23);
             this.txt_Order_CAddress.TabIndex = 1;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(182, 16);
+            this.button8.Location = new System.Drawing.Point(321, 16);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(36, 23);
             this.button8.TabIndex = 2;
@@ -1000,7 +1040,7 @@
             this.groupBox7.Controls.Add(this.txt_OrderPriceXCount);
             this.groupBox7.Controls.Add(this.txt_OrderPriceCount);
             this.groupBox7.Controls.Add(this.txt_OrderPriceZCount);
-            this.groupBox7.Location = new System.Drawing.Point(629, 14);
+            this.groupBox7.Location = new System.Drawing.Point(776, 14);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(502, 119);
             this.groupBox7.TabIndex = 5;
@@ -1077,16 +1117,17 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(106, 106);
+            this.button9.Location = new System.Drawing.Point(106, 108);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(74, 27);
             this.button9.TabIndex = 0;
             this.button9.Text = "移除商品";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(19, 106);
+            this.button7.Location = new System.Drawing.Point(19, 108);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(74, 27);
             this.button7.TabIndex = 0;
@@ -1131,39 +1172,21 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // textBox1
+            // label28
             // 
-            this.textBox1.Location = new System.Drawing.Point(99, 11);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(277, 49);
-            this.textBox1.TabIndex = 1;
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(224, 114);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(77, 14);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "订单编号：";
             // 
-            // label26
+            // txt_orderNumber
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(16, 14);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(77, 14);
-            this.label26.TabIndex = 2;
-            this.label26.Text = "订单备注：";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(492, 11);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(277, 49);
-            this.textBox2.TabIndex = 1;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(409, 14);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(77, 14);
-            this.label27.TabIndex = 2;
-            this.label27.Text = "内部备注：";
+            this.txt_orderNumber.Location = new System.Drawing.Point(307, 110);
+            this.txt_orderNumber.Name = "txt_orderNumber";
+            this.txt_orderNumber.Size = new System.Drawing.Size(199, 23);
+            this.txt_orderNumber.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -1312,7 +1335,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtp_OrderDate;
         private System.Windows.Forms.TextBox txt_WeigthCount;
         private System.Windows.Forms.TextBox txt_OrderPriceZCount;
         private System.Windows.Forms.Label label21;
@@ -1328,8 +1351,10 @@
         private System.Windows.Forms.TextBox txt_OrderPriceXCount;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_OrderRemark2;
+        private System.Windows.Forms.TextBox txt_OrderRemark;
+        private System.Windows.Forms.TextBox txt_orderNumber;
+        private System.Windows.Forms.Label label28;
     }
 }
 

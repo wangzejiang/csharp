@@ -26,7 +26,7 @@ namespace POSystem
             bool flag = UserInfoManager.GetUserInfoBool(user);
             if (flag)
             {
-                MainForm mForm = new MainForm(this);
+                MainForm mForm = new MainForm(user);
                 mForm.Show(this);
                 this.Hide();
             }
