@@ -19,13 +19,14 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public ProductInfo(Object PImageID, int? PID, DateTime? UpdateDate, DateTime? CreateDate, decimal? PPrice, decimal? PWeigth, string PName, string PNumber, string PSuppliter, string PRemark)
+        public ProductInfo(Object PImageID, int? PID, DateTime? UpdateDate, DateTime? CreateDate, decimal? PPrice, decimal? PPriceX, decimal? PWeigth, string PName, string PNumber, string PSuppliter, string PRemark)
         {
             this.PImageID = PImageID;
             this.PID = PID;
             this.UpdateDate = UpdateDate;
             this.CreateDate = CreateDate;
             this.PPrice = PPrice;
+            this.PPriceX = PPriceX;
             this.PWeigth = PWeigth;
             this.PName = PName;
             this.PNumber = PNumber;
@@ -70,6 +71,7 @@ namespace POSystem.Model
         /// </summary>
         public decimal? PPrice { get; set; }
 
+        public decimal? PPriceX { get; set; }
         /// <summary>
         /// 
         /// </summary>

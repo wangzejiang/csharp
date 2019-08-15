@@ -12,25 +12,28 @@ namespace POSystem.DAL
     public class OrderInfoService
     {
         #region BasicMethod
-		/// <summary>
+        /// <summary>
         /// 增加OrderInfo表信息
         /// </summary>
         /// <param name="orderInfo">orderInfo表对象</param>
         /// <returns>受影响行数</returns>
         public int AddOrderInfo(OrderInfo orderInfo)
         {
-            string sql = "insert into [OrderInfo](cID,uID,oStatus,oDate,create_date,update_date,oPrice,oWeigth,oFirstCost,oNumber,oRemark,oRemark2) values(@CID,@UID,@OSTATUS,@ODATE,@CREATEDATE,@UPDATEDATE,@OPRICE,@OWEIGTH,@OFIRSTCOST,@ONUMBER,@OREMARK,@OREMARK2)";
+            string sql = "insert into [OrderInfo](oStatus,oDate,create_date,update_date,oWeigth,oPrice,oPriceX,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@CREATEDATE,@UPDATEDATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
             SqlParameter[] paras = new SqlParameter[]{
-                new SqlParameter("@CID",orderInfo.CID == null ? Convert.DBNull : orderInfo.CID),
-                new SqlParameter("@UID",orderInfo.UID == null ? Convert.DBNull : orderInfo.UID),
                 new SqlParameter("@OSTATUS",orderInfo.OStatus == null ? Convert.DBNull : orderInfo.OStatus),
                 new SqlParameter("@ODATE",orderInfo.ODate == null ? Convert.DBNull : orderInfo.ODate),
                 new SqlParameter("@CREATEDATE",orderInfo.CreateDate == null ? Convert.DBNull : orderInfo.CreateDate),
                 new SqlParameter("@UPDATEDATE",orderInfo.UpdateDate == null ? Convert.DBNull : orderInfo.UpdateDate),
-                new SqlParameter("@OPRICE",orderInfo.OPrice == null ? Convert.DBNull : orderInfo.OPrice),
                 new SqlParameter("@OWEIGTH",orderInfo.OWeigth == null ? Convert.DBNull : orderInfo.OWeigth),
-                new SqlParameter("@OFIRSTCOST",orderInfo.OFirstCost == null ? Convert.DBNull : orderInfo.OFirstCost),
+                new SqlParameter("@OPRICE",orderInfo.OPrice == null ? Convert.DBNull : orderInfo.OPrice),
+                new SqlParameter("@OPRICEX",orderInfo.OPriceX == null ? Convert.DBNull : orderInfo.OPriceX),
+                new SqlParameter("@OPRICEZ",orderInfo.OPriceZ == null ? Convert.DBNull : orderInfo.OPriceZ),
+                new SqlParameter("@UNAME",orderInfo.UName == null ? Convert.DBNull : orderInfo.UName),
                 new SqlParameter("@ONUMBER",orderInfo.ONumber == null ? Convert.DBNull : orderInfo.ONumber),
+                new SqlParameter("@CNAME",orderInfo.CName == null ? Convert.DBNull : orderInfo.CName),
+                new SqlParameter("@CPHONE",orderInfo.CPhone == null ? Convert.DBNull : orderInfo.CPhone),
+                new SqlParameter("@CADDRESS",orderInfo.CAddress == null ? Convert.DBNull : orderInfo.CAddress),
                 new SqlParameter("@OREMARK",orderInfo.ORemark == null ? Convert.DBNull : orderInfo.ORemark),
                 new SqlParameter("@OREMARK2",orderInfo.ORemark2 == null ? Convert.DBNull : orderInfo.ORemark2)
             };
@@ -61,7 +64,7 @@ namespace POSystem.DAL
             string conditions = "";
             List<SqlParameter> fieldsParameter = GetUpdateFields(orderInfo, ref fields);
             List<SqlParameter> conditionParameter = GetCondition(oldOrderInfo, ref conditions);
-            string sql = "update [OrderInfo] set " + fields + 
+            string sql = "update [OrderInfo] set " + fields +
                          " where 1=1" + conditions;
             fieldsParameter.AddRange(conditionParameter);
             SqlParameter[] paras = fieldsParameter.ToArray();
@@ -77,7 +80,7 @@ namespace POSystem.DAL
         {
             string sql = "select * from [OrderInfo] where 1=1";
             List<SqlParameter> paraList = new List<SqlParameter>();
-            if(orderInfo!=null)
+            if (orderInfo != null)
             {
                 paraList = GetCondition(orderInfo, ref sql);
             }
@@ -88,16 +91,19 @@ namespace POSystem.DAL
             {
                 OrderInfo obj = new OrderInfo();
                 obj.OID = Convert.IsDBNull(reader["oID"]) ? null : (int?)reader["oID"];
-                obj.CID = Convert.IsDBNull(reader["cID"]) ? null : (int?)reader["cID"];
-                obj.UID = Convert.IsDBNull(reader["uID"]) ? null : (int?)reader["uID"];
                 obj.OStatus = Convert.IsDBNull(reader["oStatus"]) ? null : (int?)reader["oStatus"];
                 obj.ODate = Convert.IsDBNull(reader["oDate"]) ? null : (DateTime?)reader["oDate"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
-                obj.OPrice = Convert.IsDBNull(reader["oPrice"]) ? null : (decimal?)reader["oPrice"];
                 obj.OWeigth = Convert.IsDBNull(reader["oWeigth"]) ? null : (decimal?)reader["oWeigth"];
-                obj.OFirstCost = Convert.IsDBNull(reader["oFirstCost"]) ? null : (decimal?)reader["oFirstCost"];
+                obj.OPrice = Convert.IsDBNull(reader["oPrice"]) ? null : (decimal?)reader["oPrice"];
+                obj.OPriceX = Convert.IsDBNull(reader["oPriceX"]) ? null : (decimal?)reader["oPriceX"];
+                obj.OPriceZ = Convert.IsDBNull(reader["oPriceZ"]) ? null : (decimal?)reader["oPriceZ"];
+                obj.UName = Convert.IsDBNull(reader["uName"]) ? null : (string)reader["uName"];
                 obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];
+                obj.CName = Convert.IsDBNull(reader["cName"]) ? null : (string)reader["cName"];
+                obj.CPhone = Convert.IsDBNull(reader["cPhone"]) ? null : (string)reader["cPhone"];
+                obj.CAddress = Convert.IsDBNull(reader["cAddress"]) ? null : (string)reader["cAddress"];
                 obj.ORemark = Convert.IsDBNull(reader["oRemark"]) ? null : (string)reader["oRemark"];
                 obj.ORemark2 = Convert.IsDBNull(reader["oRemark2"]) ? null : (string)reader["oRemark2"];
                 orderInfoList.Add(obj);
@@ -113,16 +119,6 @@ namespace POSystem.DAL
             {
                 sql += " and oID=@OID";
                 paraList.Add(new SqlParameter("@OID", orderInfo.OID));
-            }
-            if (orderInfo.CID != null)
-            {
-                sql += " and cID=@CID";
-                paraList.Add(new SqlParameter("@CID", orderInfo.CID));
-            }
-            if (orderInfo.UID != null)
-            {
-                sql += " and uID=@UID";
-                paraList.Add(new SqlParameter("@UID", orderInfo.UID));
             }
             if (orderInfo.OStatus != null)
             {
@@ -144,25 +140,50 @@ namespace POSystem.DAL
                 sql += " and update_date=@UPDATEDATE";
                 paraList.Add(new SqlParameter("@UPDATEDATE", orderInfo.UpdateDate));
             }
-            if (orderInfo.OPrice != null)
-            {
-                sql += " and oPrice=@OPRICE";
-                paraList.Add(new SqlParameter("@OPRICE", orderInfo.OPrice));
-            }
             if (orderInfo.OWeigth != null)
             {
                 sql += " and oWeigth=@OWEIGTH";
                 paraList.Add(new SqlParameter("@OWEIGTH", orderInfo.OWeigth));
             }
-            if (orderInfo.OFirstCost != null)
+            if (orderInfo.OPrice != null)
             {
-                sql += " and oFirstCost=@OFIRSTCOST";
-                paraList.Add(new SqlParameter("@OFIRSTCOST", orderInfo.OFirstCost));
+                sql += " and oPrice=@OPRICE";
+                paraList.Add(new SqlParameter("@OPRICE", orderInfo.OPrice));
+            }
+            if (orderInfo.OPriceX != null)
+            {
+                sql += " and oPriceX=@OPRICEX";
+                paraList.Add(new SqlParameter("@OPRICEX", orderInfo.OPriceX));
+            }
+            if (orderInfo.OPriceZ != null)
+            {
+                sql += " and oPriceZ=@OPRICEZ";
+                paraList.Add(new SqlParameter("@OPRICEZ", orderInfo.OPriceZ));
+            }
+            if (orderInfo.UName != null)
+            {
+                sql += " and uName=@UNAME";
+                paraList.Add(new SqlParameter("@UNAME", orderInfo.UName));
             }
             if (orderInfo.ONumber != null)
             {
-                sql += " and oNumber=@ONUMBER";
-                paraList.Add(new SqlParameter("@ONUMBER", orderInfo.ONumber));
+                sql += " and oNumber like @ONUMBER";
+                paraList.Add(new SqlParameter("@ONUMBER", "%" + orderInfo.ONumber + "%"));
+            }
+            if (orderInfo.CName != null)
+            {
+                sql += " and cName like @CNAME";
+                paraList.Add(new SqlParameter("@CNAME", "%" + orderInfo.CName + "%"));
+            }
+            if (orderInfo.CPhone != null)
+            {
+                sql += " and cPhone=@CPHONE";
+                paraList.Add(new SqlParameter("@CPHONE", orderInfo.CPhone));
+            }
+            if (orderInfo.CAddress != null)
+            {
+                sql += " and cAddress=@CADDRESS";
+                paraList.Add(new SqlParameter("@CADDRESS", orderInfo.CAddress));
             }
             if (orderInfo.ORemark != null)
             {
@@ -181,16 +202,6 @@ namespace POSystem.DAL
         {
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
-            if (orderInfo.CID != null)
-            {
-                fields += "cID=@UpdateCID,";
-                paraList.Add(new SqlParameter("@UpdateCID", orderInfo.CID));
-            }
-            if (orderInfo.UID != null)
-            {
-                fields += "uID=@UpdateUID,";
-                paraList.Add(new SqlParameter("@UpdateUID", orderInfo.UID));
-            }
             if (orderInfo.OStatus != null)
             {
                 fields += "oStatus=@UpdateOSTATUS,";
@@ -211,25 +222,50 @@ namespace POSystem.DAL
                 fields += "update_date=@UpdateUPDATEDATE,";
                 paraList.Add(new SqlParameter("@UpdateUPDATEDATE", orderInfo.UpdateDate));
             }
-            if (orderInfo.OPrice != null)
-            {
-                fields += "oPrice=@UpdateOPRICE,";
-                paraList.Add(new SqlParameter("@UpdateOPRICE", orderInfo.OPrice));
-            }
             if (orderInfo.OWeigth != null)
             {
                 fields += "oWeigth=@UpdateOWEIGTH,";
                 paraList.Add(new SqlParameter("@UpdateOWEIGTH", orderInfo.OWeigth));
             }
-            if (orderInfo.OFirstCost != null)
+            if (orderInfo.OPrice != null)
             {
-                fields += "oFirstCost=@UpdateOFIRSTCOST,";
-                paraList.Add(new SqlParameter("@UpdateOFIRSTCOST", orderInfo.OFirstCost));
+                fields += "oPrice=@UpdateOPRICE,";
+                paraList.Add(new SqlParameter("@UpdateOPRICE", orderInfo.OPrice));
+            }
+            if (orderInfo.OPriceX != null)
+            {
+                fields += "oPriceX=@UpdateOPRICEX,";
+                paraList.Add(new SqlParameter("@UpdateOPRICEX", orderInfo.OPriceX));
+            }
+            if (orderInfo.OPriceZ != null)
+            {
+                fields += "oPriceZ=@UpdateOPRICEZ,";
+                paraList.Add(new SqlParameter("@UpdateOPRICEZ", orderInfo.OPriceZ));
+            }
+            if (orderInfo.UName != null)
+            {
+                fields += "uName=@UpdateUNAME,";
+                paraList.Add(new SqlParameter("@UpdateUNAME", orderInfo.UName));
             }
             if (orderInfo.ONumber != null)
             {
                 fields += "oNumber=@UpdateONUMBER,";
                 paraList.Add(new SqlParameter("@UpdateONUMBER", orderInfo.ONumber));
+            }
+            if (orderInfo.CName != null)
+            {
+                fields += "cName=@UpdateCNAME,";
+                paraList.Add(new SqlParameter("@UpdateCNAME", orderInfo.CName));
+            }
+            if (orderInfo.CPhone != null)
+            {
+                fields += "cPhone=@UpdateCPHONE,";
+                paraList.Add(new SqlParameter("@UpdateCPHONE", orderInfo.CPhone));
+            }
+            if (orderInfo.CAddress != null)
+            {
+                fields += "cAddress=@UpdateCADDRESS,";
+                paraList.Add(new SqlParameter("@UpdateCADDRESS", orderInfo.CAddress));
             }
             if (orderInfo.ORemark != null)
             {
@@ -244,10 +280,10 @@ namespace POSystem.DAL
             fields = fields.Substring(0, fields.Length - 1);
             return paraList;
         }
-	    #endregion
+        #endregion
 
         #region ExtensionMethod
-		 
-	    #endregion
+
+        #endregion
     }
 }

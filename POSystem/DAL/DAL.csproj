@@ -41,9 +41,9 @@
     <Compile Include="AttachmentService.cs" />
     <Compile Include="CustomerInfoService.cs" />
     <Compile Include="OrderInfoService.cs" />
+    <Compile Include="OrderProductInfoService.cs" />
     <Compile Include="ProductInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubOrderService.cs" />
     <Compile Include="UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,7 @@ namespace POSystem
             textBox_pName.Text = pro.PName;
             textBox_pNumber.Text = pro.PNumber;
             textBox_pPrice.Text = pro.PPrice.ToString();
+            textBox_pPriceX.Text = pro.PPriceX.ToString();
             textBox_pRemark.Text = pro.PRemark;
             textBox_pSuppliter.Text = pro.PSuppliter;
             textBox_pWeight.Text = pro.PWeigth.ToString();
@@ -50,6 +51,7 @@ namespace POSystem
             pro.PName = textBox_pName.Text;
             pro.PNumber = textBox_pNumber.Text;
             pro.PPrice = decimal.Parse(textBox_pPrice.Text);
+            pro.PPriceX = decimal.Parse(textBox_pPriceX.Text);
             pro.PRemark = textBox_pRemark.Text;
             pro.PSuppliter = textBox_pSuppliter.Text;
             pro.PWeigth = decimal.Parse(textBox_pWeight.Text);
@@ -62,7 +64,7 @@ namespace POSystem
             if (idx > 0)
             {
                 mainForm.selectProduct(pro.PID);
-                MessageBoxEx.Show(this, "修改商品图片成功!");
+                MessageBoxEx.Show(this, "修改商品信息成功!");
             }
         }
         private void button3_Click(object sender, EventArgs e)

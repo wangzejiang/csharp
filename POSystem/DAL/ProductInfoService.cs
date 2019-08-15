@@ -20,12 +20,13 @@ namespace POSystem.DAL
         public int AddProductInfo(ProductInfo productInfo)
         {
             // string sql = "insert into [ProductInfo](pImageID,update_date,create_date,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@UPDATEDATE,@CREATEDATE,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
-            string sql = "insert into [ProductInfo](pImageID,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
+            string sql = "insert into [ProductInfo](pImageID,pPrice,pPriceX,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@PPRICE,@PPRICEX,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@PIMAGEID",productInfo.PImageID == null ? Convert.DBNull : productInfo.PImageID),
                 // new SqlParameter("@UPDATEDATE",productInfo.UpdateDate == null ? Convert.DBNull : productInfo.UpdateDate),
                // new SqlParameter("@CREATEDATE",productInfo.CreateDate == null ? Convert.DBNull : productInfo.CreateDate),
                 new SqlParameter("@PPRICE",productInfo.PPrice == null ? Convert.DBNull : productInfo.PPrice),
+                new SqlParameter("@PPRICEX",productInfo.PPriceX == null ? Convert.DBNull : productInfo.PPriceX),
                 new SqlParameter("@PWEIGTH",productInfo.PWeigth == null ? Convert.DBNull : productInfo.PWeigth),
                 new SqlParameter("@PNAME",productInfo.PName == null ? Convert.DBNull : productInfo.PName),
                 new SqlParameter("@PNUMBER",productInfo.PNumber == null ? Convert.DBNull : productInfo.PNumber),
@@ -89,6 +90,7 @@ namespace POSystem.DAL
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
                 obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (decimal?)reader["pPrice"];
+                obj.PPriceX = Convert.IsDBNull(reader["pPriceX"]) ? null : (decimal?)reader["pPriceX"];
                 obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (decimal?)reader["pWeigth"];
                 obj.PName = Convert.IsDBNull(reader["pName"]) ? null : (string)reader["pName"];
                 obj.PNumber = Convert.IsDBNull(reader["pNumber"]) ? null : (string)reader["pNumber"];
@@ -125,6 +127,7 @@ namespace POSystem.DAL
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
                 obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
                 obj.PPrice = Convert.IsDBNull(reader["pPrice"]) ? null : (decimal?)reader["pPrice"];
+                obj.PPriceX = Convert.IsDBNull(reader["pPriceX"]) ? null : (decimal?)reader["pPriceX"];
                 obj.PWeigth = Convert.IsDBNull(reader["pWeigth"]) ? null : (decimal?)reader["pWeigth"];
                 obj.PName = Convert.IsDBNull(reader["pName"]) ? null : (string)reader["pName"];
                 obj.PNumber = Convert.IsDBNull(reader["pNumber"]) ? null : (string)reader["pNumber"];
@@ -163,6 +166,11 @@ namespace POSystem.DAL
             {
                 sql += " and pPrice=@PPRICE";
                 paraList.Add(new SqlParameter("@PPRICE", productInfo.PPrice));
+            }
+            if (productInfo.PPriceX != null)
+            {
+                sql += " and pPrice=@PPRICEX";
+                paraList.Add(new SqlParameter("@PPRICEX", productInfo.PPriceX));
             }
             if (productInfo.PWeigth != null)
             {
@@ -215,6 +223,11 @@ namespace POSystem.DAL
             {
                 fields += "pPrice=@UpdatePPRICE,";
                 paraList.Add(new SqlParameter("@UpdatePPRICE", productInfo.PPrice));
+            }
+            if (productInfo.PPriceX != null)
+            {
+                fields += "pPriceX=@UpdatePPRICEX,";
+                paraList.Add(new SqlParameter("@UpdatePPRICEX", productInfo.PPriceX));
             }
             if (productInfo.PWeigth != null)
             {

@@ -43,9 +43,9 @@
     <Compile Include="Attachment.cs" />
     <Compile Include="CustomerInfo.cs" />
     <Compile Include="OrderInfo.cs" />
+    <Compile Include="OrderProductInfo.cs" />
     <Compile Include="ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubOrder.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

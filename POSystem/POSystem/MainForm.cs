@@ -16,106 +16,197 @@ namespace POSystem
 {
     public partial class MainForm : Form
     {
-        public LoginForm loginForm { get; set; }
+        //public LoginForm loginForm { get; set; }
         public MainForm(LoginForm _loginForm)
         {
-            this.loginForm = _loginForm;
+            //this.loginForm = _loginForm;
+            InitializeComponent();
+        }
+        public MainForm()
+        {
             InitializeComponent();
         }
 
         #region addMethod
         private void 新增商品ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.tabPage新增商品.Parent = this.MainTabControl;
-            this.MainTabControl.SelectedTab = this.tabPage新增商品;
+            tabPage新增商品.Parent = MainTabControl;
+            MainTabControl.SelectedTab = tabPage新增商品;
         }
+        private OrderInfo order;
+        private IList<OrderProductInfo> products;
         private void 新订单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.tabPage新订单.Parent = this.MainTabControl;
-            this.MainTabControl.SelectedTab = this.tabPage新订单;
+            order = new OrderInfo();
+            products = new List<OrderProductInfo>();
+            dgvSubOrders.DataSource = null;
+            tabPage新订单.Parent = MainTabControl;
+            MainTabControl.SelectedTab = tabPage新订单;
         }
         private void 新增客户ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.tabPage新增客户.Parent = this.MainTabControl;
-            this.MainTabControl.SelectedTab = this.tabPage新增客户;
+            tabPage新增客户.Parent = MainTabControl;
+            MainTabControl.SelectedTab = tabPage新增客户;
         }
         #endregion addMethod
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SelectProduct sp = new SelectProduct(this);
+            sp.ShowDialog(this);
+        }
+        internal void addOrderProduct(int? pID, int? Count)
+        {
+            OrderProductInfo op = new OrderProductInfo();
+            ProductInfo p = new ProductInfo();
+            p.PID = pID;
+            p = ProductInfoManager.GetProductInfo2(p);
+            op.CreateDate = null;
+            op.UpdateDate = null;
+            op.OpCount = Count;
+            op.OpID = null;
+            op.OpImageBytes = p.PImageBytes;
+            op.OpImageID = p.PImageID;
+            op.OpName = p.PName;
+            op.OpNumber = p.PNumber;
+            op.OpPrice = p.PPrice;
+            op.OpPriceX = p.PPriceX;
+            op.OpRemark = p.PRemark;
+            op.OpSuppliter = p.PSuppliter;
+            op.OpWeigth = p.PWeigth;
+
+            products.Add(op);
+
+            resetOrderProductInfo();
+            resetOrderInfo();
+
+            dgvSubOrders.DataSource = null;
+            dgvSubOrders.DataSource = products;
+
+            dgvSubOrders.Columns["OpImageBytes"].HeaderCell.Value = "图片";
+            dgvSubOrders.Columns["OpName"].HeaderCell.Value = "名称";
+            dgvSubOrders.Columns["OpSuppliter"].HeaderCell.Value = "供应商";
+            dgvSubOrders.Columns["OpNumber"].HeaderCell.Value = "编号";
+            dgvSubOrders.Columns["OpRemark"].HeaderCell.Value = "备注";
+            dgvSubOrders.Columns["OpPrice"].HeaderCell.Value = "成本价";
+            dgvSubOrders.Columns["OpWeigth"].HeaderCell.Value = "重量";
+            dgvSubOrders.Columns["OpPriceX"].HeaderCell.Value = "销售价";  // 修改项
+            dgvSubOrders.Columns["OpCount"].HeaderCell.Value = "数量"; // 修改项
+
+            dgvSubOrders.Columns["priceCount"].HeaderCell.Value = "总成本";
+            dgvSubOrders.Columns["priceXCount"].HeaderCell.Value = "总价";
+            dgvSubOrders.Columns["priceZCount"].HeaderCell.Value = "总利润";
+            dgvSubOrders.Columns["weigthCount"].HeaderCell.Value = "总重量";
+
+            dgvSubOrders.Columns["OpID"].Visible = false;
+            dgvSubOrders.Columns["OpImageID"].Visible = false;
+            dgvSubOrders.Columns["CreateDate"].Visible = false;
+            dgvSubOrders.Columns["UpdateDate"].Visible = false;
+
+            dgvSubOrders.Columns["OpImageBytes"].ReadOnly = true;
+            dgvSubOrders.Columns["OpName"].ReadOnly = true;
+            dgvSubOrders.Columns["OpNumber"].ReadOnly = true;
+            dgvSubOrders.Columns["OpSuppliter"].ReadOnly = true;
+            dgvSubOrders.Columns["OpPrice"].ReadOnly = true;
+            dgvSubOrders.Columns["OpWeigth"].ReadOnly = true;
+            //dgvSubOrders.Columns["OpRemark"].ReadOnly = true;
+        }
+        private void dgvSubOrders_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // 数据刷新
+            resetOrderProductInfo();
+            resetOrderInfo();
+            //  界面刷新
+            var row = dgvSubOrders.Rows[e.RowIndex];
+
+            decimal OpCount = decimal.Parse(row.Cells["OpCount"].Value.ToString());
+            decimal OpPrice = decimal.Parse(row.Cells["OpPrice"].Value.ToString());
+            decimal OpPriceX = decimal.Parse(row.Cells["OpPriceX"].Value.ToString());
+            decimal OpWeigth = decimal.Parse(row.Cells["OpWeigth"].Value.ToString());
+
+            row.Cells["priceCount"].Value = OpPrice * OpCount;
+            row.Cells["priceXCount"].Value = OpPriceX * OpCount;
+            row.Cells["priceZCount"].Value = (OpPriceX - OpPrice) * OpCount;
+            row.Cells["weigthCount"].Value = OpWeigth * OpCount;
+
+            dgvSubOrders.Refresh();
+        }
+        internal void resetOrderProductInfo()
+        {
+            foreach (OrderProductInfo p in products)
+            {
+                p.priceCount = p.OpPrice * p.OpCount;
+                p.priceXCount = p.OpPriceX * p.OpCount;
+                p.weigthCount = p.OpWeigth * p.OpCount;
+                p.priceZCount = p.priceXCount - p.priceCount;
+            }
+        }
+        internal void resetOrderInfo()
+        {
+            decimal? price = 0, pricex = 0, pricez = 0, weigth = 0;
+            foreach (OrderProductInfo p in products)
+            {
+                price += p.priceCount;
+                pricex += p.priceXCount;
+                pricez += p.priceZCount;
+                weigth += p.weigthCount;
+            }
+            txt_OrderPriceCount.Text = price.ToString();
+            txt_OrderPriceXCount.Text = pricex.ToString();
+            txt_OrderPriceZCount.Text = pricez.ToString();
+            txt_WeigthCount.Text = weigth.ToString();
+        }
+        internal void setCustomer(int? cID, string cName, string cPhone, string cAddress)
+        {
+            txt_Order_CAddress.Text = cAddress;
+            txt_Order_CPhone.Text = cPhone;
+            txt_Order_CName.Text = cName;
+        }
         public void selectProduct(int? PID = -1)
         {
             ProductInfo pinfo = new ProductInfo();
             pinfo.PName = txt_SelPName.Text;
             pinfo.PNumber = txt_SelPNumber.Text;
             pinfo.PSuppliter = txt_SelPSuppliter.Text;
-            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProducts.DataSource = ProductInfoManager.GetProductInfoAll2(pinfo);
-            dgvProducts.Columns["pNumber"].HeaderCell.Value = "编号";
-            dgvProducts.Columns["pName"].HeaderCell.Value = "名称";
-            dgvProducts.Columns["PWeigth"].HeaderCell.Value = "重量";
-            dgvProducts.Columns["PSuppliter"].HeaderCell.Value = "供应商";
-            dgvProducts.Columns["PPrice"].HeaderCell.Value = "价格";
-            dgvProducts.Columns["PRemark"].HeaderCell.Value = "备注";
-            dgvProducts.Columns["PID"].Visible = false;
-            dgvProducts.Columns["CreateDate"].Visible = false;
-            dgvProducts.Columns["UpdateDate"].Visible = false;
-            dgvProducts.Columns["PImageID"].Visible = false;
-            dgvProducts.Columns["pImageBytes"].HeaderCell.Value = "产品图片";
-            if (PID >= 0)
-            {
-                string sPID = string.Format("{0}", PID);
-                for (int i = 0; i < dgvProducts.RowCount; i++)
-                {
-                    if (dgvProducts.Rows[i].Cells["PID"].Value.ToString().Equals(sPID))
-                    {
-                        dgvProducts.ClearSelection();
-                        dgvProducts.FirstDisplayedScrollingRowIndex = i;
-                        dgvProducts.Rows[i].Selected = true;
-                        break;
-                    }
-                }
-            }
+            Common.selectProduct(dgvProducts, pinfo, PID);
         }
         public void selectCustomers(int? CID = -1)
         {
             CustomerInfo cinfo = new CustomerInfo();
             cinfo.CName = txt_SelCName.Text;
             cinfo.CPhone = txt_SelCPhone.Text;
-            dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCustomers.DataSource = CustomerInfoManager.GetCustomerInfoAll(cinfo);
-            dgvCustomers.Columns["CID"].HeaderCell.Value = "编号";
-            dgvCustomers.Columns["CName"].HeaderCell.Value = "客户名称";
-            dgvCustomers.Columns["CPhone"].HeaderCell.Value = "联系方式";
-            dgvCustomers.Columns["CAddress"].HeaderCell.Value = "联系地址";
-            dgvCustomers.Columns["CreateDate"].Visible = false;
-            dgvCustomers.Columns["UpdateDate"].Visible = false;
-            if (CID >= 0)
-            {
-                string sCID = string.Format("{0}", CID);
-                for (int i = 0; i < dgvCustomers.RowCount; i++)
-                {
-                    if (dgvCustomers.Rows[i].Cells["CID"].Value.ToString().Equals(sCID))
-                    {
-                        dgvCustomers.ClearSelection();
-                        dgvCustomers.FirstDisplayedScrollingRowIndex = i;
-                        dgvCustomers.Rows[i].Selected = true;
-                        break;
-                    }
-                }
-            }
+            Common.selectCustomers(dgvCustomers, cinfo, CID);
         }
 
         public void selectOrders()
         {
             OrderInfo order = new OrderInfo();
             order.ONumber = txt_SelONumber.Text;
+            order.CName = txt_SelOCName.Text;
             dgvOrders.DataSource = OrderInfoManager.GetOrderInfoAll(order);
+            dgvOrders.Columns["OWeigth"].HeaderCell.Value = "总重量";
+            dgvOrders.Columns["ODate"].HeaderCell.Value = "订单时间";
+            dgvOrders.Columns["OPriceX"].HeaderCell.Value = "总售价";
+            dgvOrders.Columns["OPrice"].HeaderCell.Value = "总成本";
+            dgvOrders.Columns["OPriceZ"].HeaderCell.Value = "总利润";
+            dgvOrders.Columns["CName"].HeaderCell.Value = "客户名称";
+            dgvOrders.Columns["CPhone"].HeaderCell.Value = "联系方式";
+            dgvOrders.Columns["CAddress"].HeaderCell.Value = "联系地址";
+            dgvOrders.Columns["UName"].HeaderCell.Value = "创建员";
+            dgvOrders.Columns["ONumber"].HeaderCell.Value = "订单编号";
+            dgvOrders.Columns["ORemark"].Visible = false;
+            dgvOrders.Columns["ORemark2"].Visible = false;
+            dgvOrders.Columns["CreateDate"].Visible = false;
+            dgvOrders.Columns["UpdateDate"].Visible = false;
+            dgvOrders.Columns["OID"].Visible = false;
+            dgvOrders.Columns["OStatus"].Visible = false;
         }
 
         #region selectMethod
         private void 商品查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.tabPage商品列表.Parent = this.MainTabControl;
-            this.MainTabControl.SelectedTab = this.tabPage商品列表;
+            tabPage商品列表.Parent = this.MainTabControl;
+            MainTabControl.SelectedTab = this.tabPage商品列表;
             selectProduct();
         }
         private void 订单查询ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,7 +265,11 @@ namespace POSystem
             selectCustomers();
         }
 
-
+        private void button8_Click(object sender, EventArgs e)
+        {
+            SelectCustomer sc = new SelectCustomer(this);
+            sc.ShowDialog(this);
+        }
         private void button5_Click(object sender, EventArgs e)
         {
             CustomerInfo cInfo = new CustomerInfo();
@@ -255,10 +350,10 @@ namespace POSystem
         {
             selectOrders();
         }
-        
+
         private void txt_SelProduct_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 selectProduct();
             }
@@ -277,5 +372,6 @@ namespace POSystem
                 selectOrders();
             }
         }
+
     }
 }

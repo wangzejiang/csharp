@@ -46,6 +46,8 @@
             this.textBox_pSuppliter = new System.Windows.Forms.TextBox();
             this.textBox_pPrice = new System.Windows.Forms.TextBox();
             this.textBox_pName = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox_pPriceX = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pImage)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -104,6 +106,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.textBox_pPriceX);
             this.groupBox1.Controls.Add(this.textBox_pRemark);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.button1);
@@ -144,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 204);
+            this.label5.Location = new System.Drawing.Point(33, 200);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 19;
@@ -153,7 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 163);
+            this.label4.Location = new System.Drawing.Point(33, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 19;
@@ -162,7 +166,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 122);
+            this.label3.Location = new System.Drawing.Point(33, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 20;
@@ -180,36 +184,36 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 81);
+            this.label1.Location = new System.Drawing.Point(33, 72);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 22;
-            this.label1.Text = "价格:";
+            this.label1.Text = "价格：";
             // 
             // textBox_pNumber
             // 
-            this.textBox_pNumber.Location = new System.Drawing.Point(98, 201);
+            this.textBox_pNumber.Location = new System.Drawing.Point(98, 197);
             this.textBox_pNumber.Name = "textBox_pNumber";
             this.textBox_pNumber.Size = new System.Drawing.Size(298, 21);
             this.textBox_pNumber.TabIndex = 18;
             // 
             // textBox_pWeight
             // 
-            this.textBox_pWeight.Location = new System.Drawing.Point(98, 119);
+            this.textBox_pWeight.Location = new System.Drawing.Point(98, 133);
             this.textBox_pWeight.Name = "textBox_pWeight";
             this.textBox_pWeight.Size = new System.Drawing.Size(298, 21);
             this.textBox_pWeight.TabIndex = 17;
             // 
             // textBox_pSuppliter
             // 
-            this.textBox_pSuppliter.Location = new System.Drawing.Point(98, 160);
+            this.textBox_pSuppliter.Location = new System.Drawing.Point(98, 165);
             this.textBox_pSuppliter.Name = "textBox_pSuppliter";
             this.textBox_pSuppliter.Size = new System.Drawing.Size(298, 21);
             this.textBox_pSuppliter.TabIndex = 18;
             // 
             // textBox_pPrice
             // 
-            this.textBox_pPrice.Location = new System.Drawing.Point(98, 78);
+            this.textBox_pPrice.Location = new System.Drawing.Point(98, 69);
             this.textBox_pPrice.Name = "textBox_pPrice";
             this.textBox_pPrice.Size = new System.Drawing.Size(298, 21);
             this.textBox_pPrice.TabIndex = 16;
@@ -220,6 +224,22 @@
             this.textBox_pName.Name = "textBox_pName";
             this.textBox_pName.Size = new System.Drawing.Size(298, 21);
             this.textBox_pName.TabIndex = 15;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(33, 104);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(53, 12);
+            this.label23.TabIndex = 25;
+            this.label23.Text = "销售价：";
+            // 
+            // textBox_pPriceX
+            // 
+            this.textBox_pPriceX.Location = new System.Drawing.Point(98, 101);
+            this.textBox_pPriceX.Name = "textBox_pPriceX";
+            this.textBox_pPriceX.Size = new System.Drawing.Size(298, 21);
+            this.textBox_pPriceX.TabIndex = 24;
             // 
             // EditProduct
             // 
@@ -261,5 +281,7 @@
         private System.Windows.Forms.TextBox textBox_pSuppliter;
         private System.Windows.Forms.TextBox textBox_pPrice;
         private System.Windows.Forms.TextBox textBox_pName;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBox_pPriceX;
     }
 }

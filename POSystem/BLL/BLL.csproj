@@ -41,9 +41,9 @@
     <Compile Include="AttachmentManager.cs" />
     <Compile Include="CustomerInfoManager.cs" />
     <Compile Include="OrderInfoManager.cs" />
+    <Compile Include="OrderProductInfoManager.cs" />
     <Compile Include="ProductInfoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubOrderManager.cs" />
     <Compile Include="UserInfoManager.cs" />
   </ItemGroup>
   <ItemGroup>

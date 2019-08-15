@@ -19,19 +19,22 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public OrderInfo(int? OID, int? CID, int? UID, int? OStatus, DateTime? ODate, DateTime? CreateDate, DateTime? UpdateDate, decimal? OPrice, decimal? OWeigth, decimal? OFirstCost, string ONumber, string ORemark, string ORemark2)
+        public OrderInfo(int? OID, int? OStatus, DateTime? ODate, DateTime? CreateDate, DateTime? UpdateDate, decimal? OWeigth, decimal? OPrice, decimal? OPriceX, decimal? OPriceZ, string UName, string ONumber, string CName, string CPhone, string CAddress, string ORemark, string ORemark2)
         {
             this.OID = OID;
-            this.CID = CID;
-            this.UID = UID;
             this.OStatus = OStatus;
             this.ODate = ODate;
             this.CreateDate = CreateDate;
             this.UpdateDate = UpdateDate;
-            this.OPrice = OPrice;
             this.OWeigth = OWeigth;
-            this.OFirstCost = OFirstCost;
+            this.OPrice = OPrice;
+            this.OPriceX = OPriceX;
+            this.OPriceZ = OPriceZ;
+            this.UName = UName;
             this.ONumber = ONumber;
+            this.CName = CName;
+            this.CPhone = CPhone;
+            this.CAddress = CAddress;
             this.ORemark = ORemark;
             this.ORemark2 = ORemark2;
         }
@@ -40,16 +43,6 @@ namespace POSystem.Model
         /// 
         /// </summary>
         public int? OID { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? CID { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? UID { get; set; }
 
         /// <summary>
         /// 
@@ -74,22 +67,47 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? OPrice { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public decimal? OWeigth { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? OFirstCost { get; set; }
+        public decimal? OPrice { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? OPriceX { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? OPriceZ { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string UName { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public string ONumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CPhone { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CAddress { get; set; }
 
         /// <summary>
         /// 
