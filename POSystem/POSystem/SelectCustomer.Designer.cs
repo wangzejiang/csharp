@@ -103,6 +103,7 @@
             this.txt_SelCPhone.Name = "txt_SelCPhone";
             this.txt_SelCPhone.Size = new System.Drawing.Size(176, 21);
             this.txt_SelCPhone.TabIndex = 2;
+            this.txt_SelCPhone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SelCustomer_KeyDown);
             // 
             // txt_SelCName
             // 
@@ -110,6 +111,7 @@
             this.txt_SelCName.Name = "txt_SelCName";
             this.txt_SelCName.Size = new System.Drawing.Size(176, 21);
             this.txt_SelCName.TabIndex = 2;
+            this.txt_SelCName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SelCustomer_KeyDown);
             // 
             // SelectCustomer
             // 

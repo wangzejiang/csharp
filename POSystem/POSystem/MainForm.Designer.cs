@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mianMenu = new System.Windows.Forms.MenuStrip();
             this.订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +101,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvSubOrders = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txt_Order_PriceOK = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.txt_OrderRemark2 = new System.Windows.Forms.TextBox();
@@ -107,6 +110,8 @@
             this.button10 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtp_OrderDate = new System.Windows.Forms.DateTimePicker();
+            this.txt_orderNumber = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -132,8 +137,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txt_orderNumber = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.mianMenu.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.tabPage商品列表.SuspendLayout();
@@ -160,6 +164,7 @@
             this.groupBox7.SuspendLayout();
             this.tabPage欢迎页.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // mianMenu
@@ -187,14 +192,14 @@
             // 新订单ToolStripMenuItem
             // 
             this.新订单ToolStripMenuItem.Name = "新订单ToolStripMenuItem";
-            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.新订单ToolStripMenuItem.Text = "新订单";
             this.新订单ToolStripMenuItem.Click += new System.EventHandler(this.新订单ToolStripMenuItem_Click);
             // 
             // 订单查询ToolStripMenuItem
             // 
             this.订单查询ToolStripMenuItem.Name = "订单查询ToolStripMenuItem";
-            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.订单查询ToolStripMenuItem.Text = "订单列表";
             this.订单查询ToolStripMenuItem.Click += new System.EventHandler(this.订单查询ToolStripMenuItem_Click);
             // 
@@ -770,6 +775,7 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1357, 607);
             this.dgvOrders.TabIndex = 6;
             // 
@@ -869,6 +875,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label29);
+            this.panel4.Controls.Add(this.txt_Order_PriceOK);
             this.panel4.Controls.Add(this.label27);
             this.panel4.Controls.Add(this.label26);
             this.panel4.Controls.Add(this.txt_OrderRemark2);
@@ -879,6 +887,22 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1357, 68);
             this.panel4.TabIndex = 3;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(786, 29);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(77, 14);
+            this.label29.TabIndex = 3;
+            this.label29.Text = "实际售价：";
+            // 
+            // txt_Order_PriceOK
+            // 
+            this.txt_Order_PriceOK.Location = new System.Drawing.Point(873, 24);
+            this.txt_Order_PriceOK.Name = "txt_Order_PriceOK";
+            this.txt_Order_PriceOK.Size = new System.Drawing.Size(144, 23);
+            this.txt_Order_PriceOK.TabIndex = 1;
             // 
             // label27
             // 
@@ -916,7 +940,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(805, 23);
+            this.button10.Location = new System.Drawing.Point(1032, 24);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(74, 27);
             this.button10.TabIndex = 0;
@@ -946,6 +970,22 @@
             this.dtp_OrderDate.Name = "dtp_OrderDate";
             this.dtp_OrderDate.Size = new System.Drawing.Size(150, 23);
             this.dtp_OrderDate.TabIndex = 2;
+            // 
+            // txt_orderNumber
+            // 
+            this.txt_orderNumber.Location = new System.Drawing.Point(307, 110);
+            this.txt_orderNumber.Name = "txt_orderNumber";
+            this.txt_orderNumber.Size = new System.Drawing.Size(199, 23);
+            this.txt_orderNumber.TabIndex = 1;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(224, 114);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(77, 14);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "订单编号：";
             // 
             // label22
             // 
@@ -1172,21 +1212,9 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label28
+            // errorProvider
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(224, 114);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(77, 14);
-            this.label28.TabIndex = 4;
-            this.label28.Text = "订单编号：";
-            // 
-            // txt_orderNumber
-            // 
-            this.txt_orderNumber.Location = new System.Drawing.Point(307, 110);
-            this.txt_orderNumber.Name = "txt_orderNumber";
-            this.txt_orderNumber.Size = new System.Drawing.Size(199, 23);
-            this.txt_orderNumber.TabIndex = 1;
+            this.errorProvider.ContainerControl = this;
             // 
             // MainForm
             // 
@@ -1195,13 +1223,15 @@
             this.ClientSize = new System.Drawing.Size(1365, 724);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.mianMenu);
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "订单管理v1.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
-            this.Load += new System.EventHandler(this.PoSystem_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.mianMenu.ResumeLayout(false);
             this.mianMenu.PerformLayout();
             this.MainTabControl.ResumeLayout(false);
@@ -1239,6 +1269,7 @@
             this.tabPage欢迎页.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1355,6 +1386,9 @@
         private System.Windows.Forms.TextBox txt_OrderRemark;
         private System.Windows.Forms.TextBox txt_orderNumber;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox txt_Order_PriceOK;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
 

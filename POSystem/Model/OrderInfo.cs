@@ -19,7 +19,7 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public OrderInfo(int? OID, int? OStatus, DateTime? ODate, DateTime? CreateDate, DateTime? UpdateDate, decimal? OWeigth, decimal? OPrice, decimal? OPriceX, decimal? OPriceZ, string UName, string ONumber, string CName, string CPhone, string CAddress, string ORemark, string ORemark2)
+        public OrderInfo(int? OID, int? OStatus, DateTime? ODate, DateTime? CreateDate, DateTime? UpdateDate, decimal? OWeigth, decimal? OPrice, decimal? OPriceX, decimal? OPriceOK, decimal? OPriceZ, string UName, string ONumber, string CName, string CPhone, string CAddress, string ORemark, string ORemark2)
         {
             this.OID = OID;
             this.OStatus = OStatus;
@@ -29,6 +29,7 @@ namespace POSystem.Model
             this.OWeigth = OWeigth;
             this.OPrice = OPrice;
             this.OPriceX = OPriceX;
+            this.OPriceOK = OPriceOK;
             this.OPriceZ = OPriceZ;
             this.UName = UName;
             this.ONumber = ONumber;
@@ -67,6 +68,24 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
+        public string ONumber { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CPhone { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CAddress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal? OWeigth { get; set; }
 
         /// <summary>
@@ -83,32 +102,13 @@ namespace POSystem.Model
         /// 
         /// </summary>
         public decimal? OPriceZ { get; set; }
+        public decimal? OPriceOK { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public string UName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ONumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CPhone { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CAddress { get; set; }
-
+        
         /// <summary>
         /// 
         /// </summary>

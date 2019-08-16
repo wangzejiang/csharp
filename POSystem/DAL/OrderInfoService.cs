@@ -19,15 +19,17 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddOrderInfo(OrderInfo orderInfo)
         {
-            string sql = "insert into [OrderInfo](oStatus,oDate,create_date,update_date,oWeigth,oPrice,oPriceX,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@CREATEDATE,@UPDATEDATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
+            //string sql = "insert into [OrderInfo](oStatus,oDate,create_date,update_date,oWeigth,oPrice,oPriceX,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@CREATEDATE,@UPDATEDATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
+            string sql = "insert into [OrderInfo](oStatus,oDate,oWeigth,oPrice,oPriceX,oPriceOK,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEOK,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@OSTATUS",orderInfo.OStatus == null ? Convert.DBNull : orderInfo.OStatus),
                 new SqlParameter("@ODATE",orderInfo.ODate == null ? Convert.DBNull : orderInfo.ODate),
-                new SqlParameter("@CREATEDATE",orderInfo.CreateDate == null ? Convert.DBNull : orderInfo.CreateDate),
-                new SqlParameter("@UPDATEDATE",orderInfo.UpdateDate == null ? Convert.DBNull : orderInfo.UpdateDate),
+                //new SqlParameter("@CREATEDATE",orderInfo.CreateDate == null ? Convert.DBNull : orderInfo.CreateDate),
+               // new SqlParameter("@UPDATEDATE",orderInfo.UpdateDate == null ? Convert.DBNull : orderInfo.UpdateDate),
                 new SqlParameter("@OWEIGTH",orderInfo.OWeigth == null ? Convert.DBNull : orderInfo.OWeigth),
                 new SqlParameter("@OPRICE",orderInfo.OPrice == null ? Convert.DBNull : orderInfo.OPrice),
                 new SqlParameter("@OPRICEX",orderInfo.OPriceX == null ? Convert.DBNull : orderInfo.OPriceX),
+                new SqlParameter("@OPRICEOK",orderInfo.OPriceOK == null ? Convert.DBNull : orderInfo.OPriceOK),
                 new SqlParameter("@OPRICEZ",orderInfo.OPriceZ == null ? Convert.DBNull : orderInfo.OPriceZ),
                 new SqlParameter("@UNAME",orderInfo.UName == null ? Convert.DBNull : orderInfo.UName),
                 new SqlParameter("@ONUMBER",orderInfo.ONumber == null ? Convert.DBNull : orderInfo.ONumber),
@@ -84,7 +86,7 @@ namespace POSystem.DAL
             {
                 paraList = GetCondition(orderInfo, ref sql);
             }
-
+            sql += " order by update_date desc";
             IList<OrderInfo> orderInfoList = new List<OrderInfo>();
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
             while (reader.Read())
@@ -98,6 +100,7 @@ namespace POSystem.DAL
                 obj.OWeigth = Convert.IsDBNull(reader["oWeigth"]) ? null : (decimal?)reader["oWeigth"];
                 obj.OPrice = Convert.IsDBNull(reader["oPrice"]) ? null : (decimal?)reader["oPrice"];
                 obj.OPriceX = Convert.IsDBNull(reader["oPriceX"]) ? null : (decimal?)reader["oPriceX"];
+                obj.OPriceOK = Convert.IsDBNull(reader["oPriceOK"]) ? null : (decimal?)reader["oPriceOK"];
                 obj.OPriceZ = Convert.IsDBNull(reader["oPriceZ"]) ? null : (decimal?)reader["oPriceZ"];
                 obj.UName = Convert.IsDBNull(reader["uName"]) ? null : (string)reader["uName"];
                 obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];
@@ -155,6 +158,11 @@ namespace POSystem.DAL
                 sql += " and oPriceX=@OPRICEX";
                 paraList.Add(new SqlParameter("@OPRICEX", orderInfo.OPriceX));
             }
+            if (orderInfo.OPriceOK != null)
+            {
+                sql += " and oPriceOK=@OPRICEOK";
+                paraList.Add(new SqlParameter("@OPRICEOK", orderInfo.OPriceOK));
+            }
             if (orderInfo.OPriceZ != null)
             {
                 sql += " and oPriceZ=@OPRICEZ";
@@ -202,6 +210,7 @@ namespace POSystem.DAL
         {
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
+            fields += "update_date=getDate(),";
             if (orderInfo.OStatus != null)
             {
                 fields += "oStatus=@UpdateOSTATUS,";
@@ -211,16 +220,6 @@ namespace POSystem.DAL
             {
                 fields += "oDate=@UpdateODATE,";
                 paraList.Add(new SqlParameter("@UpdateODATE", orderInfo.ODate));
-            }
-            if (orderInfo.CreateDate != null)
-            {
-                fields += "create_date=@UpdateCREATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateCREATEDATE", orderInfo.CreateDate));
-            }
-            if (orderInfo.UpdateDate != null)
-            {
-                fields += "update_date=@UpdateUPDATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateUPDATEDATE", orderInfo.UpdateDate));
             }
             if (orderInfo.OWeigth != null)
             {
@@ -236,6 +235,11 @@ namespace POSystem.DAL
             {
                 fields += "oPriceX=@UpdateOPRICEX,";
                 paraList.Add(new SqlParameter("@UpdateOPRICEX", orderInfo.OPriceX));
+            }
+            if (orderInfo.OPriceOK != null)
+            {
+                fields += "oPriceOK=@UpdateOPRICEOK,";
+                paraList.Add(new SqlParameter("@UpdateOPRICEOK", orderInfo.OPriceOK));
             }
             if (orderInfo.OPriceZ != null)
             {

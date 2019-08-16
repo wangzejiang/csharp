@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace POSystem.DBUtility
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        public static readonly string ConnectionString = "server=.;database=PODB;uid=sa;pwd=zejiang123";
+        //public static readonly string ConnectionString = "server=.;database=PODB;uid=sa;pwd=zejiang123";
+        public static readonly string ConnectionString = ConfigurationManager.AppSettings["url"];
 
         #region 执行操作，返回表  +static DataTable ExcuteTable(string sql, CommandType type, params SqlParameter[] ps)
         /// <summary>

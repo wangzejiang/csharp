@@ -75,7 +75,7 @@ namespace POSystem.DAL
             {
                 paraList = GetCondition(customerInfo, ref sql);
             }
-
+            sql += " order by update_date desc";
             IList<CustomerInfo> customerInfoList = new List<CustomerInfo>();
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
             while (reader.Read())
@@ -133,15 +133,15 @@ namespace POSystem.DAL
         {
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
-            if (customerInfo.CreateDate != null)
+            //if (customerInfo.CreateDate != null)
+            //{
+            //    fields += "create_date=@UpdateCREATEDATE,";
+            //    paraList.Add(new SqlParameter("@UpdateCREATEDATE", customerInfo.CreateDate));
+            //}
+            //if (customerInfo.UpdateDate != null)
             {
-                fields += "create_date=@UpdateCREATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateCREATEDATE", customerInfo.CreateDate));
-            }
-            if (customerInfo.UpdateDate != null)
-            {
-                fields += "update_date=@UpdateUPDATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateUPDATEDATE", customerInfo.UpdateDate));
+                fields += "update_date=getdate(),";
+                //paraList.Add(new SqlParameter("@UpdateUPDATEDATE", customerInfo.UpdateDate));
             }
             if (customerInfo.CName != null)
             {

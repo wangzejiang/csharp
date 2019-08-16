@@ -19,11 +19,13 @@ namespace POSystem.Model
         /// <summary>
         /// 带参构造
         /// </summary>
-        public OrderProductInfo(Object OpImageID, int? OpID, int? OID, string ONumber, DateTime? UpdateDate, DateTime? CreateDate, decimal? OpPrice, decimal? OpWeigth, decimal? OpCount, decimal? OpPriceX, string OpName, string OpNumber, string OpSuppliter, string OpRemark)
+        public OrderProductInfo(Object OpImageID, int? OpID, int? OID, int? PID, int? CID, string ONumber, DateTime? UpdateDate, DateTime? CreateDate, decimal? OpPrice, decimal? OpWeigth, decimal? OpCount, decimal? OpPriceX, string OpName, string OpNumber, string OpSuppliter, string OpRemark)
         {
             this.OpImageID = OpImageID;
             this.OpID = OpID;
             this.OID = OID;
+            this.CID = CID;
+            this.PID = PID;
             this.ONumber = ONumber;
             this.UpdateDate = UpdateDate;
             this.CreateDate = CreateDate;
@@ -47,6 +49,8 @@ namespace POSystem.Model
         /// </summary>
         public int? OpID { get; set; }
         public int? OID { get; set; }
+        public int? CID { get; set; }
+        public int? PID { get; set; }
         public string ONumber { get; set; }
         /// <summary>
         /// 
@@ -58,16 +62,6 @@ namespace POSystem.Model
         /// </summary>
         public DateTime? CreateDate { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public decimal? OpPrice { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public decimal? OpWeigth { get; set; }
-        
         /// <summary>
         /// 
         /// </summary>
@@ -86,12 +80,23 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
+        public decimal? OpPrice { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? OpWeigth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string OpRemark { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public decimal? OpPriceX { get; set; }
+        //public decimal? OpPriceY { get; set; }
         /// <summary>
         /// 
         /// </summary>

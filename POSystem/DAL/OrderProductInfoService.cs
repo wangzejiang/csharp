@@ -19,13 +19,16 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddOrderProductInfo(OrderProductInfo orderProductInfo)
         {
-            string sql = "insert into [OrderProductInfo](opImageID,oID,oNumber,update_date,create_date,opPrice,opWeigth,opCount,opPriceX,opName,opNumber,opSuppliter,opRemark) values(@OPIMAGEID,@OID,@ONUMBER,@UPDATEDATE,@CREATEDATE,@OPPRICE,@OPWEIGTH,@OPCOUNT,@OPPRICEX,@OPNAME,@OPNUMBER,@OPSUPPLITER,@OPREMARK)";
+            //string sql = "insert into [OrderProductInfo](opImageID,oID,cID,oNumber,update_date,create_date,opPrice,opWeigth,opCount,opPriceX,opName,opNumber,opSuppliter,opRemark) values(@OPIMAGEID,@OID,@CID,@ONUMBER,@UPDATEDATE,@CREATEDATE,@OPPRICE,@OPWEIGTH,@OPCOUNT,@OPPRICEX,@OPNAME,@OPNUMBER,@OPSUPPLITER,@OPREMARK)";
+            string sql = "insert into [OrderProductInfo](opImageID,oID,pID,cID,oNumber,opPrice,opWeigth,opCount,opPriceX,opName,opNumber,opSuppliter,opRemark) values(@OPIMAGEID,@OID,@PID,@CID,@ONUMBER,@OPPRICE,@OPWEIGTH,@OPCOUNT,@OPPRICEX,@OPNAME,@OPNUMBER,@OPSUPPLITER,@OPREMARK)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@OPIMAGEID",orderProductInfo.OpImageID == null ? Convert.DBNull : orderProductInfo.OpImageID),
                 new SqlParameter("@OID",orderProductInfo.OID == null ? Convert.DBNull : orderProductInfo.OID),
+                new SqlParameter("@PID",orderProductInfo.PID == null ? Convert.DBNull : orderProductInfo.PID),
+                new SqlParameter("@CID",orderProductInfo.CID == null ? Convert.DBNull : orderProductInfo.CID),
                 new SqlParameter("@ONUMBER",orderProductInfo.ONumber == null ? Convert.DBNull : orderProductInfo.ONumber),
-                new SqlParameter("@UPDATEDATE",orderProductInfo.UpdateDate == null ? Convert.DBNull : orderProductInfo.UpdateDate),
-                new SqlParameter("@CREATEDATE",orderProductInfo.CreateDate == null ? Convert.DBNull : orderProductInfo.CreateDate),
+                //new SqlParameter("@UPDATEDATE",orderProductInfo.UpdateDate == null ? Convert.DBNull : orderProductInfo.UpdateDate),
+                //new SqlParameter("@CREATEDATE",orderProductInfo.CreateDate == null ? Convert.DBNull : orderProductInfo.CreateDate),
                 new SqlParameter("@OPPRICE",orderProductInfo.OpPrice == null ? Convert.DBNull : orderProductInfo.OpPrice),
                 new SqlParameter("@OPWEIGTH",orderProductInfo.OpWeigth == null ? Convert.DBNull : orderProductInfo.OpWeigth),
                 new SqlParameter("@OPCOUNT",orderProductInfo.OpCount == null ? Convert.DBNull : orderProductInfo.OpCount),
@@ -68,7 +71,47 @@ namespace POSystem.DAL
             SqlParameter[] paras = fieldsParameter.ToArray();
             return SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionString, CommandType.Text, sql, paras);
         }
+        
+        public IList<OrderProductInfo> GetOrderProductMinPrice(OrderProductInfo orderProductInfo)
+        {
+            string sql = "select * from [OrderProductInfo] where 1=1";
+            List<SqlParameter> paraList = new List<SqlParameter>();
+            if (orderProductInfo != null)
+            {
+                paraList = GetCondition(orderProductInfo, ref sql);
+            }
+            sql += " order by create_date desc";
+            IList<OrderProductInfo> orderProductInfoList = new List<OrderProductInfo>();
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
+            while (reader.Read())
+            {
+                orderProductInfoList.Add(createOP(reader));
+            }
+            reader.Close();
+            return orderProductInfoList;
+        }
 
+        private OrderProductInfo createOP(SqlDataReader reader)
+        {
+            OrderProductInfo obj = new OrderProductInfo();
+            obj.OpImageID = Convert.IsDBNull(reader["opImageID"]) ? null : (Object)reader["opImageID"];
+            obj.OpID = Convert.IsDBNull(reader["opID"]) ? null : (int?)reader["opID"];
+            obj.OID = Convert.IsDBNull(reader["oID"]) ? null : (int?)reader["oID"]; // aaa
+            obj.CID = Convert.IsDBNull(reader["cID"]) ? null : (int?)reader["cID"]; // aaa
+            obj.PID = Convert.IsDBNull(reader["pID"]) ? null : (int?)reader["pID"]; // aaa
+            obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];   // aaa
+            obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
+            obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
+            obj.OpPrice = Convert.IsDBNull(reader["opPrice"]) ? null : (decimal?)reader["opPrice"];
+            obj.OpWeigth = Convert.IsDBNull(reader["opWeigth"]) ? null : (decimal?)reader["opWeigth"];
+            obj.OpCount = Convert.IsDBNull(reader["opCount"]) ? null : (decimal?)reader["opCount"];
+            obj.OpPriceX = Convert.IsDBNull(reader["opPriceX"]) ? null : (decimal?)reader["opPriceX"];
+            obj.OpName = Convert.IsDBNull(reader["opName"]) ? null : (string)reader["opName"];
+            obj.OpNumber = Convert.IsDBNull(reader["opNumber"]) ? null : (string)reader["opNumber"];
+            obj.OpSuppliter = Convert.IsDBNull(reader["opSuppliter"]) ? null : (string)reader["opSuppliter"];
+            obj.OpRemark = Convert.IsDBNull(reader["opRemark"]) ? null : (string)reader["opRemark"];
+            return obj;
+        }
         /// <summary>
         /// 查询OrderProductInfo表信息
         /// </summary>
@@ -87,22 +130,7 @@ namespace POSystem.DAL
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
             while (reader.Read())
             {
-                OrderProductInfo obj = new OrderProductInfo();
-                obj.OpImageID = Convert.IsDBNull(reader["opImageID"]) ? null : (Object)reader["opImageID"];
-                obj.OpID = Convert.IsDBNull(reader["opID"]) ? null : (int?)reader["opID"];
-                obj.OID = Convert.IsDBNull(reader["oID"]) ? null : (int?)reader["oID"]; // aaa
-                obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];   // aaa
-                obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
-                obj.CreateDate = Convert.IsDBNull(reader["create_date"]) ? null : (DateTime?)reader["create_date"];
-                obj.OpPrice = Convert.IsDBNull(reader["opPrice"]) ? null : (decimal?)reader["opPrice"];
-                obj.OpWeigth = Convert.IsDBNull(reader["opWeigth"]) ? null : (decimal?)reader["opWeigth"];
-                obj.OpCount = Convert.IsDBNull(reader["opCount"]) ? null : (decimal?)reader["opCount"];
-                obj.OpPriceX = Convert.IsDBNull(reader["opPriceX"]) ? null : (decimal?)reader["opPriceX"];
-                obj.OpName = Convert.IsDBNull(reader["opName"]) ? null : (string)reader["opName"];
-                obj.OpNumber = Convert.IsDBNull(reader["opNumber"]) ? null : (string)reader["opNumber"];
-                obj.OpSuppliter = Convert.IsDBNull(reader["opSuppliter"]) ? null : (string)reader["opSuppliter"];
-                obj.OpRemark = Convert.IsDBNull(reader["opRemark"]) ? null : (string)reader["opRemark"];
-                orderProductInfoList.Add(obj);
+                orderProductInfoList.Add(createOP(reader));
             }
             reader.Close();
             return orderProductInfoList;
@@ -121,10 +149,20 @@ namespace POSystem.DAL
                 sql += " and opID=@OPID";
                 paraList.Add(new SqlParameter("@OPID", orderProductInfo.OpID));
             }
+            if (orderProductInfo.PID != null)
+            {
+                sql += " and pID=@PID";
+                paraList.Add(new SqlParameter("@PID", orderProductInfo.PID));
+            }
             if (orderProductInfo.OID != null)
             {
                 sql += " and oID=@OID";
                 paraList.Add(new SqlParameter("@OID", orderProductInfo.OID));
+            }
+            if (orderProductInfo.CID != null)
+            {
+                sql += " and cID=@CID";
+                paraList.Add(new SqlParameter("@CID", orderProductInfo.CID));
             }
             if (orderProductInfo.ONumber != null)
             {
@@ -188,6 +226,7 @@ namespace POSystem.DAL
         {
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
+            fields += "update_date=getdate(),";
             if (orderProductInfo.OpImageID != null)
             {
                 fields += "opImageID=@UpdateOPIMAGEID,";
@@ -198,20 +237,20 @@ namespace POSystem.DAL
                 fields += "oID=@UpdateOID,";
                 paraList.Add(new SqlParameter("@UpdateOID", orderProductInfo.OID));
             }
+            if (orderProductInfo.PID != null)
+            {
+                fields += "pID=@UpdatePID,";
+                paraList.Add(new SqlParameter("@UpdatePID", orderProductInfo.PID));
+            }
+            if (orderProductInfo.CID != null)
+            {
+                fields += "cID=@UpdateCID,";
+                paraList.Add(new SqlParameter("@UpdateCID", orderProductInfo.CID));
+            }
             if (orderProductInfo.ONumber != null)
             {
                 fields += "oNumber=@UpdateONUMBER,";
                 paraList.Add(new SqlParameter("@UpdateONUMBER", orderProductInfo.ONumber));
-            }
-            if (orderProductInfo.UpdateDate != null)
-            {
-                fields += "update_date=@UpdateUPDATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateUPDATEDATE", orderProductInfo.UpdateDate));
-            }
-            if (orderProductInfo.CreateDate != null)
-            {
-                fields += "create_date=@UpdateCREATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateCREATEDATE", orderProductInfo.CreateDate));
             }
             if (orderProductInfo.OpPrice != null)
             {

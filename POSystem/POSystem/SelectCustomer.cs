@@ -18,13 +18,23 @@ namespace POSystem
             mForm = m;
             InitializeComponent();
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void selectCustomers()
         {
             CustomerInfo cinfo = new CustomerInfo();
             cinfo.CName = txt_SelCName.Text;
             cinfo.CPhone = txt_SelCPhone.Text;
             Common.selectCustomers(dgvCustomers, cinfo);
+        }
+        private void txt_SelCustomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                selectCustomers();
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            selectCustomers();
         }
 
         private void SelectCustomer_Load(object sender, EventArgs e)

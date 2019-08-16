@@ -65,7 +65,10 @@ namespace POSystem.BLL
         {
             return service.GetOrderProductInfo(orderProductInfo).Count > 0 ? service.GetOrderProductInfo(orderProductInfo)[0] : null;
         }
-
+        public static OrderProductInfo GetOrderProductMinPrice(OrderProductInfo orderProductInfo)
+        {
+            return service.GetOrderProductMinPrice(orderProductInfo).Count > 0 ? service.GetOrderProductMinPrice(orderProductInfo)[0] : null;
+        }
         /// <summary>
         /// 查询OrderProductInfo表信息是否存在
         /// </summary>

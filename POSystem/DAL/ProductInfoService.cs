@@ -19,12 +19,9 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddProductInfo(ProductInfo productInfo)
         {
-            // string sql = "insert into [ProductInfo](pImageID,update_date,create_date,pPrice,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@UPDATEDATE,@CREATEDATE,@PPRICE,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
             string sql = "insert into [ProductInfo](pImageID,pPrice,pPriceX,pWeigth,pName,pNumber,pSuppliter,pRemark) values(@PIMAGEID,@PPRICE,@PPRICEX,@PWEIGTH,@PNAME,@PNUMBER,@PSUPPLITER,@PREMARK)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@PIMAGEID",productInfo.PImageID == null ? Convert.DBNull : productInfo.PImageID),
-                // new SqlParameter("@UPDATEDATE",productInfo.UpdateDate == null ? Convert.DBNull : productInfo.UpdateDate),
-               // new SqlParameter("@CREATEDATE",productInfo.CreateDate == null ? Convert.DBNull : productInfo.CreateDate),
                 new SqlParameter("@PPRICE",productInfo.PPrice == null ? Convert.DBNull : productInfo.PPrice),
                 new SqlParameter("@PPRICEX",productInfo.PPriceX == null ? Convert.DBNull : productInfo.PPriceX),
                 new SqlParameter("@PWEIGTH",productInfo.PWeigth == null ? Convert.DBNull : productInfo.PWeigth),
@@ -79,7 +76,7 @@ namespace POSystem.DAL
             {
                 paraList = GetCondition(productInfo, ref sql);
             }
-
+            sql += " order by update_date desc";
             IList<ProductInfo> productInfoList = new List<ProductInfo>();
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.ConnectionString, CommandType.Text, sql, paraList.ToArray());
             while (reader.Read())
@@ -204,20 +201,11 @@ namespace POSystem.DAL
         {
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
+            fields += "update_date=getdate(),";
             if (productInfo.PImageID != null)
             {
                 fields += "pImageID=@UpdatePIMAGEID,";
                 paraList.Add(new SqlParameter("@UpdatePIMAGEID", productInfo.PImageID));
-            }
-            if (productInfo.UpdateDate != null)
-            {
-                fields += "update_date=@UpdateUPDATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateUPDATEDATE", productInfo.UpdateDate));
-            }
-            if (productInfo.CreateDate != null)
-            {
-                fields += "create_date=@UpdateCREATEDATE,";
-                paraList.Add(new SqlParameter("@UpdateCREATEDATE", productInfo.CreateDate));
             }
             if (productInfo.PPrice != null)
             {
