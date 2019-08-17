@@ -121,7 +121,7 @@
             this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.groupBox3);
             this.Name = "SelectCustomer";
-            this.Text = "SelectCustomer";
+            this.Text = "选择客户";
             this.Load += new System.EventHandler(this.SelectCustomer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.groupBox3.ResumeLayout(false);

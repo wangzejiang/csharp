@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POSystem.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,8 +16,8 @@ namespace POSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
-            //Application.Run(new MainForm());
+            //Application.Run(new LoginForm());
+            Application.Run(new MainForm(new UserInfo()));
         }
     }
 }

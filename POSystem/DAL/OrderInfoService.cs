@@ -19,13 +19,12 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddOrderInfo(OrderInfo orderInfo)
         {
-            //string sql = "insert into [OrderInfo](oStatus,oDate,create_date,update_date,oWeigth,oPrice,oPriceX,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@CREATEDATE,@UPDATEDATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
-            string sql = "insert into [OrderInfo](oStatus,oDate,oWeigth,oPrice,oPriceX,oPriceOK,oPriceZ,uName,oNumber,cName,cPhone,cAddress,oRemark,oRemark2) values(@OSTATUS,@ODATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEOK,@OPRICEZ,@UNAME,@ONUMBER,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
+            string sql = "insert into [OrderInfo](cID,oStatus,oDate,oWeigth,oPrice,oPriceX,oPriceOK,oPriceZ,uName,oNumber,otherPrice,cName,cPhone,cAddress,oRemark,oRemark2) "
+                +"values(@CID,@OSTATUS,@ODATE,@OWEIGTH,@OPRICE,@OPRICEX,@OPRICEOK,@OPRICEZ,@UNAME,@ONUMBER,@OTHERPRICE,@CNAME,@CPHONE,@CADDRESS,@OREMARK,@OREMARK2)";
             SqlParameter[] paras = new SqlParameter[]{
+                new SqlParameter("@CID",orderInfo.CID == null ? Convert.DBNull : orderInfo.CID),
                 new SqlParameter("@OSTATUS",orderInfo.OStatus == null ? Convert.DBNull : orderInfo.OStatus),
                 new SqlParameter("@ODATE",orderInfo.ODate == null ? Convert.DBNull : orderInfo.ODate),
-                //new SqlParameter("@CREATEDATE",orderInfo.CreateDate == null ? Convert.DBNull : orderInfo.CreateDate),
-               // new SqlParameter("@UPDATEDATE",orderInfo.UpdateDate == null ? Convert.DBNull : orderInfo.UpdateDate),
                 new SqlParameter("@OWEIGTH",orderInfo.OWeigth == null ? Convert.DBNull : orderInfo.OWeigth),
                 new SqlParameter("@OPRICE",orderInfo.OPrice == null ? Convert.DBNull : orderInfo.OPrice),
                 new SqlParameter("@OPRICEX",orderInfo.OPriceX == null ? Convert.DBNull : orderInfo.OPriceX),
@@ -33,6 +32,7 @@ namespace POSystem.DAL
                 new SqlParameter("@OPRICEZ",orderInfo.OPriceZ == null ? Convert.DBNull : orderInfo.OPriceZ),
                 new SqlParameter("@UNAME",orderInfo.UName == null ? Convert.DBNull : orderInfo.UName),
                 new SqlParameter("@ONUMBER",orderInfo.ONumber == null ? Convert.DBNull : orderInfo.ONumber),
+                new SqlParameter("@OTHERPRICE",orderInfo.OtherPrice == null ? Convert.DBNull : orderInfo.OtherPrice),
                 new SqlParameter("@CNAME",orderInfo.CName == null ? Convert.DBNull : orderInfo.CName),
                 new SqlParameter("@CPHONE",orderInfo.CPhone == null ? Convert.DBNull : orderInfo.CPhone),
                 new SqlParameter("@CADDRESS",orderInfo.CAddress == null ? Convert.DBNull : orderInfo.CAddress),
@@ -92,6 +92,7 @@ namespace POSystem.DAL
             while (reader.Read())
             {
                 OrderInfo obj = new OrderInfo();
+                obj.CID = Convert.IsDBNull(reader["cID"]) ? null : (int?)reader["cID"];
                 obj.OID = Convert.IsDBNull(reader["oID"]) ? null : (int?)reader["oID"];
                 obj.OStatus = Convert.IsDBNull(reader["oStatus"]) ? null : (int?)reader["oStatus"];
                 obj.ODate = Convert.IsDBNull(reader["oDate"]) ? null : (DateTime?)reader["oDate"];
@@ -104,6 +105,7 @@ namespace POSystem.DAL
                 obj.OPriceZ = Convert.IsDBNull(reader["oPriceZ"]) ? null : (decimal?)reader["oPriceZ"];
                 obj.UName = Convert.IsDBNull(reader["uName"]) ? null : (string)reader["uName"];
                 obj.ONumber = Convert.IsDBNull(reader["oNumber"]) ? null : (string)reader["oNumber"];
+                obj.OtherPrice = Convert.IsDBNull(reader["otherPrice"]) ? null : (decimal?)reader["otherPrice"];
                 obj.CName = Convert.IsDBNull(reader["cName"]) ? null : (string)reader["cName"];
                 obj.CPhone = Convert.IsDBNull(reader["cPhone"]) ? null : (string)reader["cPhone"];
                 obj.CAddress = Convert.IsDBNull(reader["cAddress"]) ? null : (string)reader["cAddress"];
@@ -122,6 +124,11 @@ namespace POSystem.DAL
             {
                 sql += " and oID=@OID";
                 paraList.Add(new SqlParameter("@OID", orderInfo.OID));
+            }
+            if (orderInfo.CID != null)
+            {
+                sql += " and cID=@CID";
+                paraList.Add(new SqlParameter("@CID", orderInfo.CID));
             }
             if (orderInfo.OStatus != null)
             {
@@ -173,6 +180,11 @@ namespace POSystem.DAL
                 sql += " and uName=@UNAME";
                 paraList.Add(new SqlParameter("@UNAME", orderInfo.UName));
             }
+            if (orderInfo.OtherPrice != null)
+            {
+                sql += " and otherPrice=@OTHERPRICE";
+                paraList.Add(new SqlParameter("@OTHERPRICE", orderInfo.OtherPrice));
+            }
             if (orderInfo.ONumber != null)
             {
                 sql += " and oNumber like @ONUMBER";
@@ -211,6 +223,11 @@ namespace POSystem.DAL
             List<SqlParameter> paraList = new List<SqlParameter>();
             fields = "";
             fields += "update_date=getDate(),";
+            if (orderInfo.CID != null)
+            {
+                fields += "cID=@UpdateCID,";
+                paraList.Add(new SqlParameter("@UpdateCID", orderInfo.CID));
+            }
             if (orderInfo.OStatus != null)
             {
                 fields += "oStatus=@UpdateOSTATUS,";
@@ -225,6 +242,11 @@ namespace POSystem.DAL
             {
                 fields += "oWeigth=@UpdateOWEIGTH,";
                 paraList.Add(new SqlParameter("@UpdateOWEIGTH", orderInfo.OWeigth));
+            }
+            if (orderInfo.OtherPrice != null)
+            {
+                fields += "otherPrice=@UpdateOTHERPRICE,";
+                paraList.Add(new SqlParameter("@UpdateOTHERPRICE", orderInfo.OtherPrice));
             }
             if (orderInfo.OPrice != null)
             {

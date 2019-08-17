@@ -12,8 +12,8 @@ namespace POSystem
 {
     public partial class SelectCustomer : Form
     {
-        private MainForm mForm;
-        public SelectCustomer(MainForm m)
+        private IForm mForm;
+        public SelectCustomer(IForm m)
         {
             mForm = m;
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace POSystem
             string CName = dgvCustomers.CurrentRow.Cells["CName"].Value.ToString();
             string CPhone = dgvCustomers.CurrentRow.Cells["CPhone"].Value.ToString();
             string CAddress = dgvCustomers.CurrentRow.Cells["CAddress"].Value.ToString();
-            mForm.setCustomer(CID, CName, CPhone, CAddress);
+            mForm.setCustomer(new CustomerInfo(CID, null, null, CName, CPhone, CAddress));
             this.Close();
         }
     }

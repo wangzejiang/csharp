@@ -18,10 +18,11 @@ namespace POSystem
     {
         private ProductInfo pro = new ProductInfo();
         private Attachment att = new Attachment();
-        internal MainForm mainForm;
+        private MainForm mainForm;
 
-        public EditProduct(int PID, Guid PImageID)
+        public EditProduct(MainForm mForm, int PID, Guid PImageID)
         {
+            this.mainForm = mForm;
             pro.PID = PID;
             att.ID = PImageID;
             InitializeComponent();

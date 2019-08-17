@@ -171,7 +171,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Gb_ProductWhere);
             this.Name = "SelectProduct";
-            this.Text = "SelectProduct";
+            this.Text = "选择商品";
             this.Load += new System.EventHandler(this.SelectProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.Gb_ProductWhere.ResumeLayout(false);

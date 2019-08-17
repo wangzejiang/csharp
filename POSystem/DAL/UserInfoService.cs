@@ -19,12 +19,19 @@ namespace POSystem.DAL
         /// <returns>受影响行数</returns>
         public int AddUserInfo(UserInfo userInfo)
         {
-            string sql = "insert into [UserInfo](create_date,update_date,uName,uPassword) values(@CREATEDATE,@UPDATEDATE,@UNAME,@UPASSWORD)";
+            string sql = "insert into [UserInfo](create_date,update_date,uName,uPassword,attr1,attr2,attr3,attr4,attr5,attr6) "+
+                "values(@CREATEDATE,@UPDATEDATE,@UNAME,@UPASSWORD,@ATTR1,@ATTR2,@ATTR3,@ATTR4,@ATTR5,@ATTR6)";
             SqlParameter[] paras = new SqlParameter[]{
                 new SqlParameter("@CREATEDATE",userInfo.CreateDate == null ? Convert.DBNull : userInfo.CreateDate),
                 new SqlParameter("@UPDATEDATE",userInfo.UpdateDate == null ? Convert.DBNull : userInfo.UpdateDate),
                 new SqlParameter("@UNAME",userInfo.UName == null ? Convert.DBNull : userInfo.UName),
-                new SqlParameter("@UPASSWORD",userInfo.UPassword == null ? Convert.DBNull : userInfo.UPassword)
+                new SqlParameter("@UPASSWORD",userInfo.UPassword == null ? Convert.DBNull : userInfo.UPassword),
+                new SqlParameter("@ATTR1",userInfo.Attr1 == null ? Convert.DBNull : userInfo.Attr1),
+                new SqlParameter("@ATTR2",userInfo.Attr2 == null ? Convert.DBNull : userInfo.Attr2),
+                new SqlParameter("@ATTR3",userInfo.Attr3 == null ? Convert.DBNull : userInfo.Attr3),
+                new SqlParameter("@ATTR4",userInfo.Attr4 == null ? Convert.DBNull : userInfo.Attr4),
+                new SqlParameter("@ATTR5",userInfo.Attr5 == null ? Convert.DBNull : userInfo.Attr5),
+                new SqlParameter("@ATTR6",userInfo.Attr6 == null ? Convert.DBNull : userInfo.Attr6)
             };
             return SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionString, CommandType.Text, sql, paras);
         }
@@ -84,6 +91,12 @@ namespace POSystem.DAL
                 obj.UpdateDate = Convert.IsDBNull(reader["update_date"]) ? null : (DateTime?)reader["update_date"];
                 obj.UName = Convert.IsDBNull(reader["uName"]) ? null : (string)reader["uName"];
                 obj.UPassword = Convert.IsDBNull(reader["uPassword"]) ? null : (string)reader["uPassword"];
+                obj.Attr1 = Convert.IsDBNull(reader["attr1"]) ? null : (string)reader["attr1"];
+                obj.Attr2 = Convert.IsDBNull(reader["attr2"]) ? null : (string)reader["attr2"];
+                obj.Attr3 = Convert.IsDBNull(reader["attr3"]) ? null : (string)reader["attr3"];
+                obj.Attr4 = Convert.IsDBNull(reader["attr4"]) ? null : (string)reader["attr4"];
+                obj.Attr5 = Convert.IsDBNull(reader["attr5"]) ? null : (string)reader["attr5"];
+                obj.Attr6 = Convert.IsDBNull(reader["attr6"]) ? null : (string)reader["attr6"];
                 userInfoList.Add(obj);
             }
             reader.Close();
@@ -118,6 +131,36 @@ namespace POSystem.DAL
                 sql += " and uPassword=@UPASSWORD";
                 paraList.Add(new SqlParameter("@UPASSWORD", userInfo.UPassword));
             }
+            if (userInfo.Attr1 != null)
+            {
+                sql += " and attr1=@ATTR1";
+                paraList.Add(new SqlParameter("@ATTR1", userInfo.Attr1));
+            }
+            if (userInfo.Attr2 != null)
+            {
+                sql += " and attr2=@ATTR2";
+                paraList.Add(new SqlParameter("@ATTR2", userInfo.Attr2));
+            }
+            if (userInfo.Attr3 != null)
+            {
+                sql += " and attr3=@ATTR3";
+                paraList.Add(new SqlParameter("@ATTR3", userInfo.Attr3));
+            }
+            if (userInfo.Attr4 != null)
+            {
+                sql += " and attr4=@ATTR4";
+                paraList.Add(new SqlParameter("@ATTR4", userInfo.Attr4));
+            }
+            if (userInfo.Attr5 != null)
+            {
+                sql += " and attr5=@ATTR5";
+                paraList.Add(new SqlParameter("@ATTR5", userInfo.Attr5));
+            }
+            if (userInfo.Attr6 != null)
+            {
+                sql += " and attr6=@ATTR6";
+                paraList.Add(new SqlParameter("@ATTR6", userInfo.Attr6));
+            }
             return paraList;
         }
 
@@ -144,6 +187,36 @@ namespace POSystem.DAL
             {
                 fields += "uPassword=@UpdateUPASSWORD,";
                 paraList.Add(new SqlParameter("@UpdateUPASSWORD", userInfo.UPassword));
+            }
+            if (userInfo.Attr1 != null)
+            {
+                fields += "attr1=@UpdateATTR1,";
+                paraList.Add(new SqlParameter("@UpdateATTR1", userInfo.Attr1));
+            }
+            if (userInfo.Attr2 != null)
+            {
+                fields += "attr2=@UpdateATTR2,";
+                paraList.Add(new SqlParameter("@UpdateATTR2", userInfo.Attr2));
+            }
+            if (userInfo.Attr3 != null)
+            {
+                fields += "attr3=@UpdateATTR3,";
+                paraList.Add(new SqlParameter("@UpdateATTR3", userInfo.Attr3));
+            }
+            if (userInfo.Attr4 != null)
+            {
+                fields += "attr4=@UpdateATTR4,";
+                paraList.Add(new SqlParameter("@UpdateATTR4", userInfo.Attr4));
+            }
+            if (userInfo.Attr5 != null)
+            {
+                fields += "attr5=@UpdateATTR5,";
+                paraList.Add(new SqlParameter("@UpdateATTR5", userInfo.Attr5));
+            }
+            if (userInfo.Attr6 != null)
+            {
+                fields += "attr6=@UpdateATTR6,";
+                paraList.Add(new SqlParameter("@UpdateATTR6", userInfo.Attr6));
             }
             fields = fields.Substring(0, fields.Length - 1);
             return paraList;

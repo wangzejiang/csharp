@@ -12,8 +12,8 @@ namespace POSystem
 {
     public partial class SelectProduct : Form
     {
-        private MainForm mForm;
-        public SelectProduct(MainForm m)
+        private IForm mForm;
+        public SelectProduct(IForm m)
         {
             mForm = m;
             InitializeComponent();

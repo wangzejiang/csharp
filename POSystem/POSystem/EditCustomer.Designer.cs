@@ -42,7 +42,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(156, 378);
+            this.button5.Location = new System.Drawing.Point(95, 327);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(104, 38);
             this.button5.TabIndex = 9;
@@ -52,7 +52,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(287, 378);
+            this.button1.Location = new System.Drawing.Point(226, 327);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 38);
             this.button1.TabIndex = 9;
@@ -68,7 +68,7 @@
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.textBox_cPhone);
-            this.groupBox5.Location = new System.Drawing.Point(72, 54);
+            this.groupBox5.Location = new System.Drawing.Point(12, 12);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(419, 295);
             this.groupBox5.TabIndex = 10;
@@ -128,13 +128,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 449);
+            this.ClientSize = new System.Drawing.Size(441, 386);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
             this.Name = "EditCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "EditCustomer";
+            this.Text = "客户编辑";
             this.Load += new System.EventHandler(this.EditCustomer_Load);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();

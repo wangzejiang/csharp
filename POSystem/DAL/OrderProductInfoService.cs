@@ -74,7 +74,7 @@ namespace POSystem.DAL
         
         public IList<OrderProductInfo> GetOrderProductMinPrice(OrderProductInfo orderProductInfo)
         {
-            string sql = "select * from [OrderProductInfo] where 1=1";
+            string sql = "select t.*, a.Content as OpImageBytes from [OrderProductInfo] t, [Attachment] a where t.opImageID=a.ID";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if (orderProductInfo != null)
             {
@@ -110,6 +110,7 @@ namespace POSystem.DAL
             obj.OpNumber = Convert.IsDBNull(reader["opNumber"]) ? null : (string)reader["opNumber"];
             obj.OpSuppliter = Convert.IsDBNull(reader["opSuppliter"]) ? null : (string)reader["opSuppliter"];
             obj.OpRemark = Convert.IsDBNull(reader["opRemark"]) ? null : (string)reader["opRemark"];
+            obj.OpImageBytes = Convert.IsDBNull(reader["opImageBytes"]) ? null : (byte[])reader["opImageBytes"];
             return obj;
         }
         /// <summary>
@@ -119,7 +120,7 @@ namespace POSystem.DAL
         /// <returns>IList对象集合</returns>
         public IList<OrderProductInfo> GetOrderProductInfo(OrderProductInfo orderProductInfo)
         {
-            string sql = "select * from [OrderProductInfo] where 1=1";
+            string sql = "select t.*, a.Content as OpImageBytes from [OrderProductInfo] t, [Attachment] a where t.opImageID=a.ID";
             List<SqlParameter> paraList = new List<SqlParameter>();
             if (orderProductInfo != null)
             {
