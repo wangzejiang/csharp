@@ -97,6 +97,7 @@
             // 
             this.txt_orderNumber.Location = new System.Drawing.Point(307, 110);
             this.txt_orderNumber.Name = "txt_orderNumber";
+            this.txt_orderNumber.ReadOnly = true;
             this.txt_orderNumber.Size = new System.Drawing.Size(199, 21);
             this.txt_orderNumber.TabIndex = 1;
             // 
@@ -221,6 +222,7 @@
             // 
             this.txt_WeigthCount.Location = new System.Drawing.Point(93, 30);
             this.txt_WeigthCount.Name = "txt_WeigthCount";
+            this.txt_WeigthCount.ReadOnly = true;
             this.txt_WeigthCount.Size = new System.Drawing.Size(130, 21);
             this.txt_WeigthCount.TabIndex = 3;
             this.txt_WeigthCount.Text = "0";
@@ -256,6 +258,7 @@
             // 
             this.txt_OrderPriceXCount.Location = new System.Drawing.Point(325, 68);
             this.txt_OrderPriceXCount.Name = "txt_OrderPriceXCount";
+            this.txt_OrderPriceXCount.ReadOnly = true;
             this.txt_OrderPriceXCount.Size = new System.Drawing.Size(130, 21);
             this.txt_OrderPriceXCount.TabIndex = 3;
             this.txt_OrderPriceXCount.Text = "0";
@@ -264,6 +267,7 @@
             // 
             this.txt_OrderPriceCount.Location = new System.Drawing.Point(325, 30);
             this.txt_OrderPriceCount.Name = "txt_OrderPriceCount";
+            this.txt_OrderPriceCount.ReadOnly = true;
             this.txt_OrderPriceCount.Size = new System.Drawing.Size(130, 21);
             this.txt_OrderPriceCount.TabIndex = 3;
             this.txt_OrderPriceCount.Text = "0";
@@ -272,6 +276,7 @@
             // 
             this.txt_OrderPriceZCount.Location = new System.Drawing.Point(93, 68);
             this.txt_OrderPriceZCount.Name = "txt_OrderPriceZCount";
+            this.txt_OrderPriceZCount.ReadOnly = true;
             this.txt_OrderPriceZCount.Size = new System.Drawing.Size(130, 21);
             this.txt_OrderPriceZCount.TabIndex = 3;
             this.txt_OrderPriceZCount.Text = "0";

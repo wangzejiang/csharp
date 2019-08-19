@@ -93,8 +93,10 @@
             this.tabPage订单列表 = new System.Windows.Forms.TabPage();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.ck_OStatus = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.txt_SelOCName = new System.Windows.Forms.TextBox();
             this.txt_SelONumber = new System.Windows.Forms.TextBox();
@@ -148,10 +150,8 @@
             this.label31 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ck_OStatus = new System.Windows.Forms.CheckBox();
+            this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mianMenu.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.tabPage商品列表.SuspendLayout();
@@ -192,7 +192,8 @@
             this.mianMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.订单ToolStripMenuItem,
             this.商品ToolStripMenuItem,
-            this.客户ToolStripMenuItem});
+            this.客户ToolStripMenuItem,
+            this.退出ToolStripMenuItem});
             this.mianMenu.Location = new System.Drawing.Point(0, 0);
             this.mianMenu.Name = "mianMenu";
             this.mianMenu.Size = new System.Drawing.Size(1316, 28);
@@ -212,21 +213,21 @@
             // 新订单ToolStripMenuItem
             // 
             this.新订单ToolStripMenuItem.Name = "新订单ToolStripMenuItem";
-            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.新订单ToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.新订单ToolStripMenuItem.Text = "新订单";
             this.新订单ToolStripMenuItem.Click += new System.EventHandler(this.新订单ToolStripMenuItem_Click);
             // 
             // 未打印订单ToolStripMenuItem
             // 
             this.未打印订单ToolStripMenuItem.Name = "未打印订单ToolStripMenuItem";
-            this.未打印订单ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.未打印订单ToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.未打印订单ToolStripMenuItem.Text = "未打印订单";
             this.未打印订单ToolStripMenuItem.Click += new System.EventHandler(this.未打印订单ToolStripMenuItem_Click);
             // 
             // 订单查询ToolStripMenuItem
             // 
             this.订单查询ToolStripMenuItem.Name = "订单查询ToolStripMenuItem";
-            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.订单查询ToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.订单查询ToolStripMenuItem.Text = "已打印订单";
             this.订单查询ToolStripMenuItem.Click += new System.EventHandler(this.订单查询ToolStripMenuItem_Click);
             // 
@@ -812,6 +813,7 @@
             this.groupBox6.Controls.Add(this.ck_OStatus);
             this.groupBox6.Controls.Add(this.label15);
             this.groupBox6.Controls.Add(this.label16);
+            this.groupBox6.Controls.Add(this.button11);
             this.groupBox6.Controls.Add(this.button6);
             this.groupBox6.Controls.Add(this.txt_SelOCName);
             this.groupBox6.Controls.Add(this.txt_SelONumber);
@@ -822,6 +824,17 @@
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "筛选";
+            // 
+            // ck_OStatus
+            // 
+            this.ck_OStatus.AutoSize = true;
+            this.ck_OStatus.Location = new System.Drawing.Point(551, 26);
+            this.ck_OStatus.Name = "ck_OStatus";
+            this.ck_OStatus.Size = new System.Drawing.Size(68, 18);
+            this.ck_OStatus.TabIndex = 3;
+            this.ck_OStatus.Text = "已打印";
+            this.ck_OStatus.UseVisualStyleBackColor = true;
+            this.ck_OStatus.CheckedChanged += new System.EventHandler(this.ck_OStatus_CheckedChanged);
             // 
             // label15
             // 
@@ -840,6 +853,16 @@
             this.label16.Size = new System.Drawing.Size(56, 14);
             this.label16.TabIndex = 0;
             this.label16.Text = "订单号:";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(706, 23);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 1;
+            this.button11.Text = "打印";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button6
             // 
@@ -1022,6 +1045,7 @@
             // 
             this.txt_orderNumber.Location = new System.Drawing.Point(307, 110);
             this.txt_orderNumber.Name = "txt_orderNumber";
+            this.txt_orderNumber.ReadOnly = true;
             this.txt_orderNumber.Size = new System.Drawing.Size(199, 23);
             this.txt_orderNumber.TabIndex = 1;
             // 
@@ -1146,6 +1170,7 @@
             // 
             this.txt_WeigthCount.Location = new System.Drawing.Point(93, 30);
             this.txt_WeigthCount.Name = "txt_WeigthCount";
+            this.txt_WeigthCount.ReadOnly = true;
             this.txt_WeigthCount.Size = new System.Drawing.Size(130, 23);
             this.txt_WeigthCount.TabIndex = 3;
             this.txt_WeigthCount.Text = "0";
@@ -1181,6 +1206,7 @@
             // 
             this.txt_OrderPriceXCount.Location = new System.Drawing.Point(325, 68);
             this.txt_OrderPriceXCount.Name = "txt_OrderPriceXCount";
+            this.txt_OrderPriceXCount.ReadOnly = true;
             this.txt_OrderPriceXCount.Size = new System.Drawing.Size(130, 23);
             this.txt_OrderPriceXCount.TabIndex = 3;
             this.txt_OrderPriceXCount.Text = "0";
@@ -1189,6 +1215,7 @@
             // 
             this.txt_OrderPriceCount.Location = new System.Drawing.Point(325, 30);
             this.txt_OrderPriceCount.Name = "txt_OrderPriceCount";
+            this.txt_OrderPriceCount.ReadOnly = true;
             this.txt_OrderPriceCount.Size = new System.Drawing.Size(130, 23);
             this.txt_OrderPriceCount.TabIndex = 3;
             this.txt_OrderPriceCount.Text = "0";
@@ -1197,6 +1224,7 @@
             // 
             this.txt_OrderPriceZCount.Location = new System.Drawing.Point(93, 68);
             this.txt_OrderPriceZCount.Name = "txt_OrderPriceZCount";
+            this.txt_OrderPriceZCount.ReadOnly = true;
             this.txt_OrderPriceZCount.Size = new System.Drawing.Size(130, 23);
             this.txt_OrderPriceZCount.TabIndex = 3;
             this.txt_OrderPriceZCount.Text = "0";
@@ -1349,27 +1377,16 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "label11";
             // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // ck_OStatus
+            // 退出ToolStripMenuItem
             // 
-            this.ck_OStatus.AutoSize = true;
-            this.ck_OStatus.Location = new System.Drawing.Point(551, 26);
-            this.ck_OStatus.Name = "ck_OStatus";
-            this.ck_OStatus.Size = new System.Drawing.Size(68, 18);
-            this.ck_OStatus.TabIndex = 3;
-            this.ck_OStatus.Text = "已打印";
-            this.ck_OStatus.UseVisualStyleBackColor = true;
+            this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.退出ToolStripMenuItem.Text = "退出";
+            this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1469,7 +1486,6 @@
         private System.Windows.Forms.TabPage tabPage新订单;
         private System.Windows.Forms.TabPage tabPage欢迎页;
         private System.Windows.Forms.GroupBox Gb_ProductWhere;
-        private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox_pImage;
@@ -1486,7 +1502,6 @@
         private System.Windows.Forms.TextBox textBox_pSuppliter;
         private System.Windows.Forms.TextBox textBox_pPrice;
         private System.Windows.Forms.TextBox textBox_pName;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
@@ -1568,6 +1583,8 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ToolStripMenuItem 未打印订单ToolStripMenuItem;
         private System.Windows.Forms.CheckBox ck_OStatus;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
     }
 }
 

@@ -70,10 +70,6 @@ namespace POSystem.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? OtherPrice { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public string ONumber { get; set; }
         /// <summary>
         /// 
@@ -98,7 +94,10 @@ namespace POSystem.Model
         /// 
         /// </summary>
         public decimal? OPrice { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? OtherPrice { get; set; }
         /// <summary>
         /// 
         /// </summary>

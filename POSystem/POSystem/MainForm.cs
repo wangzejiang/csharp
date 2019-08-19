@@ -1,4 +1,5 @@
-﻿using POSystem.BLL;
+﻿using Aspose.Cells;
+using POSystem.BLL;
 using POSystem.Model;
 using System;
 using System.Collections.Generic;
@@ -120,6 +121,7 @@ namespace POSystem
 
         public void selectOrders()
         {
+            //button11.Visible = !ck_OStatus.Checked;
             OrderInfo order = new OrderInfo();
             order.ONumber = txt_SelONumber.Text;
             order.CName = txt_SelOCName.Text;
@@ -145,7 +147,9 @@ namespace POSystem
             dgvOrders.Columns["CreateDate"].Visible = false;
             dgvOrders.Columns["UpdateDate"].Visible = false;
             dgvOrders.Columns["OID"].Visible = false;
+            dgvOrders.Columns["CID"].Visible = false;
             dgvOrders.Columns["OStatus"].Visible = false;
+            
             //#endif
         }
 
@@ -189,10 +193,6 @@ namespace POSystem
             selectProduct();
         }
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-
-        }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -214,6 +214,11 @@ namespace POSystem
         {
             CustomerInfo cInfo = new CustomerInfo();
             cInfo.CName = textBox_cName.Text.Trim();
+            if (CustomerInfoManager.GetCustomerInfoBool(cInfo))
+            {
+                MessageBoxEx.Show(this, "客户已经存在！");
+                return;
+            }
             cInfo.CPhone = textBox_cPhone.Text.Trim();
             cInfo.CAddress = textBox_cAddress.Text.Trim();
             int idx = CustomerInfoManager.AddCustomerInfo(cInfo);
@@ -231,13 +236,19 @@ namespace POSystem
                 return;
             }
             ProductInfo pInfo = new ProductInfo();
-            pInfo.PImageID = Guid.NewGuid();
+            pInfo.PSuppliter = textBox_pSuppliter.Text.Trim();
+            pInfo.PNumber = textBox_pNumber.Text.Trim();
+            if (ProductInfoManager.GetProductInfoBool(pInfo))
+            {
+                MessageBoxEx.Show(this, "产品已存在！");
+                return;
+            }
             pInfo.PName = textBox_pName.Text.Trim();
+            pInfo.PImageID = Guid.NewGuid();
             pInfo.PPrice = decimal.Parse(textBox_pPrice.Text.Trim());
             pInfo.PPriceX = decimal.Parse(textBox_pPriceX.Text.Trim());
             pInfo.PWeigth = decimal.Parse(textBox_pWeight.Text.Trim());
-            pInfo.PSuppliter = textBox_pSuppliter.Text.Trim();
-            pInfo.PNumber = textBox_pNumber.Text.Trim();
+            
             pInfo.PRemark = textBox_pRemark.Text.Trim();
             int idx = ProductInfoManager.AddProductInfo(pInfo, attachment);
             if (idx > 0)
@@ -432,5 +443,29 @@ namespace POSystem
             edit.ShowDialog(this);
         }
 
+        private void ck_OStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            //button11.Visible = !ck_OStatus.Checked;
+            //selectOrders();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (dgvOrders.CurrentRow == null)
+            {
+                if (dgvOrders.Rows.Count == 0) return;
+                dgvOrders.Rows[0].Selected = true;
+                dgvOrders.CurrentCell = dgvOrders.Rows[0].Cells["ONUMBER"];
+            }
+            int OID = Convert.ToInt32(dgvOrders.CurrentRow.Cells["OID"].Value.ToString());
+            PrinterForm printer = new PrinterForm(OID);
+            printer.StartPosition = FormStartPosition.CenterParent;
+            printer.ShowDialog(this);
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
