@@ -31,19 +31,22 @@ namespace 生意参谋下载器
             webBrowser1.Size = new System.Drawing.Size(886, 373);
             webBrowser1.TabIndex = 0;
             tabPage1.Controls.Add(this.webBrowser1);
-            webBrowser1.Navigate("https://sycm.taobao.com");
+            webBrowser1.Navigate("https://mai.taobao.com");
             BindingComboBox();
         }
+
+        private DataTable table = null;
 
         private void BindingComboBox()
         {
             DataSet ds = new DataSet();
             ds.ReadXml(@"Total.xml");
-            Console.WriteLine(ConvertDataSetToXML(ds));
-            var table = ds.Tables["Commbox"];
+            //Console.WriteLine(ConvertDataSetToXML(ds));
+            table = ds.Tables["Commbox"];
+            table.Columns.Add("brandId|brandName", typeof(string), string.Format("{0}+'|'+{1}", "brandName", "brandId"));
             comboBox1.DataSource = table;
             comboBox1.ValueMember = "brandId";
-            comboBox1.DisplayMember = "brandName";
+            comboBox1.DisplayMember = "brandId|brandName";
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -79,13 +82,20 @@ namespace 生意参谋下载器
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = comboBox1.Text;
+            //string name = comboBox1.Text;
             string id = comboBox1.SelectedValue as string;
+            DataRow[] row = table.Select(string.Format("brandId='{0}'", id));
+            if (row.Length <= 0)
+            {
+                MessageBox.Show("Test");
+                return;
+            }
             if (id == "0")
             {
                 MessageBox.Show("Test");
                 return;
-            } 
+            }
+            string name = row[0]["brandName"].ToString();
             DateTime date = DateTime.Now.AddDays(-1);  //昨天
             int day = 0;
             for (int i = 0; i < 29; i++)

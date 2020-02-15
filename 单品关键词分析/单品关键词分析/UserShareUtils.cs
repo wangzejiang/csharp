@@ -13,7 +13,7 @@ namespace 单品关键词分析
     {
         public static bool isOK()
         {
-            bool status = connectState(@"\\192.168.0.250\运营\temp", "yy", "a5850855");
+            bool status = true;//connectState(@"\\192.168.0.250\运营\temp", "yy", "a5850855");
             if (status)
             {
                 return true;
