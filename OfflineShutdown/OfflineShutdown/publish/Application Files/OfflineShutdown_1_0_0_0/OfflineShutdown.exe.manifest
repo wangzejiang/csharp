@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="OfflineShutdown.exe" version="1.0.0.0" publicKeyToken="e2ba9a72084ba1b9" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="OfflineShutdown" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="OfflineShutdown.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC 清单选项
+             如果想要更改 Windows 用户帐户控制级别，请使用
+             以下节点之一替换 requestedExecutionLevel 节点。n
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            指定 requestedExecutionLevel 元素将禁用文件和注册表虚拟化。
+            如果你的应用程序需要此虚拟化来实现向后兼容性，则删除此
+            元素。
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OfflineShutdown.exe" size="11176">
+      <assemblyIdentity name="OfflineShutdown" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>T0ETOCD8wPMtZW4djWpBpIdzpQqwkZmsVOaQ6ZxsQ1s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="OfflineShutdown.exe.config" size="163">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3utv63flikstbalrOjpqPml0v2wBLvsQNG2N+u9gXoo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- 设计此应用程序与其一起工作且已针对此应用程序进行测试的
+           Windows 版本的列表。取消评论适当的元素，Windows 将
+           自动选择最兼容的环境。 -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=ZJPC\zejiang" issuerKeyHash="702a1bc9ba282960e83a636f4731ff4c619ac411" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>lS6kPQnc1Se/dXiBXXy3/Ado7cq50Ly5E7P2ijHnGbQ=</DigestValue></Reference></SignedInfo><SignatureValue>PBvfzvZ58aTSlvFXnoUhZBzVGvRquHHMqbKFK2dwGPO38hyFNYx3ce7q873y4Se4TOhe8VF+vpFeSyBdXV988DhwHgrnGlCi6z8aQkp74vpBKCQqUMUfXV2r2uQ82TXPndJGFoAJ++L8AkXA1vRFRuXdk+HlDGwBcl/l3UORuHs=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>uuEVpPCxjaVi/l+GELs6AGaoCcYluJo7VWYbnf2x+hcFa3oSGw2W5TMPvnXsFq+vkP86WTaDk8vhXVvGhCd1CttQni92U6LTabF6fW09A69MrYFDwth9daF6lw5FUMTQJj1IEK3YLlczCyunPZnUVeW5RgC28WfkeXE4P8DgC8k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="b419e7318af6b313b9bcd0b9caed6807fcb77c5d817875bf27d5dc093da42e95" Description="" Url=""><as:assemblyIdentity name="OfflineShutdown.exe" version="1.0.0.0" publicKeyToken="e2ba9a72084ba1b9" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=ZJPC\zejiang</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>kYrO37x75aM+ZnfACGBS1ER0rVNP78YwCWef8vReiKM=</DigestValue></Reference></SignedInfo><SignatureValue>RhgNSu04WesXKsmytiMvWUnk3plJ+O4DD3n6iLGUAJJFSaicPW98urtHhgg1ZXe+qFf1Qp0vsz/ie2+ajZo1t9ducityJTm8lOBthvUlA0xpmzswbhqDkZZ8j+ztnVxUKQByaoZZK4/cNTopvaSI/xNO5iLls72WHKcKWG2/3uU=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>uuEVpPCxjaVi/l+GELs6AGaoCcYluJo7VWYbnf2x+hcFa3oSGw2W5TMPvnXsFq+vkP86WTaDk8vhXVvGhCd1CttQni92U6LTabF6fW09A69MrYFDwth9daF6lw5FUMTQJj1IEK3YLlczCyunPZnUVeW5RgC28WfkeXE4P8DgC8k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQQI9BPHvbLodPVNzk7St97TANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDHhgAWgBKAFAAQwBcAHoAZQBqAGkAYQBuAGcwHhcNMjAwNTIxMTIxOTMyWhcNMjEwNTIxMTgxOTMyWjAjMSEwHwYDVQQDHhgAWgBKAFAAQwBcAHoAZQBqAGkAYQBuAGcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALrhFaTwsY2lYv5fhhC7OgBmqAnGJbiaO1VmG539sfoXBWt6EhsNluUzD7517Bavr5D/Olk2g5PL4V1bxoQndQrbUJ4vdlOi02mxen1tPQOvTK2BQ8LYfXWhepcORVDE0CY9SBCt2C5XMwsrpz2Z1FXluUYAtvFn5HlxOD/A4AvJAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAEzwSkanAvEUNn0nrmqVe/dvisVCbHIKgd9Nap2bZTnWJgFSxb7K9ngHEjX2R/kFTwojSnrwiMdxkgzrR+jv7KpmVbGVJMa7xsQizRg9o13Niffcec1I1h0WNuAlTUFMHK1JUW5CDwC3rsjF2FKhowRX6V9KWTueFBBrgG9cuiDA=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
